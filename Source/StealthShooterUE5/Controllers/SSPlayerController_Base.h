@@ -50,19 +50,14 @@ protected: // Protected variables input
 
 private: // Private variables
 
-	class ASSCharacter_Base* Character;
+	class ASSCharacter_Base* CurrentCharacter = nullptr;
+
+	UFUNCTION()
+	void LocomotionCharacter(const FInputActionValue& Value);
 
 protected: // Protected functions
 
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;
-
-private: // Private functions
-
-	UFUNCTION()
-	void LocomotionCharacter(const FInputActionValue& Value);
-
-	UFUNCTION()
-	void LookCharacter(const FInputActionValue& Value);
 };
