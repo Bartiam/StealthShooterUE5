@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+
 #include "DataTypes.generated.h"
 
+// Enumeration of the input ID
 UENUM(BlueprintType)
 enum class ESSAbilityInputID : uint8
 {

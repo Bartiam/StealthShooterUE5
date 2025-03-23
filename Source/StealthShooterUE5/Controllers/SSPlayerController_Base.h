@@ -26,6 +26,8 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<class UInputMappingContext> MappingContext;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<class USSInputConfig> InputConfig;
 	// -- Input Actions -- //
 
 protected: // Functions
