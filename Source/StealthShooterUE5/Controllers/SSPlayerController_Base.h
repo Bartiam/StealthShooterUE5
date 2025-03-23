@@ -18,37 +18,13 @@ protected: // Variables
 
 	// -- Input Actions -- //
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* LocomotionCharacterInput = nullptr;
+	TObjectPtr<UInputAction> LocomotionCharacterInput;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* LookCharacterInput = nullptr;
+	TObjectPtr<UInputAction> LookCharacterInput;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* ReloadWeaponInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* CrouchCharacterInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* WalkCharacterInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* InteractionCharacterInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* ShootCharacterInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* AimCharacterInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* PauseMenuInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputAction* InventoryCharacterInput = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	class UInputMappingContext* MappingContext = nullptr;
+	TObjectPtr<class UInputMappingContext> MappingContext;
 
 	// -- Input Actions -- //
 
@@ -57,9 +33,4 @@ protected: // Functions
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;
-
-private: // Functions
-
-	UFUNCTION()
-	void ReloadWeaponCharacter(const FInputActionValue& Value);
 };

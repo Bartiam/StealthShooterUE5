@@ -17,7 +17,10 @@ void ASSPlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+	{
+		SubSystem->AddMappingContext(MappingContext, 0);
+	}
 }
 
 void ASSPlayerController_Base::SetupInputComponent()
@@ -26,12 +29,7 @@ void ASSPlayerController_Base::SetupInputComponent()
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
-		EnhancedInputComponent->BindAction(ReloadWeaponInput, ETriggerEvent::Triggered, this, &ASSPlayerController_Base::ReloadWeaponCharacter);
+
+		
 	}
 }
-
-void ASSPlayerController_Base::ReloadWeaponCharacter(const FInputActionValue& Value)
-{
-	
-}
-

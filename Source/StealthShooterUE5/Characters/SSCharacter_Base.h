@@ -25,10 +25,10 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	class USS_AbilitySystemComponent* AbilitySystemComponent = nullptr;
+	TObjectPtr<class USS_AbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
-	class USS_CharacterAttributeSet* AttributeSet = nullptr;
+	TObjectPtr<class USS_CharacterAttributeSet> AttributeSet;
 
 	UFUNCTION()
 	virtual void PossessedBy(AController* NewController) override;
