@@ -9,10 +9,11 @@
 UENUM(BlueprintType)
 enum class ESSAbilityInputID : uint8
 {
-	None, 
-	Confirm,
-	Cancel,
-	Attack,
+	None UMETA(DisplayName = "None"),
+	Confirm UMETA(DisplayName = "Confirm"),
+	Cancel UMETA(DisplayName = "Cancel"),
+	Attack UMETA(DisplayName = "Attack"),
+	Test UMETA(DisplayName = "Test")
 };
 
 UCLASS()

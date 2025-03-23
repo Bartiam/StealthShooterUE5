@@ -13,5 +13,5 @@ UCLASS()
 class STEALTHSHOOTERUE5_API ASSLevelGameMode_Base : public AGameMode
 {
 	GENERATED_BODY()
-	
+
 };

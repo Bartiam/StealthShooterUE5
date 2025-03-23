@@ -7,14 +7,16 @@
 #include "SSPlayerController_Base.generated.h"
 
 class UInputAction;
-class UInputMappingContext;
+
 
 UCLASS()
 class STEALTHSHOOTERUE5_API ASSPlayerController_Base : public APlayerController
 {
 	GENERATED_BODY()
-	
-protected: // Protected variables input
+
+protected: // Variables
+
+	// -- Input Actions -- //
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	UInputAction* LocomotionCharacterInput = nullptr;
 
@@ -46,18 +48,18 @@ protected: // Protected variables input
 	UInputAction* InventoryCharacterInput = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	UInputMappingContext* MappingContext = nullptr;
+	class UInputMappingContext* MappingContext = nullptr;
 
-private: // Private variables
+	// -- Input Actions -- //
 
-	class ASSCharacter_Base* CurrentCharacter = nullptr;
-
-	UFUNCTION()
-	void LocomotionCharacter(const FInputActionValue& Value);
-
-protected: // Protected functions
+protected: // Functions
 
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;
+
+private: // Functions
+
+	UFUNCTION()
+	void ReloadWeaponCharacter(const FInputActionValue& Value);
 };
