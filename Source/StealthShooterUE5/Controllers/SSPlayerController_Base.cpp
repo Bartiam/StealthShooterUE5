@@ -3,11 +3,10 @@
 
 #include "SSPlayerController_Base.h"
 
-//Include Inputs
 #include "InputAction.h"
 #include "InputMappingContext.h"
 
-#include "EnhancedInputComponent.h"
+#include "../Input/SSEnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
 #include "../GAS/SS_AbilitySystemComponent.h"
@@ -29,7 +28,7 @@ void ASSPlayerController_Base::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
+	if (USSEnhancedInputComponent* EnhancedInputComponent = Cast<USSEnhancedInputComponent>(InputComponent))
 	{
 		if (InputConfig)
 		{
