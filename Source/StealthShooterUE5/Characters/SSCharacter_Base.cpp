@@ -58,11 +58,7 @@ void ASSCharacter_Base::GiveAbilities()
 	{
 		// Gets all abilities
 		for (TSubclassOf<USS_GameplayAbility_Base> StartupAbility : CharacterAbilities)
-		{
-			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec());
-			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(
-				StartupAbility, 1, -1, this));
-		}
+			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(StartupAbility));
 	}
 }
 

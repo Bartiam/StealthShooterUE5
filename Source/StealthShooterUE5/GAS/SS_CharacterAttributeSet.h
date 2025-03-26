@@ -23,13 +23,19 @@ public:
 
 	USS_CharacterAttributeSet();
 
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	// - Variables - //
 
-	UPROPERTY(ReplicatedUsing = OnRep_Health, EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData Health;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, Health);
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentHealth, EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayAttributeData CurrentHealth;
+	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentHealth);
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayAttributeData BaseHealth;
+	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, BaseHealth);
 
 	UPROPERTY(ReplicatedUsing = OnRep_Damage, EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData Damage;
@@ -38,7 +44,7 @@ public:
 	// - Rep functions - //
 
 	UFUNCTION()
-	virtual void OnRep_Health(const FGameplayAttributeData& OldValue);
+	virtual void OnRep_CurrentHealth(const FGameplayAttributeData& OldValue);
 	UFUNCTION()
 	virtual void OnRep_Damage(const FGameplayAttributeData& OldValue);
 };

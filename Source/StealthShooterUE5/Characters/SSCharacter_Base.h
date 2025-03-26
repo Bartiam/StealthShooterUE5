@@ -22,10 +22,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USS_AbilitySystemComponent> AbilitySystemComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GAS")
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USS_CharacterAttributeSet> AttributeSet;
 
 	UFUNCTION()
@@ -33,10 +33,10 @@ protected:
 
 public:
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "GAS")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes")
 	TSubclassOf<class UGameplayEffect> DefaultAttributeEffect;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "GAS")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes")
 	TArray<TSubclassOf<class USS_GameplayAbility_Base>> CharacterAbilities;
 
 	virtual void InitializeAttributes();
