@@ -4,8 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
-#include "../../DataLibraries/DataTypes.h"
-
 #include "SS_GameplayAbility_Base.generated.h"
 
 
@@ -17,7 +15,4 @@ class STEALTHSHOOTERUE5_API USS_GameplayAbility_Base : public UGameplayAbility
 	
 public:
 	USS_GameplayAbility_Base();
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	ESSAbilityInputID AbilityInputID;
 };

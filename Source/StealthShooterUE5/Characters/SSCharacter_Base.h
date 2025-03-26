@@ -8,8 +8,6 @@
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
 
-#include "../DataLibraries/DataTypes.h"
-
 #include "SSCharacter_Base.generated.h"
 
 UCLASS()
@@ -32,11 +30,6 @@ protected:
 
 	UFUNCTION()
 	virtual void PossessedBy(AController* NewController) override;
-
-	virtual void OnRep_PlayerState() override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 public:
 

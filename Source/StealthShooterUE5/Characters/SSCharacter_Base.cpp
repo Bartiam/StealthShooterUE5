@@ -29,9 +29,6 @@ ASSCharacter_Base::ASSCharacter_Base()
 void ASSCharacter_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	InitializeAttributes();
-	GiveAbilities();
 }
 
 void ASSCharacter_Base::InitializeAttributes()
@@ -62,8 +59,9 @@ void ASSCharacter_Base::GiveAbilities()
 		// Gets all abilities
 		for (TSubclassOf<USS_GameplayAbility_Base> StartupAbility : CharacterAbilities)
 		{
+			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec());
 			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(
-				StartupAbility, 1, static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID), this));
+				StartupAbility, 1, -1, this));
 		}
 	}
 }
@@ -80,47 +78,3 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 	InitializeAttributes();
 	GiveAbilities();
 }
-
-void ASSCharacter_Base::OnRep_PlayerState()
-{
-	Super::OnRep_PlayerState();
-
-	AbilitySystemComponent->InitAbilityActorInfo(this, this);
-
-	InitializeAttributes();
-
-	// Check ASC and InputComponent != nullptr
-	if (AbilitySystemComponent && InputComponent)
-	{
-		// Binds ASC to InputComponent
-		const FGameplayAbilityInputBinds Binds(
-			FString(TEXT("Confirm")),
-			FString(TEXT("Cancel")),
-			FString(TEXT("ESSAbilityInputID")),
-			static_cast<int32>(ESSAbilityInputID::Confirm),
-			static_cast<int32>(ESSAbilityInputID::Cancel));
-
-		AbilitySystemComponent->BindAbilityActivationToInputComponent(InputComponent, Binds);
-	}
-}
-
-// Called to bind functionality to input
-void ASSCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
-	// Check ASC and InputComponent != nullptr
-	if (GetAbilitySystemComponent() && InputComponent)
-	{
-		// Binds ASC to InputComponent
-		const FGameplayAbilityInputBinds Binds(
-			FString(TEXT("Confirm")),
-			FString(TEXT("Cancel")),
-			FString(TEXT("ESSAbilityInputID")),
-			static_cast<int32>(ESSAbilityInputID::Confirm),
-			static_cast<int32>(ESSAbilityInputID::Cancel));
-
-		GetAbilitySystemComponent()->BindAbilityActivationToInputComponent(InputComponent, Binds);
-	}
-}
-
