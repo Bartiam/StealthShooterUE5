@@ -4,15 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
-#include "SS_GameplayAbility_Base.generated.h"
+
+#include "Ability_Locomotion.generated.h"
 
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API USS_GameplayAbility_Base : public UGameplayAbility
+class STEALTHSHOOTERUE5_API UAbility_Locomotion : public UGameplayAbility
 {
 	GENERATED_BODY()
-	
-public:
-	USS_GameplayAbility_Base();
 };

@@ -18,12 +18,6 @@ protected: // Variables
 
 	// -- Input Actions -- //
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> LocomotionCharacterInput;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> LookCharacterInput;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<class UInputMappingContext> MappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
@@ -35,4 +29,12 @@ protected: // Functions
 	virtual void BeginPlay() override;
 
 	virtual void SetupInputComponent() override;
+
+private: // Variables
+
+	UPROPERTY()
+	TObjectPtr<class ASSCharacter_Base> CurrentCharacter;
+
+	UFUNCTION()
+	void LocomotionCharacter(const FGameplayTag InputTag);
 };

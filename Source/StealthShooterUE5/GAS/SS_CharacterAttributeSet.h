@@ -29,13 +29,21 @@ public:
 
 	// - Variables - //
 
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentHealth, EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData CurrentHealth;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentHealth);
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayAttributeData CurrentSpeed;
+	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentSpeed);
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayAttributeData Noise;
+	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, Noise);
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData BaseHealth;
 	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, BaseHealth);
+
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentHealth, EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayAttributeData CurrentHealth;
+	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentHealth);
 
 	UPROPERTY(ReplicatedUsing = OnRep_Damage, EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData Damage;

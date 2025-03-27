@@ -4,7 +4,7 @@
 #include "SSCharacter_Base.h"
 
 #include "../GAS/SS_AbilitySystemComponent.h"
-#include "../GAS/GameplayAbilities/SS_GameplayAbility_Base.h"
+#include "Abilities/GameplayAbility.h"
 #include "../GAS/SS_CharacterAttributeSet.h"
 
 // Sets default values
@@ -57,8 +57,8 @@ void ASSCharacter_Base::GiveAbilities()
 	if (HasAuthority() && AbilitySystemComponent)
 	{
 		// Gets all abilities
-		for (TSubclassOf<USS_GameplayAbility_Base> StartupAbility : CharacterAbilities)
-			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(StartupAbility));
+		for (TSubclassOf<UGameplayAbility> StartupAbility : CharacterAbilities)
+			AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(StartupAbility, 1));
 	}
 }
 

@@ -37,11 +37,12 @@ public:
 	TSubclassOf<class UGameplayEffect> DefaultAttributeEffect;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes")
-	TArray<TSubclassOf<class USS_GameplayAbility_Base>> CharacterAbilities;
+	TArray<TSubclassOf<class UGameplayAbility>> CharacterAbilities;
 
 	virtual void InitializeAttributes();
 
 	virtual void GiveAbilities();
 
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
 };
