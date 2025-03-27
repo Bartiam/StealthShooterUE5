@@ -39,7 +39,7 @@ protected: // Functions
 private: // Variables
 
 	UPROPERTY()
-	TObjectPtr<class ASSCharacter_Base> CurrentCharacter;
+	TObjectPtr<class ASSPlayer_Base> CurrentCharacter;
 
 private: // Functions
 

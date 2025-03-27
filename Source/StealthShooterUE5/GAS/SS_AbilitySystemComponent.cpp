@@ -2,3 +2,8 @@
 
 
 #include "SS_AbilitySystemComponent.h"
+
+void USS_AbilitySystemComponent::ActivateAbilityByTag()
+{
+
+}

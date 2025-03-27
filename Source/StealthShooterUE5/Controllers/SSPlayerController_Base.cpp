@@ -12,13 +12,13 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
-#include "../Characters/SSCharacter_Base.h"
+#include "../Characters/SSPlayer_Base.h"
 
 void ASSPlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CurrentCharacter = Cast<ASSCharacter_Base>(GetPawn());
+	CurrentCharacter = Cast<ASSPlayer_Base>(GetPawn());
 
 	if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -42,7 +42,7 @@ void ASSPlayerController_Base::SetupInputComponent()
 			// Bind Inputs from InputConfig
 			for (const FSSInputActionBinds& ActionBind : InputConfig->InputActionBinds)
 			{
-				
+				//EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::)
 			}
 		}
 	}
