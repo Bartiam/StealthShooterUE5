@@ -32,20 +32,43 @@ void ASSPlayerController_Base::SetupInputComponent()
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
+		EnhancedInputComponent->BindAction(InputCharacterLocomotion, ETriggerEvent::Triggered, this, &ThisClass::LocomotionCharacter);
+		EnhancedInputComponent->BindAction(InputCharacterLook, ETriggerEvent::Triggered, this, &ThisClass::LookCharacter);
+
 		if (InputConfig)
 		{
 			for (const FSSInputActionBinds& ActionBind : InputConfig->InputActionBinds)
 			{
-				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::LocomotionCharacter, ActionBind.InputTag);
+				
 			}
 		}
 	}
 }
 
-void ASSPlayerController_Base::LocomotionCharacter(const FGameplayTag InputTag)
+void ASSPlayerController_Base::LocomotionCharacter(const FInputActionValue& Value)
 {
-	bool test = CurrentCharacter->GetAbilitySystemComponent()->TryActivateAbilitiesByTag(InputTag.GetSingleTagContainer());
+	FVector2D MoveVector = Value.Get<FVector2D>();
 
-	if (!test)
-		GEngine->AddOnScreenDebugMessage(-1, 1, FColor::Black, FString("FDSFsedf"));
+	if (IsValid(CurrentCharacter))
+	{
+		// Find out which way is forward
+		FRotator RotationYaw = FRotator(0.f, GetControlRotation().Yaw, 0.f);
+
+		// Get forward vector
+		FVector ForwardDirection = FRotationMatrix(RotationYaw).GetUnitAxis(EAxis::X);
+		// Get right vector
+		FVector RightDirection = FRotationMatrix(RotationYaw).GetUnitAxis(EAxis::Y);
+
+		// Add movement
+		CurrentCharacter->AddMovementInput(ForwardDirection, MoveVector.Y);
+		CurrentCharacter->AddMovementInput(RightDirection, MoveVector.X);
+	}
+}
+
+void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
+{
+	FVector2D LookVector = Value.Get<FVector2D>();
+
+	AddYawInput(LookVector.X);
+	AddPitchInput(LookVector.Y);
 }

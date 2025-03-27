@@ -21,6 +21,12 @@ protected: // Variables
 	TObjectPtr<class UInputMappingContext> MappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> InputCharacterLocomotion;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> InputCharacterLook;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<class USSInputConfig> InputConfig;
 	// -- Input Actions -- //
 
@@ -35,6 +41,11 @@ private: // Variables
 	UPROPERTY()
 	TObjectPtr<class ASSCharacter_Base> CurrentCharacter;
 
+private: // Functions
+
 	UFUNCTION()
-	void LocomotionCharacter(const FGameplayTag InputTag);
+	void LocomotionCharacter(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void LookCharacter(const FInputActionValue& Value);
 };
