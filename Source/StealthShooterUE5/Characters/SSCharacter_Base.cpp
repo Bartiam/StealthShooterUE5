@@ -20,6 +20,7 @@ ASSCharacter_Base::ASSCharacter_Base()
 
 	// Create AS
 	AttributeSet = CreateDefaultSubobject<USS_CharacterAttributeSet>(FName("Attribute Set"));
+	AttributeSet->OwnerMovementComponent = GetCharacterMovement();
 
 	// Set character TPS
 	NetUpdateFrequency = 30.f;

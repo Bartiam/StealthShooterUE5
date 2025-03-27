@@ -2,6 +2,9 @@
 
 
 #include "SS_CharacterAttributeSet.h"
+#include "GameplayEffectExtension.h"
+
+#include "GameFramework/CharacterMovementComponent.h"
 
 #include "Net/UnrealNetwork.h"
 
@@ -14,6 +17,14 @@ void USS_CharacterAttributeSet::PreAttributeChange(const FGameplayAttribute & At
 
 	if (Attribute == GetCurrentHealthAttribute())
 		NewValue = FMath::Clamp(NewValue, 0.f, GetBaseHealth());
+}
+
+void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
+{
+	Super::PostGameplayEffectExecute(Data);
+
+	if (Data.EvaluatedData.Attribute == GetCurrentSpeedAttribute())
+		OwnerMovementComponent->MaxWalkSpeed = GetCurrentSpeed();
 }
 
 void USS_CharacterAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const

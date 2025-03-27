@@ -4,12 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
-#include "Ability_Look.generated.h"
+
+#include "Ability_Crouch.generated.h"
 
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API UAbility_Look : public UGameplayAbility
+class STEALTHSHOOTERUE5_API UAbility_Crouch : public UGameplayAbility
 {
 	GENERATED_BODY()
 	

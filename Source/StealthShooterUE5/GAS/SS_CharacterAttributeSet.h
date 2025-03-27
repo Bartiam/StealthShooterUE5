@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
 
@@ -18,14 +19,19 @@ UCLASS()
 class STEALTHSHOOTERUE5_API USS_CharacterAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
-	
+
 public: 
+
+	UPROPERTY()
+	TObjectPtr<class UCharacterMovementComponent> OwnerMovementComponent; // Get from character
 
 	USS_CharacterAttributeSet();
 
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
 	// - Variables - //
 

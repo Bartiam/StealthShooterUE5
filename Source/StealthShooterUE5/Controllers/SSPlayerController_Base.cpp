@@ -32,11 +32,14 @@ void ASSPlayerController_Base::SetupInputComponent()
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
+		// Bind character locomotion
 		EnhancedInputComponent->BindAction(InputCharacterLocomotion, ETriggerEvent::Triggered, this, &ThisClass::LocomotionCharacter);
+		// Bind character look
 		EnhancedInputComponent->BindAction(InputCharacterLook, ETriggerEvent::Triggered, this, &ThisClass::LookCharacter);
 
 		if (InputConfig)
 		{
+			// Bind Inputs from InputConfig
 			for (const FSSInputActionBinds& ActionBind : InputConfig->InputActionBinds)
 			{
 				
