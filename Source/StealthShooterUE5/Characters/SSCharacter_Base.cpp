@@ -4,7 +4,7 @@
 #include "SSCharacter_Base.h"
 
 #include "../GAS/SS_AbilitySystemComponent.h"
-#include "Abilities/GameplayAbility.h"
+#include "../GAS/Abilities/SSGameplayAbility_Base.h"
 #include "../GAS/SS_CharacterAttributeSet.h"
 
 #include "Net/UnrealNetwork.h"
@@ -66,9 +66,11 @@ void ASSCharacter_Base::GiveAbilities()
 	if (HasAuthority() && AbilitySystemComponent)
 	{
 		// Gets all abilities
-		for (TSubclassOf<UGameplayAbility> StartupAbility : StartupAbilities)
+		for (TSubclassOf<USSGameplayAbility_Base> StartupAbility : StartupAbilities)
 		{
-			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(StartupAbility, 1);
+			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(StartupAbility, 1, 
+				static_cast<int32>(StartupAbility.GetDefaultObject()->AbilityInputID));
+
 			AbilitySystemComponent->GiveAbility(AbilitySpec);
 		}
 	}

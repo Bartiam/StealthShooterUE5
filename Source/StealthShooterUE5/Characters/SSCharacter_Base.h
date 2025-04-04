@@ -7,6 +7,7 @@
 
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
+#include "../SSData/SSTypes.h"
 
 #include "SSCharacter_Base.generated.h"
 
@@ -37,7 +38,7 @@ public: // Variables
 	TSubclassOf<class UGameplayEffect> DefaultAttributeEffect;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes")
-	TArray<TSubclassOf<class UGameplayAbility>> StartupAbilities;
+	TArray<TSubclassOf<class USSGameplayAbility_Base>> StartupAbilities;
 
 public: // Functions
 
@@ -47,7 +48,7 @@ public: // Functions
 
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-public: // Functions
+public: // Multiplayer Functions
 
 	UFUNCTION(Client, Reliable)
 	void Client_UpdateCharacterSpeed(float NewSpeed);

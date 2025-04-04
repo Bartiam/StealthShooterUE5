@@ -8,7 +8,3 @@ USS_AbilitySystemComponent::USS_AbilitySystemComponent()
 	
 }
 
-void USS_AbilitySystemComponent::ActivateAbilityByTag()
-{
-
-}

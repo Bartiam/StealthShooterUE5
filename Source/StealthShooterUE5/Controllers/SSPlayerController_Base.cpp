@@ -8,18 +8,19 @@
 
 #include "../Input/SSInputConfig.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
+#include "../Characters/SSPlayer_Base.h"
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-
-#include "../Characters/SSPlayer_Base.h"
 
 void ASSPlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
 	CurrentCharacter = Cast<ASSPlayer_Base>(GetPawn());
+
+	if (IsValid(CurrentCharacter))
+		ASC = Cast<USS_AbilitySystemComponent>(CurrentCharacter->GetAbilitySystemComponent());
 
 	if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 	{
@@ -43,9 +44,8 @@ void ASSPlayerController_Base::SetupInputComponent()
 			// Bind Inputs from InputConfig
 			for (const FSSInputActionBinds& ActionBind : InputConfig->InputActionBinds)
 			{
-				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::ActivateAbilityByTagHold, ActionBind.InputTag);
-				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Started, this, &ThisClass::ActivateAbilityByTagPressed, ActionBind.InputTag);
-				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByTagReleased, ActionBind.InputTag);
+				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::ActivateAbilityByInputIDHeld, ActionBind.ButtonInputID);
+				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
 			}
 		}
 	}
@@ -79,17 +79,19 @@ void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
 	AddPitchInput(LookVector.Y);
 }
 
-void ASSPlayerController_Base::ActivateAbilityByTagHold(const FGameplayTag InputTag)
+void ASSPlayerController_Base::ActivateAbilityByInputIDHeld(const ESSInputID InputID)
 {
-
+	ASC->PressInputID(static_cast<int32>(InputID));
 }
 
-void ASSPlayerController_Base::ActivateAbilityByTagPressed(const FGameplayTag InputTag)
+void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID InputID)
 {
-
+	
 }
 
-void ASSPlayerController_Base::ActivateAbilityByTagReleased(const FGameplayTag InputTag)
+void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID InputID)
 {
-
+	ASC->ReleaseInputID(static_cast<int32>(InputID));
 }
+
+

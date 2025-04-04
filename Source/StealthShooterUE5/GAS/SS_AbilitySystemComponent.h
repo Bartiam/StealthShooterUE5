@@ -16,9 +16,5 @@ class STEALTHSHOOTERUE5_API USS_AbilitySystemComponent : public UAbilitySystemCo
 protected:
 	USS_AbilitySystemComponent();
 
-public: // Functions
-
-	UFUNCTION()
-	virtual void ActivateAbilityByTag();
 
 };

@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 
-#include "GameplayTagContainer.h"
+#include "../SSData/SSTypes.h"
 
 #include "SSInputConfig.generated.h"
 
@@ -19,7 +19,7 @@ struct FSSInputActionBinds
 	TObjectPtr<class UInputAction> InputAction;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	FGameplayTag InputTag;
+	ESSInputID ButtonInputID;
 };
 
 UCLASS(BlueprintType, Blueprintable)

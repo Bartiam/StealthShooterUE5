@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+
+#include "../SSData/SSTypes.h"
+
 #include "SSPlayerController_Base.generated.h"
 
 class UInputAction;
@@ -41,6 +44,9 @@ private: // Variables
 	UPROPERTY()
 	TObjectPtr<class ASSPlayer_Base> CurrentCharacter;
 
+	UPROPERTY()
+	TObjectPtr<class USS_AbilitySystemComponent> ASC;
+
 private: // Functions
 
 	UFUNCTION()
@@ -50,11 +56,13 @@ private: // Functions
 	void LookCharacter(const FInputActionValue& Value);
 
 	UFUNCTION()
-	void ActivateAbilityByTagHold(const FGameplayTag InputTag);
+	void ActivateAbilityByInputIDHeld(const ESSInputID InputID);
 
 	UFUNCTION()
-	void ActivateAbilityByTagPressed(const FGameplayTag InputTag);
+	void ActivateAbilityByInputIDPressed(const ESSInputID InputID);
 
 	UFUNCTION()
-	void ActivateAbilityByTagReleased(const FGameplayTag InputTag);
+	void ActivateAbilityByInputIDReleased(const ESSInputID InputID);
+
+
 };
