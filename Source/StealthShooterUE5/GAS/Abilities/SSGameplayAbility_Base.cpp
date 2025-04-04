@@ -3,3 +3,7 @@
 
 #include "SSGameplayAbility_Base.h"
 
+USSGameplayAbility_Base::USSGameplayAbility_Base()
+{
+	
+}

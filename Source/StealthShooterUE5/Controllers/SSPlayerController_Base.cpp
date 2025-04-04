@@ -47,11 +47,14 @@ void ASSPlayerController_Base::SetupInputComponent()
 
 				if (ActionBind.bIsTriggered)
 				{
-					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::ActivateAbilityByInputIDHeld, ActionBind.ButtonInputID);
+					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::ActivateAbilityByInputIDPressed, ActionBind.ButtonInputID);
 					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
 				}
 				else
-					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Started, this, &ThisClass::ActivateAbilityByInputIDHeld, ActionBind.ButtonInputID);
+				{
+					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Started, this, &ThisClass::ActivateAbilityByInputIDPressed, ActionBind.ButtonInputID);
+					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
+				}
 			}
 		}
 	}
@@ -83,11 +86,6 @@ void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
 
 	AddYawInput(LookVector.X);
 	AddPitchInput(LookVector.Y);
-}
-
-void ASSPlayerController_Base::ActivateAbilityByInputIDHeld(const ESSInputID InputID)
-{
-	ASC->PressInputID(static_cast<int32>(InputID));
 }
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID InputID)

@@ -56,9 +56,6 @@ private: // Functions
 	void LookCharacter(const FInputActionValue& Value);
 
 	UFUNCTION()
-	void ActivateAbilityByInputIDHeld(const ESSInputID InputID);
-
-	UFUNCTION()
 	void ActivateAbilityByInputIDPressed(const ESSInputID InputID);
 
 	UFUNCTION()
