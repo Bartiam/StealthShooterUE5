@@ -44,8 +44,14 @@ void ASSPlayerController_Base::SetupInputComponent()
 			// Bind Inputs from InputConfig
 			for (const FSSInputActionBinds& ActionBind : InputConfig->InputActionBinds)
 			{
-				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::ActivateAbilityByInputIDHeld, ActionBind.ButtonInputID);
-				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
+
+				if (ActionBind.bIsTriggered)
+				{
+					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::ActivateAbilityByInputIDHeld, ActionBind.ButtonInputID);
+					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
+				}
+				else
+					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Started, this, &ThisClass::ActivateAbilityByInputIDHeld, ActionBind.ButtonInputID);
 			}
 		}
 	}
@@ -86,7 +92,7 @@ void ASSPlayerController_Base::ActivateAbilityByInputIDHeld(const ESSInputID Inp
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID InputID)
 {
-	
+	ASC->PressInputID(static_cast<int32>(InputID));
 }
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID InputID)

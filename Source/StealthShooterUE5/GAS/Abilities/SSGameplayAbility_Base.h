@@ -17,6 +17,7 @@ class STEALTHSHOOTERUE5_API USSGameplayAbility_Base : public UGameplayAbility
 	GENERATED_BODY()
 
 public: // Variables
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input ID")
+	// Input ID for ability
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	ESSInputID AbilityInputID;
 };

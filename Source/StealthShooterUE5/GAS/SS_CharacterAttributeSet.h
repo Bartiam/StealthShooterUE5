@@ -42,43 +42,11 @@ public:
 
 	// - Speed Variables - //
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData RunSpeed;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, RunSpeed);
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData WalkSpeed;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, WalkSpeed);
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData CrouchSpeed;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CrouchSpeed);
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData AimSpeed;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, AimSpeed);
-
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentSpeed, EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData CurrentSpeed;
 	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentSpeed);
 
 	// - Noise Variables - //
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData RunNoise;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, RunNoise);
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData WalkNoise;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, WalkNoise);
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData CrouchNoise;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CrouchNoise);
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData AimNoise;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, AimNoise);
 
 	UPROPERTY(ReplicatedUsing = OnRep_CurrentNoise, EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData CurrentNoise;

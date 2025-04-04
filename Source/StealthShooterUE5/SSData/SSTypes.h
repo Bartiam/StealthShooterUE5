@@ -15,14 +15,6 @@ enum class ESSInputID : uint8
 	Crouch_Walk_Input UMETA(DisplayName = "Crouch Walk Input")
 };
 
-USTRUCT(BlueprintType)
-struct FCharacterSpeed
-{
-	GENERATED_BODY()
-
-
-};
-
 UCLASS()
 class STEALTHSHOOTERUE5_API USSTypes : public UBlueprintFunctionLibrary
 {
