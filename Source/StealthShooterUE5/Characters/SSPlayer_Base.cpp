@@ -4,6 +4,7 @@
 #include "SSPlayer_Base.h"
 
 #include "GameFramework/SpringArmComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 
 ASSPlayer_Base::ASSPlayer_Base()
@@ -24,6 +25,9 @@ ASSPlayer_Base::ASSPlayer_Base()
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(FName("Camera Component"));
 	CameraComponent->bUsePawnControlRotation = true;
 	CameraComponent->SetupAttachment(SpringArmComponent);
+
+	// Player character movement base specifications
+	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 }
 
 void ASSPlayer_Base::BeginPlay()

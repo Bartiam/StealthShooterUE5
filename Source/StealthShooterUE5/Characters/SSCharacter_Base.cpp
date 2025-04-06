@@ -30,8 +30,8 @@ ASSCharacter_Base::ASSCharacter_Base()
 
 	// Base specifications for PlayerMovement
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
+	GetCharacterMovement()->SetIsReplicated(true);
 }
 
 // Called when the game starts or when spawned
