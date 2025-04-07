@@ -26,9 +26,13 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USkeletalMeshComponent> HolsterComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<class USkeletalMeshComponent> Jacket;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;
 
-
+	UFUNCTION()
+	void CheckJacketOnTheCharacter();
 };

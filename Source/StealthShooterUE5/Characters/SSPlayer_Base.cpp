@@ -28,6 +28,10 @@ ASSPlayer_Base::ASSPlayer_Base()
 	HolsterComponent = CreateDefaultSubobject<USkeletalMeshComponent>(FName("Holster"));
 	HolsterComponent->SetupAttachment(GetMesh());
 
+	// Create and base specifications for Jacket
+	Jacket = CreateDefaultSubobject<USkeletalMeshComponent>(FName("Jacket"));
+	Jacket->SetupAttachment(GetMesh());
+
 	// Player character movement base specifications
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 }
@@ -35,6 +39,15 @@ ASSPlayer_Base::ASSPlayer_Base()
 void ASSPlayer_Base::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CheckJacketOnTheCharacter();
+}
+
+void ASSPlayer_Base::CheckJacketOnTheCharacter()
+{
+	// If Jacket mesh is empty, destroy Jacket
+	if (Jacket->MeshObject == nullptr)
+		Jacket->DestroyComponent();
 }
 
 
