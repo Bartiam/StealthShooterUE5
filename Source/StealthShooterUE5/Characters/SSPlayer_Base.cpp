@@ -18,13 +18,15 @@ ASSPlayer_Base::ASSPlayer_Base()
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));
 	SpringArmComponent->SetupAttachment(RootComponent);
 	SpringArmComponent->bUsePawnControlRotation = true;
-	SpringArmComponent->TargetArmLength = 150.f;
-	SpringArmComponent->SocketOffset = FVector(0.f, 35.f, 70.f);
 
 	// Create and base specifications for Camera Component
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(FName("Camera Component"));
 	CameraComponent->bUsePawnControlRotation = true;
 	CameraComponent->SetupAttachment(SpringArmComponent);
+
+	// Create and base specifications for Holster Component
+	HolsterComponent = CreateDefaultSubobject<USkeletalMeshComponent>(FName("Holster"));
+	HolsterComponent->SetupAttachment(GetMesh());
 
 	// Player character movement base specifications
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;

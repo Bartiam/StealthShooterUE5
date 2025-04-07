@@ -23,6 +23,9 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class UCameraComponent> CameraComponent;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<class USkeletalMeshComponent> HolsterComponent;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;

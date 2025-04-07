@@ -27,6 +27,7 @@ void USS_CharacterAttributeSet::PreAttributeChange(const FGameplayAttribute& Att
 {
 	Super::PreAttributeChange(Attribute, NewValue);
 
+	// Clamp CurrentHealth
 	if (Attribute == GetCurrentHealthAttribute())
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
 }
@@ -37,6 +38,7 @@ void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectM
 
 	if (Data.EvaluatedData.Attribute == GetCurrentSpeedAttribute())
 	{
+		// Transfer to a character CurrentSpeed
 		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
 			OwnerCharacter->Server_UpdateCharacterSpeed(GetCurrentSpeed());
 	}
