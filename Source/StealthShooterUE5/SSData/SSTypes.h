@@ -14,6 +14,7 @@ enum class ESSInputID : uint8
 	Crouch_Input UMETA(DisplayName = "Crouch Input"),
 	Crouch_Walk_Input UMETA(DisplayName = "Crouch Walk Input"),
 	Reload_Input UMETA(DisplayName = "Reload Input"),
+	Dodge_Input UMETA(DisplayName = "Dodge Input"),
 };
 
 UCLASS()
