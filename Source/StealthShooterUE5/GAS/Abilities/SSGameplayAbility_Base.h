@@ -6,13 +6,14 @@
 #include "Abilities/GameplayAbility.h"
 
 #include "../../SSData/SSTypes.h"
+#include "../../Interfaces/CharacterAbilities.h"
 
 #include "SSGameplayAbility_Base.generated.h"
 
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API USSGameplayAbility_Base : public UGameplayAbility
+class STEALTHSHOOTERUE5_API USSGameplayAbility_Base : public UGameplayAbility, public ICharacterAbilities
 {
 	GENERATED_BODY()
 

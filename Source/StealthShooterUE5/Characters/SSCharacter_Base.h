@@ -8,11 +8,12 @@
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
 #include "../SSData/SSTypes.h"
+#include "../Interfaces/CharacterAbilities.h"
 
 #include "SSCharacter_Base.generated.h"
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface
+class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface, public ICharacterAbilities
 {
 	GENERATED_BODY()
 
@@ -47,6 +48,11 @@ public: // Functions
 	virtual void GiveAbilities();
 
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	// - Functions from ICharacterAbilities - //
+
+	virtual void CrouchCharacter_Implementation() override;
+
 
 public: // Multiplayer Functions
 

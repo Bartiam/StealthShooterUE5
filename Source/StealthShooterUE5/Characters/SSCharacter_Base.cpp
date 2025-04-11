@@ -79,6 +79,11 @@ void ASSCharacter_Base::GiveAbilities()
 UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
 { return AbilitySystemComponent; }
 
+void ASSCharacter_Base::CrouchCharacter_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 20, FColor::Black, FString("WORKED!"));
+}
+
 void ASSCharacter_Base::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
