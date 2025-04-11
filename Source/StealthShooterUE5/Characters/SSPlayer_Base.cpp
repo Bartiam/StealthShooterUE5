@@ -53,20 +53,3 @@ void ASSPlayer_Base::CheckJacketOnTheCharacter()
 		Jacket->DestroyComponent();
 	}
 }
-
-void ASSPlayer_Base::NetMulticast_PlayDodgeMontages_Implementation()
-{
-	Server_PlayDodgeMontages();
-}
-
-void ASSPlayer_Base::Server_PlayDodgeMontages_Implementation()
-{
-	if (CurrentDirection.Y == 1)
-		PlayAnimMontage(PlayerMontages.ForwardMontage);
-	else if (CurrentDirection.Y == -1)
-		PlayAnimMontage(PlayerMontages.BackwardMontage);
-	else if (CurrentDirection.X == 1)
-		PlayAnimMontage(PlayerMontages.RightMonatage);
-	else
-		PlayAnimMontage(PlayerMontages.LeftMonatage);
-}
