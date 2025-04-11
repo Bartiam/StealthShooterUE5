@@ -17,6 +17,24 @@ enum class ESSInputID : uint8
 	Dodge_Input UMETA(DisplayName = "Dodge Input"),
 };
 
+USTRUCT(BlueprintType)
+struct FCharacterMontages
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<class UAnimMontage> ForwardMontage = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<class UAnimMontage> BackwardMontage = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<class UAnimMontage> LeftMonatage = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<class UAnimMontage> RightMonatage = nullptr;
+};
+
 UCLASS()
 class STEALTHSHOOTERUE5_API USSTypes : public UBlueprintFunctionLibrary
 {

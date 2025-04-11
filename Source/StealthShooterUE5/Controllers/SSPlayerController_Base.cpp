@@ -66,6 +66,8 @@ void ASSPlayerController_Base::LocomotionCharacter(const FInputActionValue& Valu
 
 	if (IsValid(CurrentCharacter))
 	{
+		CurrentCharacter->CurrentDirection = MoveVector;
+
 		// Find out which way is forward
 		FRotator RotationYaw = FRotator(0.f, GetControlRotation().Yaw, 0.f);
 

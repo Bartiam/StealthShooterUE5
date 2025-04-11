@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "SSCharacter_Base.h"
+
+#include "../SSData/SSTypes.h"
+
 #include "SSPlayer_Base.generated.h"
 
 
@@ -29,10 +32,28 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USkeletalMeshComponent> Jacket;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Player Montages")
+	FCharacterMontages PlayerMontages;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;
 
+private: // Functions 
+
 	UFUNCTION()
 	void CheckJacketOnTheCharacter();
+
+public: // Variables
+
+	UPROPERTY(BlueprintReadOnly)
+	FVector2D CurrentDirection = FVector2D::Zero();
+
+public: // Multiplay functions
+
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	virtual void Server_PlayDodgeMontages();
+
+	UFUNCTION(NetMulticast, Reliable, BlueprintCallable)
+	virtual void NetMulticast_PlayDodgeMontages();
 };
