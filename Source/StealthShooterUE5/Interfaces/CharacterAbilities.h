@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
+
 #include "CharacterAbilities.generated.h"
 
 // This class does not need to be modified.
@@ -23,5 +24,5 @@ class STEALTHSHOOTERUE5_API ICharacterAbilities
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void CrouchCharacter();
+	class ASSCharacter_Base* GetCharacter();
 };

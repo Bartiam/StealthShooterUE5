@@ -49,10 +49,7 @@ public: // Functions
 
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	// - Functions from ICharacterAbilities - //
-
-	virtual void CrouchCharacter_Implementation() override;
-
+	virtual ASSCharacter_Base* GetCharacter_Implementation() override;
 
 public: // Multiplayer Functions
 

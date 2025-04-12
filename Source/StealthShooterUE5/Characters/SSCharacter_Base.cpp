@@ -74,15 +74,15 @@ void ASSCharacter_Base::GiveAbilities()
 			AbilitySystemComponent->GiveAbility(AbilitySpec);
 		}
 	}
+
+	Crouch();
 }
 
 UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
 { return AbilitySystemComponent; }
 
-void ASSCharacter_Base::CrouchCharacter_Implementation()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 20, FColor::Black, FString("WORKED!"));
-}
+ASSCharacter_Base* ASSCharacter_Base::GetCharacter_Implementation()
+{ return this; }
 
 void ASSCharacter_Base::PossessedBy(AController* NewController)
 {
