@@ -13,7 +13,7 @@
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API USSGameplayAbility_Base : public UGameplayAbility, public ICharacterAbilities
+class STEALTHSHOOTERUE5_API USSGameplayAbility_Base : public UGameplayAbility
 {
 	GENERATED_BODY()
 

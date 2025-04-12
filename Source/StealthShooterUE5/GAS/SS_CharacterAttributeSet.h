@@ -42,9 +42,13 @@ public:
 
 	// - Speed Variables - //
 
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentSpeed, EditDefaultsOnly, BlueprintReadOnly)
-	FGameplayAttributeData CurrentSpeed;
-	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentSpeed);
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentWalkSpeed, EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayAttributeData CurrentWalkSpeed;
+	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentWalkSpeed);
+
+	UPROPERTY(ReplicatedUsing = OnRep_CurrentCrouchSpeed, EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayAttributeData CurrentCrouchSpeed;
+	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentCrouchSpeed);
 
 	// - Noise Variables - //
 
@@ -63,7 +67,10 @@ public:
 	// - Speed Rep Functions - //
 
 	UFUNCTION()
-	virtual void OnRep_CurrentSpeed(const FGameplayAttributeData& OldValue);
+	virtual void OnRep_CurrentWalkSpeed(const FGameplayAttributeData& OldValue);
+
+	UFUNCTION()
+	virtual void OnRep_CurrentCrouchSpeed(const FGameplayAttributeData& OldValue);
 
 
 	// - Noise Rep Functions - //

@@ -18,6 +18,8 @@ ASSPlayer_Base::ASSPlayer_Base()
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(FName("Spring Arm"));
 	SpringArmComponent->SetupAttachment(RootComponent);
 	SpringArmComponent->bUsePawnControlRotation = true;
+	SpringArmComponent->bEnableCameraLag = true;
+	SpringArmComponent->CameraLagSpeed = 14.f;
 
 	// Create and base specifications for Camera Component
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(FName("Camera Component"));

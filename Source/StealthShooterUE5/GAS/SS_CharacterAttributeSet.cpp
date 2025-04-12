@@ -18,7 +18,8 @@ void USS_CharacterAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimePrope
 	DOREPLIFETIME_CONDITION_NOTIFY(USS_CharacterAttributeSet, CurrentHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(USS_CharacterAttributeSet, MaxHealth, COND_None, REPNOTIFY_OnChanged);
 
-	DOREPLIFETIME_CONDITION_NOTIFY(USS_CharacterAttributeSet, CurrentSpeed, COND_None, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(USS_CharacterAttributeSet, CurrentWalkSpeed, COND_None, REPNOTIFY_OnChanged);
+	DOREPLIFETIME_CONDITION_NOTIFY(USS_CharacterAttributeSet, CurrentCrouchSpeed, COND_None, REPNOTIFY_OnChanged);
 
 	DOREPLIFETIME_CONDITION_NOTIFY(USS_CharacterAttributeSet, CurrentNoise, COND_None, REPNOTIFY_OnChanged);
 }
@@ -36,11 +37,18 @@ void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectM
 {
 	Super::PostGameplayEffectExecute(Data);
 
-	if (Data.EvaluatedData.Attribute == GetCurrentSpeedAttribute())
+	if (Data.EvaluatedData.Attribute == GetCurrentWalkSpeedAttribute())
 	{
-		// Transfer to a character CurrentSpeed
+		// Transfer to a character CurrentWalkSpeed
 		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
-			OwnerCharacter->Server_UpdateCharacterSpeed(GetCurrentSpeed());
+			OwnerCharacter->Server_UpdateCharacterSpeed(GetCurrentWalkSpeed(), false);
+	}
+
+	if (Data.EvaluatedData.Attribute == GetCurrentCrouchSpeedAttribute())
+	{
+		// Transfer to a character CurrentCrouchSpeed
+		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
+			OwnerCharacter->Server_UpdateCharacterSpeed(GetCurrentCrouchSpeed(), true);
 	}
 }
 
@@ -54,9 +62,14 @@ void USS_CharacterAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& Ol
 	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, MaxHealth, OldValue);
 }
 
-void USS_CharacterAttributeSet::OnRep_CurrentSpeed(const FGameplayAttributeData& OldValue)
+void USS_CharacterAttributeSet::OnRep_CurrentWalkSpeed(const FGameplayAttributeData& OldValue)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, CurrentSpeed, OldValue);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, CurrentWalkSpeed, OldValue);
+}
+
+void USS_CharacterAttributeSet::OnRep_CurrentCrouchSpeed(const FGameplayAttributeData& OldValue)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, CurrentCrouchSpeed, OldValue);
 }
 
 void USS_CharacterAttributeSet::OnRep_CurrentNoise(const FGameplayAttributeData& OldValue)

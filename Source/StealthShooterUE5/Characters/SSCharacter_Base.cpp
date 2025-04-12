@@ -32,6 +32,9 @@ ASSCharacter_Base::ASSCharacter_Base()
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
 	GetCharacterMovement()->SetIsReplicated(true);
+
+	SetReplicateMovement(true);
+	SetReplicates(true);
 }
 
 // Called when the game starts or when spawned
@@ -94,13 +97,28 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 	GiveAbilities();
 }
 
-void ASSCharacter_Base::Client_UpdateCharacterSpeed_Implementation(float NewSpeed)
+void ASSCharacter_Base::Client_UpdateCharacterSpeed_Implementation(float NewSpeed, bool bIsCharacterCrouched)
 {
-	GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+	if (bIsCharacterCrouched)
+	{
+		GetCharacterMovement()->MaxWalkSpeedCrouched = NewSpeed;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+	}
 }
 
-void ASSCharacter_Base::Server_UpdateCharacterSpeed_Implementation(float NewSpeed)
+void ASSCharacter_Base::Server_UpdateCharacterSpeed_Implementation(float NewSpeed, bool bIsCharacterCrouched)
 {
-	GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-	Client_UpdateCharacterSpeed(NewSpeed);
+	if (bIsCharacterCrouched)
+	{
+		GetCharacterMovement()->MaxWalkSpeedCrouched = NewSpeed;
+		Client_UpdateCharacterSpeed(NewSpeed, bIsCharacterCrouched);
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
+		Client_UpdateCharacterSpeed(NewSpeed, bIsCharacterCrouched);
+	}
 }
