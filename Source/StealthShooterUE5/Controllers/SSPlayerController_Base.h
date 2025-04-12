@@ -61,4 +61,6 @@ private: // Functions
 	UFUNCTION()
 	void ActivateAbilityByInputIDReleased(const ESSInputID InputID);
 
+	virtual void OnPossess(APawn* NewPawn) override;
+
 };

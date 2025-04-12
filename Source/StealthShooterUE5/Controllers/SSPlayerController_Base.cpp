@@ -17,16 +17,15 @@ void ASSPlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetReplicates(true);
-
 	CurrentCharacter = Cast<ASSPlayer_Base>(GetPawn());
 
 	if (IsValid(CurrentCharacter))
 		ASC = Cast<USS_AbilitySystemComponent>(CurrentCharacter->GetAbilitySystemComponent());
 
-	if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+	if (IsLocalController())
 	{
-		SubSystem->AddMappingContext(MappingContext, 0);
+		if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+			SubSystem->AddMappingContext(MappingContext, 0);
 	}
 }
 
@@ -58,6 +57,11 @@ void ASSPlayerController_Base::SetupInputComponent()
 					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
 				}
 			}
+		}
+		else
+		{
+			UE_LOG(LogTemp, Warning, TEXT("InputConfig is not set for %s!"), *GetName());
+			return;
 		}
 	}
 }
@@ -98,4 +102,14 @@ void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID 
 void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID InputID)
 {
 	ASC->ReleaseInputID(static_cast<int32>(InputID));
+}
+
+void ASSPlayerController_Base::OnPossess(APawn* NewPawn)
+{
+	Super::OnPossess(NewPawn);
+
+	CurrentCharacter = Cast<ASSPlayer_Base>(NewPawn);
+
+	if (IsValid(CurrentCharacter))
+		ASC = Cast<USS_AbilitySystemComponent>(CurrentCharacter->GetAbilitySystemComponent());
 }
