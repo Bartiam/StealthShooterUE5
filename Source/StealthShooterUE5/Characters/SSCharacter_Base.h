@@ -51,11 +51,4 @@ public: // Functions
 
 	virtual ASSCharacter_Base* GetCharacter_Implementation() override;
 
-public: // Multiplayer Functions
-
-	UFUNCTION(Client, Reliable)
-	void Client_UpdateCharacterSpeed(float NewSpeed, bool bIsCharacterCrouched);
-
-	UFUNCTION(Server, Reliable)
-	void Server_UpdateCharacterSpeed(float NewSpeed, bool bIsCharacterCrouched);
 };

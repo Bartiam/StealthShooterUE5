@@ -17,6 +17,8 @@ void ASSPlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
+	SetReplicates(true);
+
 	CurrentCharacter = Cast<ASSPlayer_Base>(GetPawn());
 
 	if (IsValid(CurrentCharacter))
@@ -97,5 +99,3 @@ void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID
 {
 	ASC->ReleaseInputID(static_cast<int32>(InputID));
 }
-
-

@@ -77,8 +77,6 @@ void ASSCharacter_Base::GiveAbilities()
 			AbilitySystemComponent->GiveAbility(AbilitySpec);
 		}
 	}
-
-	Crouch();
 }
 
 UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
@@ -95,30 +93,4 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 
 	InitializeAttributes();
 	GiveAbilities();
-}
-
-void ASSCharacter_Base::Client_UpdateCharacterSpeed_Implementation(float NewSpeed, bool bIsCharacterCrouched)
-{
-	if (bIsCharacterCrouched)
-	{
-		GetCharacterMovement()->MaxWalkSpeedCrouched = NewSpeed;
-	}
-	else
-	{
-		GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-	}
-}
-
-void ASSCharacter_Base::Server_UpdateCharacterSpeed_Implementation(float NewSpeed, bool bIsCharacterCrouched)
-{
-	if (bIsCharacterCrouched)
-	{
-		GetCharacterMovement()->MaxWalkSpeedCrouched = NewSpeed;
-		Client_UpdateCharacterSpeed(NewSpeed, bIsCharacterCrouched);
-	}
-	else
-	{
-		GetCharacterMovement()->MaxWalkSpeed = NewSpeed;
-		Client_UpdateCharacterSpeed(NewSpeed, bIsCharacterCrouched);
-	}
 }

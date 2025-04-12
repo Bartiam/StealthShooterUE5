@@ -61,5 +61,4 @@ private: // Functions
 	UFUNCTION()
 	void ActivateAbilityByInputIDReleased(const ESSInputID InputID);
 
-
 };

@@ -5,6 +5,7 @@
 #include "GameplayEffectExtension.h"
 
 #include "../Characters/SSCharacter_Base.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 #include "Net/UnrealNetwork.h"
 
@@ -41,14 +42,18 @@ void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectM
 	{
 		// Transfer to a character CurrentWalkSpeed
 		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
-			OwnerCharacter->Server_UpdateCharacterSpeed(GetCurrentWalkSpeed(), false);
+		{
+			OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = GetCurrentWalkSpeed();
+		}
 	}
 
 	if (Data.EvaluatedData.Attribute == GetCurrentCrouchSpeedAttribute())
 	{
 		// Transfer to a character CurrentCrouchSpeed
 		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
-			OwnerCharacter->Server_UpdateCharacterSpeed(GetCurrentCrouchSpeed(), true);
+		{
+			OwnerCharacter->GetCharacterMovement()->MaxWalkSpeedCrouched = GetCurrentCrouchSpeed();
+		}
 	}
 }
 
@@ -65,11 +70,23 @@ void USS_CharacterAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& Ol
 void USS_CharacterAttributeSet::OnRep_CurrentWalkSpeed(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, CurrentWalkSpeed, OldValue);
+
+	// Transfer to a character CurrentWalkSpeed
+	if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
+	{
+		OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = GetCurrentWalkSpeed();
+	}
 }
 
 void USS_CharacterAttributeSet::OnRep_CurrentCrouchSpeed(const FGameplayAttributeData& OldValue)
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, CurrentCrouchSpeed, OldValue);
+
+	// Transfer to a character CurrentCrouchSpeed
+	if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
+	{
+		OwnerCharacter->GetCharacterMovement()->MaxWalkSpeedCrouched = GetCurrentCrouchSpeed();
+	}
 }
 
 void USS_CharacterAttributeSet::OnRep_CurrentNoise(const FGameplayAttributeData& OldValue)
