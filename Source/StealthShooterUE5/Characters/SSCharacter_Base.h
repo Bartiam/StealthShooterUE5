@@ -8,17 +8,21 @@
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
 #include "../SSData/SSTypes.h"
-#include "../Interfaces/CharacterAbilities.h"
+#include "../Interfaces/CharacterInterface.h"
 
 #include "SSCharacter_Base.generated.h"
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface, public ICharacterAbilities
+class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface, public ICharacterInterface
 {
 	GENERATED_BODY()
 
 public:
 	ASSCharacter_Base();
+
+private: // Variables
+
+	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,6 +36,8 @@ protected:
 
 	UFUNCTION()
 	virtual void PossessedBy(AController* NewController) override;
+
+	
 
 public: // Variables
 
@@ -49,6 +55,7 @@ public: // Functions
 
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
-	virtual ASSCharacter_Base* GetCharacter_Implementation() override;
+	virtual ASSCharacter_Base* GetCurrentCharacter_Implementation() override;
 
+	virtual class ASSPlayerController_Base* GetCharacterController_Implementation() override;
 };

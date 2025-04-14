@@ -5,18 +5,18 @@
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
 
-#include "CharacterAbilities.generated.h"
+#include "CharacterInterface.generated.h"
 
 // This class does not need to be modified.
 UINTERFACE(MinimalAPI, Blueprintable)
-class UCharacterAbilities : public UInterface
+class UCharacterInterface : public UInterface
 {
 	GENERATED_BODY()
 };
 
 
 
-class STEALTHSHOOTERUE5_API ICharacterAbilities
+class STEALTHSHOOTERUE5_API ICharacterInterface
 {
 	GENERATED_BODY()
 
@@ -24,5 +24,8 @@ class STEALTHSHOOTERUE5_API ICharacterAbilities
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	class ASSCharacter_Base* GetCharacter();
+	class ASSCharacter_Base* GetCurrentCharacter();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	class ASSPlayerController_Base* GetCharacterController();
 };

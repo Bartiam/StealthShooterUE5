@@ -6,7 +6,6 @@
 #include "Abilities/GameplayAbility.h"
 
 #include "../../SSData/SSTypes.h"
-#include "../../Interfaces/CharacterAbilities.h"
 
 #include "SSGameplayAbility_Base.generated.h"
 
