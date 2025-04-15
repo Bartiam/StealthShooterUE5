@@ -6,6 +6,7 @@
 #include "../GAS/SS_AbilitySystemComponent.h"
 #include "../GAS/Abilities/SSGameplayAbility_Base.h"
 #include "../GAS/SS_CharacterAttributeSet.h"
+#include "../Controllers/SSPlayerController_Base.h"
 
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/CharacterMovementComponent.h"
