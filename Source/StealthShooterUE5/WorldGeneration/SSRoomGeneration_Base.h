@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "SSRoomDataAsset_Base.h"
+
 #include "SSRoomGeneration_Base.generated.h"
 
 UCLASS()
@@ -19,8 +22,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+protected: // Variables
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Room Configuration")
+	TObjectPtr<USSRoomDataAsset_Base> RoomConfig;
 
 };

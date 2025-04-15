@@ -6,8 +6,6 @@
 // Sets default values
 ASSRoomGeneration_Base::ASSRoomGeneration_Base()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
 
 }
 
@@ -17,11 +15,3 @@ void ASSRoomGeneration_Base::BeginPlay()
 	Super::BeginPlay();
 	
 }
-
-// Called every frame
-void ASSRoomGeneration_Base::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

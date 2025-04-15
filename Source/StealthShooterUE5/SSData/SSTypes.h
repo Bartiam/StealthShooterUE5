@@ -17,22 +17,17 @@ enum class ESSInputID : uint8
 	Dodge_Input UMETA(DisplayName = "Dodge Input"),
 };
 
-USTRUCT(BlueprintType)
-struct FCharacterMontages
+UENUM(BlueprintType)
+enum class ESSRoomTypes : uint8
 {
-	GENERATED_BODY()
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UAnimMontage> ForwardMontage = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UAnimMontage> BackwardMontage = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UAnimMontage> LeftMonatage = nullptr;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UAnimMontage> RightMonatage = nullptr;
+	Begin_Play_Room UMETA(DisplayName = "Begin Play Room"),
+	End_Play_Room UMETA(DisplayName = "End Play Room"),
+	Laboratory_Room UMETA(DisplayName = "Laboratory Room"),
+	Security_Room UMETA(DisplayName = "Security Room"),
+	Distribution_Room UMETA(DisplayName = "Distribution Room"),
+	Experimental_Room UMETA(DisplayName = "Experimental Room"),
+	Arena_Room UMETA(DisplayName = "Arena Room"),
+	Surveillance_Room UMETA(DisplayName = "Surveillance Room")
 };
 
 UCLASS()
