@@ -14,4 +14,23 @@ void ASSRoomGeneration_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	switch (RoomConfig->RoomType)
+	{
+	case ESSRoomTypes::Begin_Play_Room:
+		break;
+	case ESSRoomTypes::End_Play_Room:
+		break;
+	case ESSRoomTypes::Laboratory_Room:
+		break;
+	case ESSRoomTypes::Security_Room:
+		break;
+	case ESSRoomTypes::Distribution_Room:
+		break;
+	case ESSRoomTypes::Experimental_Room:
+		break;
+	case ESSRoomTypes::Arena_Room:
+		break;
+	case ESSRoomTypes::Surveillance_Room:
+		break;
+	}
 }
