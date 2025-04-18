@@ -10,6 +10,7 @@
 #include "SSRoomDataAsset_Base.generated.h"
 
 
+
 UCLASS()
 class STEALTHSHOOTERUE5_API USSRoomDataAsset_Base : public UDataAsset
 {
