@@ -4,7 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "../SSData/SSTypes.h"
+
 #include "SSWorldGeneration_Base.generated.h"
+
+
 
 UCLASS()
 class STEALTHSHOOTERUE5_API ASSWorldGeneration_Base : public AActor

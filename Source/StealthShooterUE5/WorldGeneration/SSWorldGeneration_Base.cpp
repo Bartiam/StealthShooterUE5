@@ -2,6 +2,7 @@
 
 
 #include "SSWorldGeneration_Base.h"
+#include "SSRoomGeneration_Base.h"
 
 // Sets default values
 ASSWorldGeneration_Base::ASSWorldGeneration_Base()

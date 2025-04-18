@@ -27,7 +27,8 @@ enum class ESSRoomTypes : uint8
 	Distribution_Room UMETA(DisplayName = "Distribution Room"),
 	Experimental_Room UMETA(DisplayName = "Experimental Room"),
 	Arena_Room UMETA(DisplayName = "Arena Room"),
-	Surveillance_Room UMETA(DisplayName = "Surveillance Room")
+	Surveillance_Room UMETA(DisplayName = "Surveillance Room"),
+	Hallway_Room UMETA(DisplayName = "Hallway Room")
 };
 
 UCLASS()
