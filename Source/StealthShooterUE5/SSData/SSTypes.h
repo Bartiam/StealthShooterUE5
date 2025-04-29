@@ -15,6 +15,7 @@ enum class ESSInputID : uint8
 	Crouch_Walk_Input UMETA(DisplayName = "Crouch Walk Input"),
 	Reload_Input UMETA(DisplayName = "Reload Input"),
 	Dodge_Input UMETA(DisplayName = "Dodge Input"),
+	Interact_Input UMETA(DisplayName = "Interact Input"),
 };
 
 UENUM(BlueprintType)
