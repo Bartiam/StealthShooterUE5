@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "SSGameplayAbility_Base.h"
+
 #include "SSInteractAbility_Base.generated.h"
 
 
@@ -15,5 +16,7 @@ class STEALTHSHOOTERUE5_API USSInteractAbility_Base : public USSGameplayAbility_
 	
 protected: // Functions
 
+	UFUNCTION(BlueprintCallable)
+	void CheckObjectWithLineTrace();
 	
 };
