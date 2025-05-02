@@ -33,13 +33,12 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 void ASSSimpleDoor_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	if (HasAuthority())
-		Server_OpenDoor();
 }
 
-void ASSSimpleDoor_Base::Interactable()
+void ASSSimpleDoor_Base::Interactable_Implementation()
 {
+	Server_OpenDoor();
+
 	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("ITS WORKED!!!"));
 }
 

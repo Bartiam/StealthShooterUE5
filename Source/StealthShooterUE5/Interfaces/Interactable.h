@@ -7,7 +7,7 @@
 #include "Interactable.generated.h"
 
 // This class does not need to be modified.
-UINTERFACE(MinimalAPI)
+UINTERFACE(MinimalAPI, Blueprintable)
 class UInteractable : public UInterface
 {
 	GENERATED_BODY()
@@ -22,5 +22,6 @@ class STEALTHSHOOTERUE5_API IInteractable
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
 
-	virtual void Interactable();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void Interactable();
 };

@@ -7,6 +7,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 
+#include "../GAS/SS_AbilitySystemComponent.h"
+
 ASSPlayer_Base::ASSPlayer_Base()
 {
 	// Don't rotate when the controller rotates. Let that just affect the camera.
@@ -38,6 +40,8 @@ ASSPlayer_Base::ASSPlayer_Base()
 
 	// Player character movement base specifications
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
+
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 }
 
 void ASSPlayer_Base::BeginPlay()

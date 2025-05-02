@@ -6,6 +6,7 @@
 #include "SSGameplayAbility_Base.h"
 
 #include "../../Interfaces/CharacterInterface.h"
+#include "../../Interfaces/Interactable.h"
 
 #include "SSInteractAbility_Base.generated.h"
 

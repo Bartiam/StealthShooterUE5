@@ -23,7 +23,7 @@ protected: // Functions
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	virtual void Interactable() override;
+	virtual void Interactable_Implementation() override;
 
 	UFUNCTION(Server, Reliable)
 	void Server_OpenDoor();

@@ -5,5 +5,4 @@
 
 // Add default functionality here for any ICharacterInteractable functions that are not pure virtual.
 
-void IInteractable::Interactable()
-{}
+

@@ -28,5 +28,8 @@ void USSInteractAbility_Base::ActivateAbility(const FGameplayAbilitySpecHandle H
 		EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 	}
 
+	if (HitResult.GetActor() != nullptr && HitResult.GetActor()->Implements<UInteractable>())
+		IInteractable::Execute_Interactable(HitResult.GetActor());
+
 	EndAbility(Handle, ActorInfo, ActivationInfo, true, false);
 }

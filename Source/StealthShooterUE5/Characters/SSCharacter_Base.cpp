@@ -21,7 +21,6 @@ ASSCharacter_Base::ASSCharacter_Base()
 	// Create ASC
 	AbilitySystemComponent = CreateDefaultSubobject<USS_AbilitySystemComponent>(FName("Ability System Component"));
 	AbilitySystemComponent->SetIsReplicated(true);
-	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 
 	// Create AS
 	AttributeSet = CreateDefaultSubobject<USS_CharacterAttributeSet>(FName("Attribute Set"));
@@ -97,6 +96,8 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 		CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
 
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+
+	SetOwner(NewController);
 
 	InitializeAttributes();
 	GiveAbilities();
