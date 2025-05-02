@@ -37,4 +37,8 @@ private: // Functions
 
 	UFUNCTION()
 	void CheckJacketOnTheCharacter();
+
+public: // Functions
+
+	virtual class UCameraComponent* GetPlayerCameraComponent_Implementation() const override;
 };

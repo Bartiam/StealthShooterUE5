@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "SSGameplayAbility_Base.h"
 
+#include "../../Interfaces/CharacterInterface.h"
+
 #include "SSInteractAbility_Base.generated.h"
 
 
@@ -14,9 +16,16 @@ class STEALTHSHOOTERUE5_API USSInteractAbility_Base : public USSGameplayAbility_
 {
 	GENERATED_BODY()
 	
+protected: // Variables
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Interact specifications")
+	float LineTraceLength = 0.f;
+
+	TArray<AActor*> IgnoreActors;
+
 protected: // Functions
 
-	UFUNCTION(BlueprintCallable)
-	void CheckObjectWithLineTrace();
-	
+	virtual void ActivateAbility(const FGameplayAbilitySpecHandle Handle,
+		const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
+		const FGameplayEventData* TriggerEventData) override;
 };

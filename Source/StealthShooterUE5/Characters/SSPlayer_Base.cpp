@@ -55,3 +55,6 @@ void ASSPlayer_Base::CheckJacketOnTheCharacter()
 		Jacket->DestroyComponent();
 	}
 }
+
+UCameraComponent* ASSPlayer_Base::GetPlayerCameraComponent_Implementation() const
+{ return CameraComponent; }

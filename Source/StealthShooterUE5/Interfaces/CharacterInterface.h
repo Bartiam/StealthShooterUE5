@@ -28,4 +28,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	class ASSPlayerController_Base* GetCharacterController();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	class UCameraComponent* GetPlayerCameraComponent() const;
 };
