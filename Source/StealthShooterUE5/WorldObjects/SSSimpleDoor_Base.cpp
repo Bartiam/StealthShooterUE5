@@ -38,20 +38,20 @@ void ASSSimpleDoor_Base::BeginPlay()
 void ASSSimpleDoor_Base::Interactable_Implementation()
 {
 	Server_OpenDoor();
-
+	
 	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("ITS WORKED!!!"));
 }
 
 void ASSSimpleDoor_Base::Server_OpenDoor_Implementation()
 {
+	if (GetLocalRole() != ROLE_Authority) return;
+
 	GetWorldTimerManager().SetTimer(TimerToOpenDoor, this, &ThisClass::ChangeRotationDoor, 0.01, true);
 }
 
-void ASSSimpleDoor_Base::ChangeRotationDoor()
+void ASSSimpleDoor_Base::ChangeRotationDoor_Implementation()
 {
 	FRotator NewRotation = Door->GetComponentRotation();
-
 	NewRotation = FRotator(NewRotation.Pitch, NewRotation.Yaw + 0.6f, NewRotation.Roll);
-
 	Door->SetRelativeRotation(NewRotation, true);
 }

@@ -56,6 +56,6 @@ private: // Variables
 
 private: // Functions
 	
-	UFUNCTION()
+	UFUNCTION(NetMulticast, Reliable)
 	void ChangeRotationDoor();
 };
