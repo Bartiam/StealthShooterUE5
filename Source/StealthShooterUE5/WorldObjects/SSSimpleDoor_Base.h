@@ -31,10 +31,7 @@ protected: // Variables
 	TObjectPtr<class UBoxComponent> OverlapBox;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	bool bIsClosed = true;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	bool bIsLock = false;
+	bool bIsDoorLock = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
 	TObjectPtr<UCurveFloat> DoorCurve;
@@ -43,21 +40,20 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
 	float DoorRotateAngle = 60.f;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	float ClosedDoorYaw = 0.f;
-
 protected: // Functions
 
 	virtual void Interactable_Implementation() override;
 
-	UFUNCTION()
-	void OpenDoor(float Value);
+	UFUNCTION(NetMulticast, Reliable)
+	void Multicast_OpenDoor(float Value);
 
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void BeginPlay() override;
 
 private: // Variables
+
+	bool bIsDoorClosed = true;
 
 	FTimeline TimelineToOpenDoor;
 };

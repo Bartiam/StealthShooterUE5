@@ -20,7 +20,7 @@ void USSInteractAbility_Base::ActivateAbility(const FGameplayAbilitySpecHandle H
 		FVector EndLineTrace = CameraLocation + (PlayerCamera->GetForwardVector() * LineTraceLength);
 
 		UKismetSystemLibrary::LineTraceSingle(GetWorld(), CameraLocation, EndLineTrace, ETraceTypeQuery::TraceTypeQuery1,
-			false, IgnoreActors, EDrawDebugTrace::Persistent, HitResult, true);
+			false, IgnoreActors, EDrawDebugTrace::ForOneFrame, HitResult, true);
 	}
 	else
 	{

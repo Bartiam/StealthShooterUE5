@@ -41,7 +41,7 @@ void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectM
 	if (Data.EvaluatedData.Attribute == GetCurrentWalkSpeedAttribute())
 	{
 		// Transfer to a character CurrentWalkSpeed
-		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
+		if (ASSCharacter_Base* OwnerCharacter = ICharacterInterface::Execute_GetCurrentCharacter(GetOwningActor()))
 		{
 			OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = GetCurrentWalkSpeed();
 		}
@@ -50,7 +50,7 @@ void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectM
 	if (Data.EvaluatedData.Attribute == GetCurrentCrouchSpeedAttribute())
 	{
 		// Transfer to a character CurrentCrouchSpeed
-		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
+		if (ASSCharacter_Base* OwnerCharacter = ICharacterInterface::Execute_GetCurrentCharacter(GetOwningActor()))
 		{
 			OwnerCharacter->GetCharacterMovement()->MaxWalkSpeedCrouched = GetCurrentCrouchSpeed();
 		}
@@ -72,7 +72,7 @@ void USS_CharacterAttributeSet::OnRep_CurrentWalkSpeed(const FGameplayAttributeD
 	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, CurrentWalkSpeed, OldValue);
 
 	// Transfer to a character CurrentWalkSpeed
-	if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
+	if (ASSCharacter_Base* OwnerCharacter = ICharacterInterface::Execute_GetCurrentCharacter(GetOwningActor()))
 	{
 		OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = GetCurrentWalkSpeed();
 	}
@@ -83,7 +83,7 @@ void USS_CharacterAttributeSet::OnRep_CurrentCrouchSpeed(const FGameplayAttribut
 	GAMEPLAYATTRIBUTE_REPNOTIFY(USS_CharacterAttributeSet, CurrentCrouchSpeed, OldValue);
 
 	// Transfer to a character CurrentCrouchSpeed
-	if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
+	if (ASSCharacter_Base* OwnerCharacter = ICharacterInterface::Execute_GetCurrentCharacter(GetOwningActor()))
 	{
 		OwnerCharacter->GetCharacterMovement()->MaxWalkSpeedCrouched = GetCurrentCrouchSpeed();
 	}

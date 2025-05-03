@@ -20,7 +20,6 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	// Setup base specifications of door
 	Door = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
 	Door->SetupAttachment(DoorFrame);
-	Door->SetIsReplicated(true);
 	Door->SetCollisionProfileName(FName("BlockAll"));
 
 	// Setup base specifications of overlap box collision
@@ -31,23 +30,29 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	NetDormancy = DORM_DormantAll;
 	NetUpdateFrequency = 30.f;
 	SetReplicates(true);
+	bReplicates = true;
 }
 
 void ASSSimpleDoor_Base::Interactable_Implementation()
 {
-	if (bIsClosed)
-	{
-		TimelineToOpenDoor.Play();
-	}
-	else
-	{
-		TimelineToOpenDoor.Reverse();
-	}
+	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing()) return;
 
-	bIsClosed = !bIsClosed;
+	if (HasAuthority())
+	{
+		if (bIsDoorClosed)
+		{
+			TimelineToOpenDoor.Play();
+		}
+		else
+		{
+			TimelineToOpenDoor.Reverse();
+		}
+
+		bIsDoorClosed = !bIsDoorClosed;
+	}
 }
 
-void ASSSimpleDoor_Base::OpenDoor(float Value)
+void ASSSimpleDoor_Base::Multicast_OpenDoor_Implementation(float Value)
 {
 	FRotator CurrentDoorRotation = FRotator(0.f, DoorRotateAngle * Value, 0.f);
 	Door->SetRelativeRotation(CurrentDoorRotation);
@@ -67,7 +72,7 @@ void ASSSimpleDoor_Base::BeginPlay()
 	if (DoorCurve)
 	{
 		FOnTimelineFloat TimelineProgress;
-		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
+		TimelineProgress.BindDynamic(this, &ThisClass::Multicast_OpenDoor);
 		TimelineToOpenDoor.AddInterpFloat(DoorCurve, TimelineProgress);
 	}
 }
