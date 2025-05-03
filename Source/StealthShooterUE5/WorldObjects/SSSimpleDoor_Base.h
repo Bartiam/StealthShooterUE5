@@ -27,9 +27,6 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> DoorFrame;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UBoxComponent> OverlapBox;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
 	bool bIsDoorLock = false;
 

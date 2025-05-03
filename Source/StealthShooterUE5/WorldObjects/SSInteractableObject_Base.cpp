@@ -4,6 +4,7 @@
 #include "SSInteractableObject_Base.h"
 
 #include "Components/WidgetComponent.h"
+#include "Components/BoxComponent.h"
 
 
 
@@ -13,9 +14,13 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	// Create Overlap Sphere
+	OverlapBox = CreateDefaultSubobject<UBoxComponent>(FName("Overlap Box"));
+	OverlapBox->SetupAttachment(RootComponent);
+
 	// Create widget component
-	PressWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
-	PressWidget->SetupAttachment(RootComponent);
+	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
+	InteractionWidget->SetupAttachment(RootComponent);
 
 	// If not active, it goes into a dormant state.
 	NetDormancy = DORM_DormantAll;
@@ -30,6 +35,11 @@ void ASSInteractableObject_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (OverlapBox)
+	{
+		OverlapBox->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnBoxCollisionBeginOverlap);
+		OverlapBox->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnBoxCollisionEndOverlap);
+	}
 }
 
 // Called every frame
@@ -39,3 +49,14 @@ void ASSInteractableObject_Base::Tick(float DeltaTime)
 
 }
 
+void ASSInteractableObject_Base::OnBoxCollisionBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	
+}
+
+void ASSInteractableObject_Base::OnBoxCollisionEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+
+}

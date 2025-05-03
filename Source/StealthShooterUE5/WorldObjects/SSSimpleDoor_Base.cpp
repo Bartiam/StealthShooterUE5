@@ -21,11 +21,6 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	Door = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
 	Door->SetupAttachment(DoorFrame);
 	Door->SetCollisionProfileName(FName("BlockAll"));
-
-	// Create and setup base specifications of overlap box collision
-	OverlapBox = CreateDefaultSubobject<UBoxComponent>(FName("Overlap Box"));
-	OverlapBox->SetupAttachment(DoorFrame);
-	OverlapBox->SetCollisionProfileName(FName("OverlapAll"));
 }
 
 void ASSSimpleDoor_Base::Interactable_Implementation()
