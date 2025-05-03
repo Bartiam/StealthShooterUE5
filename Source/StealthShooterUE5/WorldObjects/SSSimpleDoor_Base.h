@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 
 #include "../Interfaces/Interactable.h"
+#include "Components/TimelineComponent.h"
 
 #include "SSSimpleDoor_Base.generated.h"
 
@@ -14,19 +15,9 @@ class STEALTHSHOOTERUE5_API ASSSimpleDoor_Base : public AActor, public IInteract
 {
 	GENERATED_BODY()
 	
-public:	
-	// Sets default values for this actor's properties
+public:	// Functions
+	
 	ASSSimpleDoor_Base();
-
-protected: // Functions
-
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-	virtual void Interactable_Implementation() override;
-
-	UFUNCTION(Server, Reliable)
-	void Server_OpenDoor();
 
 protected: // Variables
 
@@ -34,28 +25,39 @@ protected: // Variables
 	TObjectPtr<UStaticMeshComponent> Door;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<UStaticMeshComponent> Platband;
+	TObjectPtr<UStaticMeshComponent> DoorFrame;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UBoxComponent> OverlapBox;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	bool bIsClosed = false;
+	bool bIsClosed = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	bool bIsLock = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	TObjectPtr<UCurveFloat> DoorCurve;
 
 	// How many need to rotation door
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	float OpenDoorYaw = 60.f;
+	float DoorRotateAngle = 60.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
 	float ClosedDoorYaw = 0.f;
 
+protected: // Functions
+
+	virtual void Interactable_Implementation() override;
+
+	UFUNCTION()
+	void OpenDoor(float Value);
+
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void BeginPlay() override;
+
 private: // Variables
 
-	FTimerHandle TimerToOpenDoor;
-
-private: // Functions
-	
-	UFUNCTION(NetMulticast, Reliable)
-	void ChangeRotationDoor();
+	FTimeline TimelineToOpenDoor;
 };
