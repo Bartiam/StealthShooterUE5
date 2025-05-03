@@ -5,13 +5,13 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 
-#include "../Interfaces/Interactable.h"
+#include "SSInteractableObject_Base.h"
 #include "Components/TimelineComponent.h"
 
 #include "SSSimpleDoor_Base.generated.h"
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASSSimpleDoor_Base : public AActor, public IInteractable
+class STEALTHSHOOTERUE5_API ASSSimpleDoor_Base : public ASSInteractableObject_Base
 {
 	GENERATED_BODY()
 	

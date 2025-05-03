@@ -10,6 +10,7 @@
 
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 
 // Sets default values
@@ -41,6 +42,16 @@ ASSCharacter_Base::ASSCharacter_Base()
 void ASSCharacter_Base::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetWorldTimerManager().SetTimer(TimerForSphereTrace, this, &ThisClass::SphereTraceInteraction, 0.01f, true);
+}
+
+
+void ASSCharacter_Base::SphereTraceInteraction()
+{
+
+
+	
 }
 
 void ASSCharacter_Base::InitializeAttributes()

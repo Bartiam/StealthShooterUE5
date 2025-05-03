@@ -24,6 +24,13 @@ private: // Variables
 
 	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
 
+	FTimerHandle TimerForSphereTrace;
+
+private: // Functions
+
+	UFUNCTION()
+	void SphereTraceInteraction();
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
