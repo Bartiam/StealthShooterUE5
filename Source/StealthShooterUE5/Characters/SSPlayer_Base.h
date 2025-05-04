@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "SSCharacter_Base.h"
+
+#include "../Interfaces/Interactable.h"
+
 #include "SSPlayer_Base.generated.h"
 
 
@@ -31,16 +34,23 @@ protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Line Trace Length")
 	float LineTraceLength = 0.f;
+
+	UPROPERTY(BlueprintReadOnly)
+	AActor* HitActorTrace = nullptr;
 	
 protected: // Functions
 
 	virtual void BeginPlay() override;
 
+	virtual void PossessedBy(AController* NewController) override;
+
 private: // Variables
+
+	FTimerHandle TimerToSearching;
 
 	TArray<AActor*> IgnoreActors;
 
-	FTimerHandle TimerToSearchObjects;
+	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
 
 private: // Functions 
 
@@ -48,9 +58,11 @@ private: // Functions
 	void CheckJacketOnTheCharacter();
 
 	UFUNCTION()
-	void LineTraceSearchInteractionObjects();
+	void SearchingObjectsLinetrace();
 
 public: // Functions
 
-	virtual class UCameraComponent* GetPlayerCameraComponent_Implementation() const override;
+	virtual ASSPlayer_Base* GetOwnerPlayer_Implementation() override;
+
+	virtual class ASSPlayerController_Base* GetOwnerPlayerController_Implementation() override;
 };

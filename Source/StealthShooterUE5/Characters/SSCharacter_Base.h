@@ -20,12 +20,6 @@ class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbili
 public:
 	ASSCharacter_Base();
 
-private: // Variables
-
-	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
-
-	FTimerHandle TimerForSphereTrace;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -36,7 +30,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USS_CharacterAttributeSet> AttributeSet;
 
-	UFUNCTION()
 	virtual void PossessedBy(AController* NewController) override;
 
 public: // Variables
@@ -54,8 +47,4 @@ public: // Functions
 	virtual void GiveAbilities();
 
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
-	virtual ASSCharacter_Base* GetCurrentCharacter_Implementation() override;
-
-	virtual class ASSPlayerController_Base* GetCharacterController_Implementation() override;
 };

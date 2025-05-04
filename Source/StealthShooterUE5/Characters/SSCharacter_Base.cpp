@@ -6,7 +6,6 @@
 #include "../GAS/SS_AbilitySystemComponent.h"
 #include "../GAS/Abilities/SSGameplayAbility_Base.h"
 #include "../GAS/SS_CharacterAttributeSet.h"
-#include "../Controllers/SSPlayerController_Base.h"
 
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -82,18 +81,9 @@ void ASSCharacter_Base::GiveAbilities()
 UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
 { return AbilitySystemComponent; }
 
-ASSCharacter_Base* ASSCharacter_Base::GetCurrentCharacter_Implementation()
-{ return this; }
-
-ASSPlayerController_Base* ASSCharacter_Base::GetCharacterController_Implementation()
-{ return CurrentPlayerController; }
-
 void ASSCharacter_Base::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
-
-	if (IsValid(NewController))
-		CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
 
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 

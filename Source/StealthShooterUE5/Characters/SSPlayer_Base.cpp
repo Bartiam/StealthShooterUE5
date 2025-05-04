@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "../Controllers/SSPlayerController_Base.h"
 
 #include "../GAS/SS_AbilitySystemComponent.h"
 
@@ -51,7 +52,16 @@ void ASSPlayer_Base::BeginPlay()
 
 	CheckJacketOnTheCharacter();
 
-	GetWorldTimerManager().SetTimer(TimerToSearchObjects, this, &ThisClass::LineTraceSearchInteractionObjects, 0.01, true);
+	// Activate line trace ability
+	GetWorldTimerManager().SetTimer(TimerToSearching, this, &ThisClass::SearchingObjectsLinetrace, 0.1f, true);
+}
+
+void ASSPlayer_Base::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (IsValid(NewController))
+		CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
 }
 
 void ASSPlayer_Base::CheckJacketOnTheCharacter()
@@ -63,18 +73,51 @@ void ASSPlayer_Base::CheckJacketOnTheCharacter()
 	}
 }
 
-UCameraComponent* ASSPlayer_Base::GetPlayerCameraComponent_Implementation() const
-{ return CameraComponent; }
-
-
-void ASSPlayer_Base::LineTraceSearchInteractionObjects()
+void ASSPlayer_Base::SearchingObjectsLinetrace()
 {
 	FHitResult HitResult;
+
 	FVector CameraLocation = CameraComponent->GetComponentLocation();
-	FVector EndLineTrace = CameraLocation + (CameraComponent->GetForwardVector() * LineTraceLength);
+	// The distance at which the beam hits
+	FVector EndLineTrace = CameraComponent->GetComponentLocation() + (CameraComponent->GetForwardVector() * LineTraceLength);
 
 	UKismetSystemLibrary::LineTraceSingle(GetWorld(), CameraLocation, EndLineTrace, ETraceTypeQuery::TraceTypeQuery1,
-		false, IgnoreActors, EDrawDebugTrace::ForOneFrame, HitResult, true);
+		false, IgnoreActors, EDrawDebugTrace::None, HitResult, true);
 
+	// Verifying that the actor is valid
+	if (!HitResult.GetActor())
+	{
+		HitActorTrace = nullptr;
+		return;
+	}
 
+	// Checking that the actor has an interface
+	if (HitResult.GetActor()->Implements<UInteractable>())
+	{
+		// Saving the link to the actor 
+		HitActorTrace = HitResult.GetActor();
+		// Call funtion from interface with true
+		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString("Implements"));
+	}
+	else
+	{
+		// Verifying that the actor is valid
+		if (HitActorTrace != nullptr)
+		{
+			// Call funtion from interface with false
+			IInteractable::Execute_CanReceiveTrace(HitActorTrace, false);
+			// Set the actor is nullptr
+			HitActorTrace = nullptr;
+		}
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString("Not Implements"));
+	}
+
+	
 }
+
+ASSPlayer_Base* ASSPlayer_Base::GetOwnerPlayer_Implementation()
+{ return this; }
+
+ASSPlayerController_Base* ASSPlayer_Base::GetOwnerPlayerController_Implementation()
+{ return CurrentPlayerController; }
