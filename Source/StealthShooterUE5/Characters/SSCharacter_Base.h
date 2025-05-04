@@ -26,11 +26,6 @@ private: // Variables
 
 	FTimerHandle TimerForSphereTrace;
 
-private: // Functions
-
-	UFUNCTION()
-	void SphereTraceInteraction();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -43,8 +38,6 @@ protected:
 
 	UFUNCTION()
 	virtual void PossessedBy(AController* NewController) override;
-
-	
 
 public: // Variables
 

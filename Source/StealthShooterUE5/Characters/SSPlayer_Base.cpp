@@ -6,6 +6,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Kismet/KismetSystemLibrary.h"
 
 #include "../GAS/SS_AbilitySystemComponent.h"
 
@@ -49,6 +50,8 @@ void ASSPlayer_Base::BeginPlay()
 	Super::BeginPlay();
 
 	CheckJacketOnTheCharacter();
+
+	GetWorldTimerManager().SetTimer(TimerToSearchObjects, this, &ThisClass::LineTraceSearchInteractionObjects, 0.01, true);
 }
 
 void ASSPlayer_Base::CheckJacketOnTheCharacter()
@@ -62,3 +65,16 @@ void ASSPlayer_Base::CheckJacketOnTheCharacter()
 
 UCameraComponent* ASSPlayer_Base::GetPlayerCameraComponent_Implementation() const
 { return CameraComponent; }
+
+
+void ASSPlayer_Base::LineTraceSearchInteractionObjects()
+{
+	FHitResult HitResult;
+	FVector CameraLocation = CameraComponent->GetComponentLocation();
+	FVector EndLineTrace = CameraLocation + (CameraComponent->GetForwardVector() * LineTraceLength);
+
+	UKismetSystemLibrary::LineTraceSingle(GetWorld(), CameraLocation, EndLineTrace, ETraceTypeQuery::TraceTypeQuery1,
+		false, IgnoreActors, EDrawDebugTrace::ForOneFrame, HitResult, true);
+
+
+}

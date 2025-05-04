@@ -24,4 +24,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void Interactable();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void CanReceiveTrace(bool bIsCanInteract);
 };

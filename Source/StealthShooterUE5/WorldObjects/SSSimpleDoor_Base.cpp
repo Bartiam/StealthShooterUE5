@@ -4,7 +4,6 @@
 #include "SSSimpleDoor_Base.h"
 
 #include "Net/UnrealNetwork.h"
-#include "Components/BoxComponent.h"
 
 // Sets default values
 ASSSimpleDoor_Base::ASSSimpleDoor_Base()

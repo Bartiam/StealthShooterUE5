@@ -28,15 +28,27 @@ protected: // Variables
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USkeletalMeshComponent> Jacket;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Line Trace Length")
+	float LineTraceLength = 0.f;
 	
 protected: // Functions
 
 	virtual void BeginPlay() override;
 
+private: // Variables
+
+	TArray<AActor*> IgnoreActors;
+
+	FTimerHandle TimerToSearchObjects;
+
 private: // Functions 
 
 	UFUNCTION()
 	void CheckJacketOnTheCharacter();
+
+	UFUNCTION()
+	void LineTraceSearchInteractionObjects();
 
 public: // Functions
 
