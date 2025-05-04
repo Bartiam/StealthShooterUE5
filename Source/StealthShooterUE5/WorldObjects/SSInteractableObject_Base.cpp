@@ -5,6 +5,7 @@
 
 #include "Components/WidgetComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 
 
@@ -14,11 +15,15 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	// Create Overlap Sphere
+	// Create and set base specifications for MainMeshComponent
+	MainObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Main Mesh Component"));
+	SetRootComponent(MainObjectCircled);
+
+	// Create and set base specifications for OverlapBox
 	OverlapBox = CreateDefaultSubobject<UBoxComponent>(FName("Overlap Box"));
 	OverlapBox->SetupAttachment(RootComponent);
 
-	// Create widget component
+	// Create and set base specifications for InteractionWidget
 	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
 	InteractionWidget->SetupAttachment(RootComponent);
 

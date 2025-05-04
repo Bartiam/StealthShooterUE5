@@ -22,9 +22,6 @@ public:	// Functions
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<UStaticMeshComponent> Door;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> DoorFrame;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")

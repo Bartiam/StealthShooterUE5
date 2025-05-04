@@ -15,12 +15,8 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	// Create and setup base specifications of Platband
 	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Platband"));
 	SetRootComponent(DoorFrame);
-	DoorFrame->SetCollisionProfileName("BlockAll");
 
-	// Create and setup base specifications of door
-	Door = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
-	Door->SetupAttachment(DoorFrame);
-	Door->SetCollisionProfileName(FName("BlockAll"));
+	MainObjectCircled->SetupAttachment(RootComponent);
 }
 
 void ASSSimpleDoor_Base::Interactable_Implementation()
@@ -49,7 +45,7 @@ void ASSSimpleDoor_Base::Multicast_OpenDoor_Implementation(float Value)
 {
 	// Set new rotation for this object
 	FRotator CurrentDoorRotation = FRotator(0.f, DoorRotateAngle * Value, 0.f);
-	Door->SetRelativeRotation(CurrentDoorRotation);
+	MainObjectCircled->SetRelativeRotation(CurrentDoorRotation);
 }
 
 void ASSSimpleDoor_Base::Tick(float DeltaTime)
