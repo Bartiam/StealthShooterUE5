@@ -33,8 +33,6 @@ protected: // Functions
 
 	virtual void BeginPlay() override;
 
-	virtual void Tick(float DeltaTime) override;
-
 	virtual void CanReceiveTrace_Implementation(bool bIsCanInteract) override;
 
 	UFUNCTION()

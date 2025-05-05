@@ -6,6 +6,7 @@
 #include "Components/WidgetComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Blueprint/UserWidget.h"
 
 
 
@@ -48,16 +49,9 @@ void ASSInteractableObject_Base::BeginPlay()
 	}
 }
 
-// Called every frame
-void ASSInteractableObject_Base::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-
 void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInteract)
 {
-
+	
 }
 
 void ASSInteractableObject_Base::OnBoxCollisionBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
