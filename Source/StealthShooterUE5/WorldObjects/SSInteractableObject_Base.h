@@ -18,10 +18,11 @@ public:	// Functions
 	
 	ASSInteractableObject_Base();
 
-protected: // Variables
+private: // Variables
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UWidgetComponent> InteractionWidget;
+	TSubclassOf<class USSInteractionWidget_Base> InteractionWidget_Class;
+
+protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UBoxComponent> OverlapBox;
@@ -29,17 +30,12 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UStaticMeshComponent> ObjectCircled;
 
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<class UWidgetComponent> InteractionWidget;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;
 
 	virtual void CanReceiveTrace_Implementation(bool bIsCanInteract) override;
-
-	UFUNCTION()
-	void OnBoxCollisionBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION()
-	void OnBoxCollisionEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 };

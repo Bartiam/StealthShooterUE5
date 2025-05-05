@@ -84,15 +84,8 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	UKismetSystemLibrary::LineTraceSingle(GetWorld(), CameraLocation, EndLineTrace, ETraceTypeQuery::TraceTypeQuery1,
 		false, IgnoreActors, EDrawDebugTrace::ForDuration, HitResult, true);
 
-	// Verifying that the actor is valid
-	if (!HitResult.GetActor())
-	{
-		HitActorTrace = nullptr;
-		return;
-	}
-
 	// Checking that the actor has an interface
-	if (HitResult.GetActor()->Implements<UInteractable>())
+	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>())
 	{
 		// Saving the link to the actor 
 		HitActorTrace = HitResult.GetActor();
@@ -112,8 +105,6 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 		}
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString("Not Implements"));
 	}
-
-	
 }
 
 ASSPlayer_Base* ASSPlayer_Base::GetOwnerPlayer_Implementation()

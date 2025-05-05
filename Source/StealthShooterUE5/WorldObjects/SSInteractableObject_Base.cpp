@@ -6,7 +6,7 @@
 #include "Components/WidgetComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "Blueprint/UserWidget.h"
+#include "../UserInterface/SSInteractionWidget_Base.h"
 
 
 
@@ -26,8 +26,17 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 
 	// Create and set base specifications for InteractionWidget
 	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
-	InteractionWidget->SetupAttachment(RootComponent);
+	InteractionWidget->SetupAttachment(ObjectCircled);
 	InteractionWidget->SetCollisionProfileName(FName("NoCollision"));
+	InteractionWidget->SetWidgetClass(InteractionWidget_Class);
+	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
+	
+	// Get a link on widget class
+	ConstructorHelpers::FClassFinder<USSInteractionWidget_Base> InteractionWidget_Finder
+	(TEXT("/Game/StealthShooter/Blueprints/UserInterface/WBP_InteractObject.WBP_InteractObject_C"));
+	// Set widget class
+	InteractionWidget_Class = InteractionWidget_Finder.Class;
+
 
 	// If not active, it goes into a dormant state.
 	NetDormancy = DORM_DormantAll;
@@ -41,27 +50,21 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 void ASSInteractableObject_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	if (OverlapBox)
-	{
-		OverlapBox->OnComponentBeginOverlap.AddDynamic(this, &ThisClass::OnBoxCollisionBeginOverlap);
-		OverlapBox->OnComponentEndOverlap.AddDynamic(this, &ThisClass::OnBoxCollisionEndOverlap);
-	}
 }
 
 void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInteract)
 {
-	
-}
+	auto NewWidget = CreateWidget<USSInteractionWidget_Base>(GetWorld(), InteractionWidget_Class);
 
-void ASSInteractableObject_Base::OnBoxCollisionBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	
-}
-
-void ASSInteractableObject_Base::OnBoxCollisionEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
-{
-
+	if (bIsCanInteract)
+	{
+		InteractionWidget->SetWidget(NewWidget);
+		InteractionWidget->SetVisibility(true);
+		NewWidget->PlayAnimation(NewWidget->AppearMarkObject);
+	}
+	else
+	{
+		InteractionWidget->SetVisibility(false);
+	}
+		
 }
