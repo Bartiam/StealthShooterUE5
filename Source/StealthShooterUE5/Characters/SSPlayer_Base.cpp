@@ -82,7 +82,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	FVector EndLineTrace = CameraComponent->GetComponentLocation() + (CameraComponent->GetForwardVector() * LineTraceLength);
 
 	UKismetSystemLibrary::LineTraceSingle(GetWorld(), CameraLocation, EndLineTrace, ETraceTypeQuery::TraceTypeQuery1,
-		false, IgnoreActors, EDrawDebugTrace::None, HitResult, true);
+		false, IgnoreActors, EDrawDebugTrace::ForDuration, HitResult, true);
 
 	// Verifying that the actor is valid
 	if (!HitResult.GetActor())
@@ -98,7 +98,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 		HitActorTrace = HitResult.GetActor();
 		// Call funtion from interface with true
 		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString("Implements"));
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, HitResult.Component.Get()->GetName());
 	}
 	else
 	{

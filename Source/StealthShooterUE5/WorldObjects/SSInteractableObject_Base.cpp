@@ -15,17 +15,18 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	// Create and set base specifications for MainMeshComponent
-	MainObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Main Mesh Component"));
-	SetRootComponent(MainObjectCircled);
-
 	// Create and set base specifications for OverlapBox
 	OverlapBox = CreateDefaultSubobject<UBoxComponent>(FName("Overlap Box"));
-	OverlapBox->SetupAttachment(RootComponent);
+	SetRootComponent(OverlapBox);
+
+	// Create and set base specifications for MainMeshComponent
+	ObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Main Mesh Component"));
+	ObjectCircled->SetupAttachment(RootComponent);
 
 	// Create and set base specifications for InteractionWidget
 	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
 	InteractionWidget->SetupAttachment(RootComponent);
+	InteractionWidget->SetCollisionProfileName(FName("NoCollision"));
 
 	// If not active, it goes into a dormant state.
 	NetDormancy = DORM_DormantAll;

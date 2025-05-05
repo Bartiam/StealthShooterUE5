@@ -27,7 +27,7 @@ protected: // Variables
 	TObjectPtr<class UBoxComponent> OverlapBox;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UStaticMeshComponent> MainObjectCircled;
+	TObjectPtr<class UStaticMeshComponent> ObjectCircled;
 
 protected: // Functions
 
