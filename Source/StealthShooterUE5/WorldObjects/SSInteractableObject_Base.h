@@ -23,7 +23,7 @@ private: // Variables
 	TSubclassOf<class USSInteractionWidget_Base> InteractionWidget_Class;
 
 	TObjectPtr<class USSInteractionWidget_Base> InteractionWidget_Poiner;
-
+	
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -34,6 +34,9 @@ protected: // Variables
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class USceneComponent> DefaultRootComponent;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Materials")
+	TObjectPtr<UMaterial> CircledObjectMaterial;
 
 protected: // Functions
 

@@ -30,6 +30,8 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	InteractionWidget->SetWidgetClass(InteractionWidget_Class);
 	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	InteractionWidget->SetVisibility(false);
+
+	CircledObjectMaterial = CreateDefaultSubobject<UMaterial>(FName("Circled Object Material"));
 	
 	// Get a link on widget class
 	ConstructorHelpers::FClassFinder<USSInteractionWidget_Base> InteractionWidget_Finder
@@ -59,11 +61,13 @@ void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInter
 
 	if (bIsCanInteract)
 	{
+		ObjectCircled->SetRenderCustomDepth(true);
 		InteractionWidget->SetVisibility(true);
 		InteractionWidget_Poiner->PlayAnimation(InteractionWidget_Poiner->AppearMarkObject);
 	}
 	else
 	{
+		ObjectCircled->SetRenderCustomDepth(false);
 		InteractionWidget->SetVisibility(false);
 		InteractionWidget_Poiner->ReverseAnimation(InteractionWidget_Poiner->AppearMarkObject);
 	}
