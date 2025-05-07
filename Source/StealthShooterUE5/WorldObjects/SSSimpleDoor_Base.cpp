@@ -15,7 +15,8 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Platband"));
 	DoorFrame->SetupAttachment(RootComponent);
 
-	ObjectCircled->SetupAttachment(RootComponent);
+	ObjectCircled->SetupAttachment(DoorFrame);
+	
 }
 
 void ASSSimpleDoor_Base::Interactable_Implementation()
@@ -58,6 +59,7 @@ void ASSSimpleDoor_Base::Tick(float DeltaTime)
 void ASSSimpleDoor_Base::BeginPlay()
 {
 	Super::BeginPlay();
+
 	// Checking that curve != nullptr
 	if (DoorCurve)
 	{

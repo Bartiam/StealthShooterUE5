@@ -32,9 +32,6 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USkeletalMeshComponent> Jacket;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Line Trace Length")
-	float LineTraceLength = 0.f;
-
 	UPROPERTY(BlueprintReadOnly)
 	AActor* HitActorTrace = nullptr;
 	
@@ -46,11 +43,14 @@ protected: // Functions
 
 private: // Variables
 
+	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
+
 	FTimerHandle TimerToSearching;
 
+	// - Variables for trace - //
 	TArray<AActor*> IgnoreActors;
-
-	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
+	float SphereTraceLength = 300.f;
+	float SphereTraceRadius = 5.f;
 
 private: // Functions 
 

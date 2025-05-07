@@ -79,10 +79,10 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 
 	FVector CameraLocation = CameraComponent->GetComponentLocation();
 	// The distance at which the beam hits
-	FVector EndLineTrace = CameraComponent->GetComponentLocation() + (CameraComponent->GetForwardVector() * LineTraceLength);
+	FVector EndSphereTrace = CameraLocation + (CameraComponent->GetForwardVector() * SphereTraceLength);
 
-	UKismetSystemLibrary::LineTraceSingle(GetWorld(), CameraLocation, EndLineTrace, ETraceTypeQuery::TraceTypeQuery1,
-		false, IgnoreActors, EDrawDebugTrace::ForDuration, HitResult, true);
+	UKismetSystemLibrary::SphereTraceSingle(GetWorld(), CameraLocation, EndSphereTrace, SphereTraceRadius,
+		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::ForDuration, HitResult, true);
 
 	// Checking that the actor has an interface
 	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>())
@@ -91,7 +91,6 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 		HitActorTrace = HitResult.GetActor();
 		// Call funtion from interface with true
 		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, HitResult.Component.Get()->GetName());
 	}
 	else
 	{
@@ -103,7 +102,6 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 			// Set the actor is nullptr
 			HitActorTrace = nullptr;
 		}
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, FString("Not Implements"));
 	}
 }
 

@@ -22,16 +22,18 @@ private: // Variables
 
 	TSubclassOf<class USSInteractionWidget_Base> InteractionWidget_Class;
 
-protected: // Variables
+	TObjectPtr<class USSInteractionWidget_Base> InteractionWidget_Poiner;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<class UBoxComponent> OverlapBox;
+protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UStaticMeshComponent> ObjectCircled;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class UWidgetComponent> InteractionWidget;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<class USceneComponent> DefaultRootComponent;
 
 protected: // Functions
 

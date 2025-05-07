@@ -4,7 +4,7 @@
 #include "SSInteractableObject_Base.h"
 
 #include "Components/WidgetComponent.h"
-#include "Components/BoxComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "../UserInterface/SSInteractionWidget_Base.h"
 
@@ -16,9 +16,8 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	// Create and set base specifications for OverlapBox
-	OverlapBox = CreateDefaultSubobject<UBoxComponent>(FName("Overlap Box"));
-	SetRootComponent(OverlapBox);
+	DefaultRootComponent = CreateDefaultSubobject<USceneComponent>(FName("Root Component"));
+	SetRootComponent(DefaultRootComponent);
 
 	// Create and set base specifications for MainMeshComponent
 	ObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Main Mesh Component"));
@@ -30,6 +29,7 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	InteractionWidget->SetCollisionProfileName(FName("NoCollision"));
 	InteractionWidget->SetWidgetClass(InteractionWidget_Class);
 	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
+	InteractionWidget->SetVisibility(false);
 	
 	// Get a link on widget class
 	ConstructorHelpers::FClassFinder<USSInteractionWidget_Base> InteractionWidget_Finder
@@ -46,25 +46,23 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	bReplicates = true;
 }
 
-// Called when the game starts or when spawned
 void ASSInteractableObject_Base::BeginPlay()
 {
 	Super::BeginPlay();
+
+	InteractionWidget_Poiner = CreateWidget<USSInteractionWidget_Base>(GetWorld(), InteractionWidget_Class);
+	InteractionWidget->SetWidget(InteractionWidget_Poiner);
 }
 
 void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInteract)
 {
-	auto NewWidget = CreateWidget<USSInteractionWidget_Base>(GetWorld(), InteractionWidget_Class);
-
 	if (bIsCanInteract)
 	{
-		InteractionWidget->SetWidget(NewWidget);
 		InteractionWidget->SetVisibility(true);
-		NewWidget->PlayAnimation(NewWidget->AppearMarkObject);
+		InteractionWidget_Poiner->PlayAnimation(InteractionWidget_Poiner->AppearMarkObject);
 	}
 	else
 	{
 		InteractionWidget->SetVisibility(false);
 	}
-		
 }
