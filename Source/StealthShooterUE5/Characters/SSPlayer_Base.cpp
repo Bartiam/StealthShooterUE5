@@ -53,7 +53,8 @@ void ASSPlayer_Base::BeginPlay()
 	CheckJacketOnTheCharacter();
 
 	// Activate line trace ability
-	GetWorldTimerManager().SetTimer(TimerToSearching, this, &ThisClass::SearchingObjectsLinetrace, 0.1f, true);
+	if (IsLocallyControlled())
+		GetWorldTimerManager().SetTimer(TimerToSearching, this, &ThisClass::SearchingObjectsLinetrace, 0.1f, true);
 }
 
 void ASSPlayer_Base::PossessedBy(AController* NewController)

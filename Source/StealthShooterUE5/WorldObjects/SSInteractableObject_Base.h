@@ -35,9 +35,6 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class USceneComponent> DefaultRootComponent;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Materials")
-	TObjectPtr<UMaterial> CircledObjectMaterial;
-
 protected: // Functions
 
 	virtual void BeginPlay() override;
