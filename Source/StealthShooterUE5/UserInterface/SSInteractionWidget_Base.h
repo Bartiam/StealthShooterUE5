@@ -12,8 +12,10 @@ UCLASS()
 class STEALTHSHOOTERUE5_API USSInteractionWidget_Base : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 public: // Variables
+
+	virtual void NativeConstruct() override;
 
 	UPROPERTY(Transient, meta = (BindWidget))
 	TObjectPtr<class UImage> Image;

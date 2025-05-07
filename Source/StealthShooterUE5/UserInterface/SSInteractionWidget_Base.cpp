@@ -2,3 +2,11 @@
 
 
 #include "SSInteractionWidget_Base.h"
+#include "Components/WidgetComponent.h"
+
+void USSInteractionWidget_Base::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	PlayAnimation(AppearMarkObject);
+}

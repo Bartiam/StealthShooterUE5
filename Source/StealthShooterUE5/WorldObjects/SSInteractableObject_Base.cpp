@@ -56,6 +56,7 @@ void ASSInteractableObject_Base::BeginPlay()
 
 void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInteract)
 {
+
 	if (bIsCanInteract)
 	{
 		InteractionWidget->SetVisibility(true);
@@ -64,5 +65,6 @@ void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInter
 	else
 	{
 		InteractionWidget->SetVisibility(false);
+		InteractionWidget_Poiner->ReverseAnimation(InteractionWidget_Poiner->AppearMarkObject);
 	}
 }

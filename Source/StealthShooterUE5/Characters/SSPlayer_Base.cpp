@@ -82,22 +82,23 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	FVector EndSphereTrace = CameraLocation + (CameraComponent->GetForwardVector() * SphereTraceLength);
 
 	UKismetSystemLibrary::SphereTraceSingle(GetWorld(), CameraLocation, EndSphereTrace, SphereTraceRadius,
-		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::ForDuration, HitResult, true);
+		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::None, HitResult, true);
 
 	// Checking that the actor has an interface
-	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>())
+	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>()
+		&& HitResult.GetActor() != HitActorTrace)
 	{
 		// Saving the link to the actor 
 		HitActorTrace = HitResult.GetActor();
 		// Call funtion from interface with true
 		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
 	}
-	else
+	else if (HitResult.GetActor() != HitActorTrace)
 	{
 		// Verifying that the actor is valid
 		if (HitActorTrace != nullptr)
 		{
-			// Call funtion from interface with false
+			// Call function from interface with false
 			IInteractable::Execute_CanReceiveTrace(HitActorTrace, false);
 			// Set the actor is nullptr
 			HitActorTrace = nullptr;
