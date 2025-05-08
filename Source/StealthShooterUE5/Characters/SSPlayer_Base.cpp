@@ -7,8 +7,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "../Controllers/SSPlayerController_Base.h"
 
+#include "../Controllers/SSPlayerController_Base.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
 
 ASSPlayer_Base::ASSPlayer_Base()
@@ -52,7 +52,7 @@ void ASSPlayer_Base::BeginPlay()
 
 	CheckJacketOnTheCharacter();
 
-	// Activate line trace ability
+	// Activate Sphere Trace
 	if (IsLocallyControlled())
 		GetWorldTimerManager().SetTimer(TimerToSearching, this, &ThisClass::SearchingObjectsLinetrace, 0.1f, true);
 }
@@ -81,7 +81,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	FVector CameraLocation = CameraComponent->GetComponentLocation();
 	// The distance at which the beam hits
 	FVector EndSphereTrace = CameraLocation + (CameraComponent->GetForwardVector() * SphereTraceLength);
-
+	// Activate sphere trace
 	UKismetSystemLibrary::SphereTraceSingle(GetWorld(), CameraLocation, EndSphereTrace, SphereTraceRadius,
 		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::None, HitResult, true);
 
@@ -91,7 +91,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	{
 		// Saving the link to the actor 
 		HitActorTrace = HitResult.GetActor();
-		// Call funtion from interface with true
+		// Call funñtion from interface with true
 		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
 	}
 	else if (HitResult.GetActor() != HitActorTrace)
