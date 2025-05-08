@@ -36,7 +36,7 @@ protected: // Variables
 
 protected: // Functions
 
-	virtual void Interactable_Implementation() override;
+	virtual void Interactable_Implementation(const AActor* Interactor) override;
 
 	UFUNCTION(NetMulticast, Reliable)
 	void Multicast_OpenDoor(float Value);

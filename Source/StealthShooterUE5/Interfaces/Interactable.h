@@ -23,7 +23,7 @@ class STEALTHSHOOTERUE5_API IInteractable
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void Interactable();
+	void Interactable(const AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void CanReceiveTrace(bool bIsCanInteract);
