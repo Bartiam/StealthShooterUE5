@@ -19,7 +19,7 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	
 }
 
-void ASSSimpleDoor_Base::Interactable_Implementation(const AActor* Interactor)
+void ASSSimpleDoor_Base::InteractableRelease_Implementation(const AActor* Interactor)
 {
 	// Checking that the object is currently running 
 	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing()) return;
