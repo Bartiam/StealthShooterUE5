@@ -24,6 +24,8 @@ ASSPlayer_Base::ASSPlayer_Base()
 	SpringArmComponent->bUsePawnControlRotation = true;
 	SpringArmComponent->bEnableCameraLag = true;
 	SpringArmComponent->CameraLagSpeed = 14.f;
+	SpringArmComponent->TargetArmLength = 130.f;
+	SpringArmComponent->SocketOffset = FVector(0.f, 40.f, 55.f);
 
 	// Create and base specifications for Camera Component
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(FName("Camera Component"));
