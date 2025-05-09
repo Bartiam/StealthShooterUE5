@@ -26,7 +26,7 @@ public:
 	void InteractableRelease(const AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	void InteractableHold(const AActor* Interactor);
+	void InteractableHeld(const AActor* Interactor);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void CanReceiveTrace(bool bIsCanInteract);

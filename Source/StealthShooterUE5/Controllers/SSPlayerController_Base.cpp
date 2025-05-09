@@ -97,6 +97,8 @@ void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
 void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID InputID)
 {
 	ASC->PressInputID(static_cast<int32>(InputID));
+
+	
 }
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID InputID)
