@@ -36,21 +36,27 @@ struct FCharacterMovementSpeed
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float WalkSpeed = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayTag WalkTag;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float CrouchSpeed = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayTag CrouchTag;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float RunSpeed = 0.f;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float CrouchedWalkSpeed = 0.f;
+
+	// Buff/dubaff
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float ImproveSpeedFromStimulator = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayTag SpeedStimulatoTag;
 };
 
 UCLASS()

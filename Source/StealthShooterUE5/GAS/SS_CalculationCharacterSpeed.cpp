@@ -74,6 +74,7 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 		float NewWalkSpeed = 0.f;
 		float NewCrouchedSpeed = 0.f;
 
+		// Setting base character speed
 		if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.CrouchTag) &&
 			SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.WalkTag))
 		{
@@ -92,12 +93,14 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 			NewWalkSpeed = CharacterMovementSpeed.RunSpeed;
 		}
 
-		if (SourceASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag(FName("Character.Status.SpeedStimulator"))))
+		// Update character speed from baff/debaff
+		if (SourceASC->HasMatchingGameplayTag(FGameplayTag(CharacterMovementSpeed.SpeedStimulatoTag)))
 		{
-			NewWalkSpeed *= 1.2;
-			NewCrouchedSpeed *= 1.2;
+			NewWalkSpeed *= CharacterMovementSpeed.ImproveSpeedFromStimulator;
+			NewCrouchedSpeed *= CharacterMovementSpeed.ImproveSpeedFromStimulator;
 		}
 
+		// Apply new speed
 		OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(SpeedStatics().CurrentWalkSpeedProperty, EGameplayModOp::Override, NewWalkSpeed));
 		OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(SpeedStatics().CurrentCrouchSpeedProperty, EGameplayModOp::Override, NewCrouchedSpeed));
 	}
