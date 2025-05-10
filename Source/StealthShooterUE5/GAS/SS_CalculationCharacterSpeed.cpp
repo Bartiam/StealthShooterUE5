@@ -35,6 +35,8 @@ USS_CalculationCharacterSpeed::USS_CalculationCharacterSpeed()
 {
 	RelevantAttributesToCapture.Add(SpeedStatics().CurrentWalkSpeedDef);
 	RelevantAttributesToCapture.Add(SpeedStatics().CurrentCrouchSpeedDef);
+
+
 }
 
 // Do the speed calculations and modify speed accordingly
@@ -68,11 +70,35 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 	// Performing the actual speed calculation
 	if (SourceActor->Implements<UCharacterInterface>())
 	{
-		FCharacterMovementSpeed CharacterSpeed = ICharacterInterface::Execute_GetOwnerCharacter(SourceActor)->GetCharacterMovementSpeed();
+		FCharacterMovementSpeed CharacterMovementSpeed = ICharacterInterface::Execute_GetOwnerCharacter(SourceActor)->GetCharacterMovementSpeed();
+		float NewWalkSpeed = 0.f;
+		float NewCrouchedSpeed = 0.f;
 
-		if (SourceASC->HasMatchingGameplayTag(CharacterSpeed.WalkTag))
+		if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.CrouchTag) &&
+			SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.WalkTag))
 		{
-
+			NewCrouchedSpeed = CharacterMovementSpeed.CrouchedWalkSpeed;
 		}
+		else if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.CrouchTag))
+		{
+			NewCrouchedSpeed = CharacterMovementSpeed.CrouchSpeed;
+		}
+		else if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.WalkTag))
+		{
+			NewWalkSpeed = CharacterMovementSpeed.WalkSpeed;
+		}
+		else
+		{
+			NewWalkSpeed = CharacterMovementSpeed.RunSpeed;
+		}
+
+		if (SourceASC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag(FName("Character.Status.SpeedStimulator"))))
+		{
+			NewWalkSpeed *= 1.2;
+			NewCrouchedSpeed *= 1.2;
+		}
+
+		OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(SpeedStatics().CurrentWalkSpeedProperty, EGameplayModOp::Override, NewWalkSpeed));
+		OutExecutionOutput.AddOutputModifier(FGameplayModifierEvaluatedData(SpeedStatics().CurrentCrouchSpeedProperty, EGameplayModOp::Override, NewCrouchedSpeed));
 	}
 }
