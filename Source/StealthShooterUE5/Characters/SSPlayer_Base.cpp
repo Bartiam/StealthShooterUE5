@@ -8,7 +8,6 @@
 #include "Camera/CameraComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
 
-#include "../Controllers/SSPlayerController_Base.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
 
 ASSPlayer_Base::ASSPlayer_Base()
@@ -59,14 +58,6 @@ void ASSPlayer_Base::BeginPlay()
 		GetWorldTimerManager().SetTimer(TimerToSearching, this, &ThisClass::SearchingObjectsLinetrace, 0.1f, true);
 }
 
-void ASSPlayer_Base::PossessedBy(AController* NewController)
-{
-	Super::PossessedBy(NewController);
-
-	if (IsValid(NewController))
-		CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
-}
-
 void ASSPlayer_Base::CheckJacketOnTheCharacter()
 {
 	// If Jacket mesh is empty, destroy Jacket
@@ -108,9 +99,3 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 		}
 	}
 }
-
-ASSPlayer_Base* ASSPlayer_Base::GetOwnerPlayer_Implementation()
-{ return this; }
-
-ASSPlayerController_Base* ASSPlayer_Base::GetOwnerPlayerController_Implementation()
-{ return CurrentPlayerController; }

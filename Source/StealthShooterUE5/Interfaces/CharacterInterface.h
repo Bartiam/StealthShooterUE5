@@ -24,8 +24,8 @@ class STEALTHSHOOTERUE5_API ICharacterInterface
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	class ASSPlayer_Base* GetOwnerPlayer();
+	class ASSCharacter_Base* GetOwnerCharacter();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	class ASSPlayerController_Base* GetOwnerPlayerController();
+	class ASSPlayerController_Base* GetOwnerCharacterController();
 };

@@ -6,6 +6,7 @@
 #include "../GAS/SS_AbilitySystemComponent.h"
 #include "../GAS/Abilities/SSGameplayAbility_Base.h"
 #include "../GAS/SS_CharacterAttributeSet.h"
+#include "../Controllers/SSPlayerController_Base.h"
 
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -34,6 +35,8 @@ ASSCharacter_Base::ASSCharacter_Base()
 
 	SetReplicateMovement(true);
 	SetReplicates(true);
+
+	// Base specifications for character
 }
 
 // Called when the game starts or when spawned
@@ -41,6 +44,15 @@ void ASSCharacter_Base::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
+FCharacterMovementSpeed ASSCharacter_Base::GetCharacterMovementSpeed() const
+{ return CharacterMovementSpeed; }
+
+ASSCharacter_Base* ASSCharacter_Base::GetOwnerCharacter_Implementation()
+{ return this; }
+
+ASSPlayerController_Base* ASSCharacter_Base::GetOwnerCharacterController_Implementation()
+{ return CurrentPlayerController; }
 
 void ASSCharacter_Base::InitializeAttributes()
 {
@@ -88,6 +100,9 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 
 	SetOwner(NewController);
+
+	if (IsValid(NewController))
+		CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
 
 	InitializeAttributes();
 	GiveAbilities();

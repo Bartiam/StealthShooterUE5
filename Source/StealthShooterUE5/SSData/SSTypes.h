@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "GameplayTagContainer.h"
 #include "SSTypes.generated.h"
 
 UENUM(BlueprintType)
@@ -28,6 +29,32 @@ enum class ESSRoomTypes : uint8
 	Arena_Room UMETA(DisplayName = "Arena Room"),
 	Surveillance_Room UMETA(DisplayName = "Surveillance Room"),
 	Hallway_Room UMETA(DisplayName = "Hallway Room")
+};
+
+USTRUCT(BlueprintType)
+struct FCharacterMovementSpeed
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	float WalkSpeed = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	FGameplayTag WalkTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	float CrouchSpeed = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	FGameplayTag CrouchTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	float RunSpeed = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	FGameplayTag RunTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	float CrouchedWalkSpeed = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	FGameplayTag CrouchedWalkTag;
 };
 
 UCLASS()
