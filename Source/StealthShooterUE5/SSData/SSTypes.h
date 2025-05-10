@@ -48,13 +48,9 @@ struct FCharacterMovementSpeed
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
 	float RunSpeed = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
-	FGameplayTag RunTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
 	float CrouchedWalkSpeed = 0.f;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
-	FGameplayTag CrouchedWalkTag;
 };
 
 UCLASS()

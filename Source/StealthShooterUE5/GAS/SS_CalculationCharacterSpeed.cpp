@@ -44,8 +44,8 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 	Super::Execute_Implementation(ExecutionParams, OutExecutionOutput);
 
 	// Obtain reference to the source ASC
-	UAbilitySystemComponent* SourceABC = ExecutionParams.GetSourceAbilitySystemComponent();
-	AActor* SourceActor = SourceABC ? SourceABC->GetAvatarActor() : nullptr;
+	UAbilitySystemComponent* SourceASC = ExecutionParams.GetSourceAbilitySystemComponent();
+	AActor* SourceActor = SourceASC ? SourceASC->GetAvatarActor() : nullptr;
 
 	// Get the owning GA Spec so that you can use its variables and tags
 	const FGameplayEffectSpec& Spec = ExecutionParams.GetOwningSpec();
@@ -63,9 +63,16 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 	float CurrentCrouchSpeed;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(SpeedStatics().CurrentWalkSpeedDef, EvaluateParametrs, CurrentCrouchSpeed);
 
+	if (!IsValid(SourceASC) && !IsValid(SourceActor)) return;
+
 	// Performing the actual speed calculation
-	if (SourceABC->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag(FName("Character.Status.SpeedStimulator"))))
+	if (SourceActor->Implements<UCharacterInterface>())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Black, FString("WORKED!"));
+		FCharacterMovementSpeed CharacterSpeed = ICharacterInterface::Execute_GetOwnerCharacter(SourceActor)->GetCharacterMovementSpeed();
+
+		if (SourceASC->HasMatchingGameplayTag(CharacterSpeed.WalkTag))
+		{
+
+		}
 	}
 }
