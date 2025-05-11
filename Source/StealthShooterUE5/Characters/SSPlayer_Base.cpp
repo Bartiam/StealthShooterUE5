@@ -75,7 +75,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	FVector EndSphereTrace = CameraLocation + (CameraComponent->GetForwardVector() * SphereTraceLength);
 	// Activate sphere trace
 	UKismetSystemLibrary::SphereTraceSingle(GetWorld(), CameraLocation, EndSphereTrace, SphereTraceRadius,
-		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::None, HitResult, true);
+		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::ForDuration, HitResult, true);
 
 	// Checking that the actor has an interface
 	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>()
@@ -84,8 +84,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 		// Saving the link to the actor
 		HitActorTrace = HitResult.GetActor();
 		// Call funñtion from interface with true
-		if (IsLocallyControlled())
-			IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
+		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
 	}
 	else if (HitResult.GetActor() != HitActorTrace)
 	{
@@ -93,8 +92,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 		if (HitActorTrace != nullptr)
 		{
 			// Call function from interface with false
-			if (IsLocallyControlled())
-				IInteractable::Execute_CanReceiveTrace(HitActorTrace, false);
+			IInteractable::Execute_CanReceiveTrace(HitActorTrace, false);
 			// Set the actor is nullptr
 			HitActorTrace = nullptr;
 		}
