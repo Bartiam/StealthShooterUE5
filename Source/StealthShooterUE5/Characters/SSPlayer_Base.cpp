@@ -80,7 +80,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 
 	// Checking that the actor has an interface
 	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>()
-		&& HitResult.GetActor() != HitActorTrace)
+		&& !HitActorTrace)
 	{
 		// Saving the link to the actor 
 		HitActorTrace = HitResult.GetActor();
