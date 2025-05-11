@@ -39,7 +39,6 @@ ASSPlayer_Base::ASSPlayer_Base()
 	// Create and base specifications for Jacket
 	Jacket = CreateDefaultSubobject<USkeletalMeshComponent>(FName("Jacket"));
 	Jacket->SetupAttachment(GetMesh());
-	Jacket->SetLeaderPoseComponent(GetMesh(), true);
 
 	// Player character movement base specifications
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
@@ -63,7 +62,9 @@ void ASSPlayer_Base::CheckJacketOnTheCharacter()
 	if (Jacket->MeshObject == nullptr)
 	{
 		Jacket->DestroyComponent();
+		return;
 	}
+	Jacket->SetLeaderPoseComponent(GetMesh(), true);
 }
 
 void ASSPlayer_Base::SearchingObjectsLinetrace()

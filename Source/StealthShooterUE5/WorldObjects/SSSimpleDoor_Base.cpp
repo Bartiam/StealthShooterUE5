@@ -16,7 +16,6 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	DoorFrame->SetupAttachment(RootComponent);
 
 	ObjectCircled->SetupAttachment(DoorFrame);
-	
 }
 
 void ASSSimpleDoor_Base::InteractableRelease_Implementation(const AActor* Interactor)

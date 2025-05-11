@@ -8,6 +8,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "../UserInterface/SSInteractionWidget_Base.h"
 
+#include "Kismet/KismetSystemLibrary.h"
+
 
 
 // Sets default values
@@ -39,7 +41,7 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 
 
 	// If not active, it goes into a dormant state.
-	NetDormancy = DORM_DormantAll;
+	//NetDormancy = DORM_DormantAll;
 	// Set TPS for actor
 	NetUpdateFrequency = 30.f;
 	SetReplicates(true);
