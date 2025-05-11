@@ -39,10 +39,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
 	FCharacterMovementSpeed CharacterMovementSpeed;
 
-	// The desired actor
-	UPROPERTY(BlueprintReadOnly)
-	TObjectPtr<AActor> HitActorTrace = nullptr;
-
 public: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
