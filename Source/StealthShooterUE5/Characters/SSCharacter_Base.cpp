@@ -11,6 +11,8 @@
 #include "Net/UnrealNetwork.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+#include "Kismet/KismetSystemLibrary.h"
+
 
 // Sets default values
 ASSCharacter_Base::ASSCharacter_Base()

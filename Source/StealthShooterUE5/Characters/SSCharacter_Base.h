@@ -24,9 +24,7 @@ private: // Variables
 
 	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+protected: // Variables
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USS_AbilitySystemComponent> AbilitySystemComponent;
@@ -34,10 +32,17 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USS_CharacterAttributeSet> AttributeSet;
 
-	virtual void PossessedBy(AController* NewController) override;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
 	FCharacterMovementSpeed CharacterMovementSpeed;
+
+	UPROPERTY(BlueprintReadOnly)
+	AActor* HitActorTrace;
+
+protected: // Functions
+
+	virtual void BeginPlay() override;
+
+	virtual void PossessedBy(AController* NewController) override;
 
 public: // Variables
 

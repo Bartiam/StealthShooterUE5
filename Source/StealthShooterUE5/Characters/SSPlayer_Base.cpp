@@ -54,8 +54,7 @@ void ASSPlayer_Base::BeginPlay()
 	CheckJacketOnTheCharacter();
 
 	// Activate Sphere Trace
-	if (IsLocallyControlled())
-		GetWorldTimerManager().SetTimer(TimerToSearching, this, &ThisClass::SearchingObjectsLinetrace, 0.1f, true);
+	GetWorldTimerManager().SetTimer(TimerToSearching, this, &ThisClass::SearchingObjectsLinetrace, 0.1f, true);
 }
 
 void ASSPlayer_Base::CheckJacketOnTheCharacter()
@@ -82,10 +81,11 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>()
 		&& !HitActorTrace)
 	{
-		// Saving the link to the actor 
+		// Saving the link to the actor
 		HitActorTrace = HitResult.GetActor();
 		// Call funñtion from interface with true
-		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
+		if (IsLocallyControlled())
+			IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
 	}
 	else if (HitResult.GetActor() != HitActorTrace)
 	{
@@ -93,7 +93,8 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 		if (HitActorTrace != nullptr)
 		{
 			// Call function from interface with false
-			IInteractable::Execute_CanReceiveTrace(HitActorTrace, false);
+			if (IsLocallyControlled())
+				IInteractable::Execute_CanReceiveTrace(HitActorTrace, false);
 			// Set the actor is nullptr
 			HitActorTrace = nullptr;
 		}
