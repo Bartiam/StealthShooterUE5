@@ -74,7 +74,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	FVector EndSphereTrace = CameraLocation + (CameraComponent->GetForwardVector() * SphereTraceLength);
 	// Activate sphere trace
 	UKismetSystemLibrary::SphereTraceSingle(GetWorld(), CameraLocation, EndSphereTrace, SphereTraceRadius,
-		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::ForDuration, HitResult, true);
+		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::None, HitResult, true);
 
 	// Checking that the actor has an interface
 	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>()
