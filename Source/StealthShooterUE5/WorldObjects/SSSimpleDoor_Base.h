@@ -28,14 +28,18 @@ protected: // Variables
 	bool bIsDoorLock = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	TObjectPtr<UCurveFloat> DoorCurve;
+	TObjectPtr<UCurveFloat> OpenDoorCurve;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	TObjectPtr<UCurveFloat> LockDoorCurve;
 
 	// How many need to rotation door
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	float DoorRotateAngle = 0.f;
+	float OpenDoorRotateAngle = 0.f;
 
+	// How many need to rotation door
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	float DoorNewLocation = 0.f;
+	float LockDoorRotateAngle = 0.f;
 
 protected: // Functions
 
@@ -50,7 +54,10 @@ protected: // Functions
 
 private: // Variables
 
+	float DoorRotateAngle = 0.f;
+
 	bool bIsDoorClosed = true;
 
 	FTimeline TimelineToOpenDoor;
+	FTimeline TimelineToOpenDoor_Lock;
 };

@@ -19,17 +19,30 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 void ASSSimpleDoor_Base::InteractableRelease_Implementation(const AActor* Interactor)
 {
 	// Checking that the object is currently running 
-	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing()) return;
-	// Checking that this function is running on the server
-	if (bIsDoorClosed)
+	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing() ||
+		TimelineToOpenDoor_Lock.IsPlaying() || TimelineToOpenDoor_Lock.IsReversing()) return;
+
+	if (bIsDoorLock)
 	{
+		DoorRotateAngle = LockDoorRotateAngle;
 		// Play timeline 
-		TimelineToOpenDoor.Play();
+		TimelineToOpenDoor_Lock.Play();
+		TimelineToOpenDoor_Lock.ReverseFromEnd();
 	}
 	else
 	{
-		// Reverse play timeline
-		TimelineToOpenDoor.Reverse();
+		DoorRotateAngle = OpenDoorRotateAngle;
+
+		if (bIsDoorClosed)
+		{
+			// Play timeline 
+			TimelineToOpenDoor.Play();
+		}
+		else
+		{
+			// Reverse play timeline
+			TimelineToOpenDoor.Reverse();
+		}
 	}
 
 	bIsDoorClosed = !bIsDoorClosed;
@@ -48,6 +61,7 @@ void ASSSimpleDoor_Base::Tick(float DeltaTime)
 
 	// Promotes the timeline
 	TimelineToOpenDoor.TickTimeline(DeltaTime);
+	TimelineToOpenDoor_Lock.TickTimeline(DeltaTime);
 }
 
 void ASSSimpleDoor_Base::BeginPlay()
@@ -55,12 +69,21 @@ void ASSSimpleDoor_Base::BeginPlay()
 	Super::BeginPlay();
 
 	// Checking that curve != nullptr
-	if (DoorCurve)
+	if (OpenDoorCurve)
 	{
 		// Binds timeline to function
-		FOnTimelineFloat TimelineProgress;
-		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
+		FOnTimelineFloat TimelineProgressOpen;
+		TimelineProgressOpen.BindDynamic(this, &ThisClass::OpenDoor);
 		// Add curve to timeline
-		TimelineToOpenDoor.AddInterpFloat(DoorCurve, TimelineProgress);
+		TimelineToOpenDoor.AddInterpFloat(OpenDoorCurve, TimelineProgressOpen);
+	}
+
+	if (LockDoorCurve)
+	{
+		// Binds timeline to function
+		FOnTimelineFloat TimelineProgressLock;
+		TimelineProgressLock.BindDynamic(this, &ThisClass::OpenDoor);
+		// Add curve to timeline
+		TimelineToOpenDoor_Lock.AddInterpFloat(LockDoorCurve, TimelineProgressLock);
 	}
 }
