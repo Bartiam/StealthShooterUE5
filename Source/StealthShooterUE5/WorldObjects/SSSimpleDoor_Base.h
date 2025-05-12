@@ -54,7 +54,7 @@ protected: // Functions
 
 private: // Variables
 
-	float DoorRotateAngle = 0.f;
+	float CurrentDoorRotateAngle = 0.f;
 
 	bool bIsDoorClosed = true;
 

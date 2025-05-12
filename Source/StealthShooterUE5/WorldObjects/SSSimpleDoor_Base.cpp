@@ -24,14 +24,13 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(const AActor* Intera
 
 	if (bIsDoorLock)
 	{
-		DoorRotateAngle = LockDoorRotateAngle;
+		CurrentDoorRotateAngle = LockDoorRotateAngle;
 		// Play timeline 
-		TimelineToOpenDoor_Lock.Play();
-		TimelineToOpenDoor_Lock.ReverseFromEnd();
+		TimelineToOpenDoor_Lock.PlayFromStart();
 	}
 	else
 	{
-		DoorRotateAngle = OpenDoorRotateAngle;
+		CurrentDoorRotateAngle = OpenDoorRotateAngle;
 
 		if (bIsDoorClosed)
 		{
@@ -43,15 +42,15 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(const AActor* Intera
 			// Reverse play timeline
 			TimelineToOpenDoor.Reverse();
 		}
-	}
 
-	bIsDoorClosed = !bIsDoorClosed;
+		bIsDoorClosed = !bIsDoorClosed;
+	}
 }
 
 void ASSSimpleDoor_Base::OpenDoor(float Value)
 {
 	// Set new rotation for this object
-	FRotator CurrentDoorRotation = FRotator(0.f, DoorRotateAngle * Value, 0.f);
+	FRotator CurrentDoorRotation = FRotator(0.f, CurrentDoorRotateAngle * Value, 0.f);
 	ObjectCircled->SetRelativeRotation(CurrentDoorRotation);
 }
 

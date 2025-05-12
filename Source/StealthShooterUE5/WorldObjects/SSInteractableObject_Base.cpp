@@ -48,6 +48,8 @@ void ASSInteractableObject_Base::BeginPlay()
 
 void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInteract)
 {
+	if (false) return;
+
 	if (bIsCanInteract)
 	{
 		ObjectCircled->SetRenderCustomDepth(true);
