@@ -32,7 +32,10 @@ protected: // Variables
 
 	// How many need to rotation door
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	float DoorRotateAngle = 60.f;
+	float DoorRotateAngle = 0.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	float DoorNewLocation = 0.f;
 
 protected: // Functions
 
