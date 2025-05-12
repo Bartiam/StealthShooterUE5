@@ -38,8 +38,8 @@ protected: // Functions
 
 	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
 
-	UFUNCTION(NetMulticast, Reliable)
-	void Multicast_OpenDoor(float Value);
+	UFUNCTION()
+	void OpenDoor(float Value);
 
 	virtual void Tick(float DeltaTime) override;
 

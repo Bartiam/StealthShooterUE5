@@ -24,57 +24,33 @@ public:
 
 	USS_CharacterAttributeSet();
 
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
 
 	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
 
 	// - Health Variables - //
 
-	UPROPERTY(ReplicatedUsing = OnRep_MaxHealth, EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, MaxHealth);
 
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentHealth, EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentHealth);
 
 	// - Speed Variables - //
 
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentWalkSpeed, EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData CurrentWalkSpeed;
 	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentWalkSpeed);
 
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentCrouchSpeed, EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData CurrentCrouchSpeed;
 	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentCrouchSpeed);
 
 	// - Noise Variables - //
 
-	UPROPERTY(ReplicatedUsing = OnRep_CurrentNoise, EditDefaultsOnly, BlueprintReadOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FGameplayAttributeData CurrentNoise;
 	ATTRIBUTE_ACCESSORS(USS_CharacterAttributeSet, CurrentNoise);
-
-	// - Health Rep functions - //
-
-	UFUNCTION()
-	virtual void OnRep_CurrentHealth(const FGameplayAttributeData& OldValue);
-
-	UFUNCTION()
-	virtual void OnRep_MaxHealth(const FGameplayAttributeData& OldValue);
-
-	// - Speed Rep Functions - //
-
-	UFUNCTION()
-	virtual void OnRep_CurrentWalkSpeed(const FGameplayAttributeData& OldValue);
-
-	UFUNCTION()
-	virtual void OnRep_CurrentCrouchSpeed(const FGameplayAttributeData& OldValue);
-
-
-	// - Noise Rep Functions - //
-
-	UFUNCTION()
-	virtual void OnRep_CurrentNoise(const FGameplayAttributeData& OldValue);
 };

@@ -34,7 +34,6 @@ ASSPlayer_Base::ASSPlayer_Base()
 	// Create and base specifications for Holster Component
 	HolsterComponent = CreateDefaultSubobject<USkeletalMeshComponent>(FName("Holster"));
 	HolsterComponent->SetupAttachment(GetMesh());
-	HolsterComponent->SetLeaderPoseComponent(GetMesh(), true);
 
 	// Create and base specifications for Jacket
 	Jacket = CreateDefaultSubobject<USkeletalMeshComponent>(FName("Jacket"));
@@ -64,7 +63,6 @@ void ASSPlayer_Base::CheckJacketOnTheCharacter()
 		Jacket->DestroyComponent();
 		return;
 	}
-	Jacket->SetLeaderPoseComponent(GetMesh(), true);
 }
 
 void ASSPlayer_Base::SearchingObjectsLinetrace()

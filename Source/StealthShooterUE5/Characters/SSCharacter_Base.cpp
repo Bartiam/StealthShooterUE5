@@ -8,7 +8,6 @@
 #include "../GAS/SS_CharacterAttributeSet.h"
 #include "../Controllers/SSPlayerController_Base.h"
 
-#include "Net/UnrealNetwork.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 #include "Kismet/KismetSystemLibrary.h"
@@ -22,7 +21,6 @@ ASSCharacter_Base::ASSCharacter_Base()
 
 	// Create ASC
 	AbilitySystemComponent = CreateDefaultSubobject<USS_AbilitySystemComponent>(FName("Ability System Component"));
-	AbilitySystemComponent->SetIsReplicated(true);
 
 	// Create AS
 	AttributeSet = CreateDefaultSubobject<USS_CharacterAttributeSet>(FName("Attribute Set"));
@@ -33,12 +31,6 @@ ASSCharacter_Base::ASSCharacter_Base()
 	// Base specifications for PlayerMovement
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
-	GetCharacterMovement()->SetIsReplicated(true);
-
-	SetReplicateMovement(true);
-	SetReplicates(true);
-
-	// Base specifications for character
 }
 
 // Called when the game starts or when spawned

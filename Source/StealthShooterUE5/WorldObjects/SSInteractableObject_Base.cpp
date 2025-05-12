@@ -8,8 +8,6 @@
 #include "Components/StaticMeshComponent.h"
 #include "../UserInterface/SSInteractionWidget_Base.h"
 
-#include "Kismet/KismetSystemLibrary.h"
-
 
 
 // Sets default values
@@ -38,14 +36,6 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	(TEXT("/Game/StealthShooter/Blueprints/UserInterface/WBP_InteractObject.WBP_InteractObject_C"));
 	// Set widget class
 	InteractionWidget_Class = InteractionWidget_Finder.Class;
-
-
-	// If not active, it goes into a dormant state.
-	//NetDormancy = DORM_DormantAll;
-	// Set TPS for actor
-	NetUpdateFrequency = 30.f;
-	SetReplicates(true);
-	bReplicates = true;
 }
 
 void ASSInteractableObject_Base::BeginPlay()

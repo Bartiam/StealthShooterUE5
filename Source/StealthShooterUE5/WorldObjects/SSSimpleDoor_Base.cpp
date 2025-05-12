@@ -3,8 +3,6 @@
 
 #include "SSSimpleDoor_Base.h"
 
-#include "Net/UnrealNetwork.h"
-
 // Sets default values
 ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 {
@@ -23,24 +21,21 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(const AActor* Intera
 	// Checking that the object is currently running 
 	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing()) return;
 	// Checking that this function is running on the server
-	if (HasAuthority())
+	if (bIsDoorClosed)
 	{
-		if (bIsDoorClosed)
-		{
-			// Play timeline 
-			TimelineToOpenDoor.Play();
-		}
-		else
-		{
-			// Reverse play timeline
-			TimelineToOpenDoor.Reverse();
-		}
-
-		bIsDoorClosed = !bIsDoorClosed;
+		// Play timeline 
+		TimelineToOpenDoor.Play();
 	}
+	else
+	{
+		// Reverse play timeline
+		TimelineToOpenDoor.Reverse();
+	}
+
+	bIsDoorClosed = !bIsDoorClosed;
 }
 
-void ASSSimpleDoor_Base::Multicast_OpenDoor_Implementation(float Value)
+void ASSSimpleDoor_Base::OpenDoor(float Value)
 {
 	// Set new rotation for this object
 	FRotator CurrentDoorRotation = FRotator(0.f, DoorRotateAngle * Value, 0.f);
@@ -64,7 +59,7 @@ void ASSSimpleDoor_Base::BeginPlay()
 	{
 		// Binds timeline to function
 		FOnTimelineFloat TimelineProgress;
-		TimelineProgress.BindDynamic(this, &ThisClass::Multicast_OpenDoor);
+		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
 		// Add curve to timeline
 		TimelineToOpenDoor.AddInterpFloat(DoorCurve, TimelineProgress);
 	}
