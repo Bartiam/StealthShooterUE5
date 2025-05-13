@@ -21,7 +21,6 @@ UENUM(BlueprintType)
 enum class ESSRoomTypes : uint8
 {
 	Begin_Play_Room UMETA(DisplayName = "Begin Play Room"),
-	End_Play_Room UMETA(DisplayName = "End Play Room"),
 	Laboratory_Room UMETA(DisplayName = "Laboratory Room"),
 	Security_Room UMETA(DisplayName = "Security Room"),
 	Distribution_Room UMETA(DisplayName = "Distribution Room"),

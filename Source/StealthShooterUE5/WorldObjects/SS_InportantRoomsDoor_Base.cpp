@@ -2,8 +2,7 @@
 
 
 #include "SS_InportantRoomsDoor_Base.h"
-#include "SS_CardReader_Base.h"
-#include "Components/ChildActorComponent.h"
+
 
 
 // Sets default values
@@ -14,9 +13,9 @@ ASS_InportantRoomsDoor_Base::ASS_InportantRoomsDoor_Base()
 
 	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door Frame"));
 	SetRootComponent(DoorFrame);
-	
-	ChildCardReader = CreateDefaultSubobject<UChildActorComponent>(FName("Card Reader"));
-	ChildCardReader->SetupAttachment(DoorFrame);
+
+	Door = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
+	Door->SetupAttachment(DoorFrame);
 }
 
 // Called when the game starts or when spawned

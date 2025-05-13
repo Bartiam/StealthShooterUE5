@@ -22,4 +22,8 @@ protected: // Functions
 	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
 
 	virtual void BeginPlay() override;
+
+private: // Variables
+
+	TObjectPtr<class ASS_InportantRoomsDoor_Base> CurrentDoor;
 };

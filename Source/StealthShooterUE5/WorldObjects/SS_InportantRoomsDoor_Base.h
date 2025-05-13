@@ -17,13 +17,16 @@ public:	// Functions
 	
 	ASS_InportantRoomsDoor_Base();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	int32 testint = 0;
+
 protected: // Variables
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UStaticMeshComponent> DoorFrame;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<UChildActorComponent> ChildCardReader;
+	TObjectPtr<UStaticMeshComponent> Door;
 
 protected: // Functions
 	
