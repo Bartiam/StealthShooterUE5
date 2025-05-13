@@ -12,14 +12,14 @@ UCLASS()
 class STEALTHSHOOTERUE5_API ASS_CardReader_Base : public ASSInteractableObject_Base
 {
 	GENERATED_BODY()
-	
-protected: // Functions
-
-	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
 
 public: // Functions
 
 	ASS_CardReader_Base();
 
+protected: // Functions
 
+	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
+
+	virtual void BeginPlay() override;
 };

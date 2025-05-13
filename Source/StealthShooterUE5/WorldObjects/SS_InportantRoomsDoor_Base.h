@@ -22,9 +22,8 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UStaticMeshComponent> DoorFrame;
 
-	// Card reader for check card and open door
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<UChildActorComponent> CardReader;
+	TObjectPtr<UChildActorComponent> ChildCardReader;
 
 protected: // Functions
 	

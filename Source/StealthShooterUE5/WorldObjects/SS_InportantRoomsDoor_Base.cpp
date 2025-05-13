@@ -14,11 +14,9 @@ ASS_InportantRoomsDoor_Base::ASS_InportantRoomsDoor_Base()
 
 	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door Frame"));
 	SetRootComponent(DoorFrame);
-
-	CardReader = CreateDefaultSubobject<UChildActorComponent>(FName("Card Reader"));
-	CardReader->SetupAttachment(RootComponent);
-	CardReader->SetChildActorClass(ASS_CardReader_Base::StaticClass());
 	
+	ChildCardReader = CreateDefaultSubobject<UChildActorComponent>(FName("Card Reader"));
+	ChildCardReader->SetupAttachment(DoorFrame);
 }
 
 // Called when the game starts or when spawned
