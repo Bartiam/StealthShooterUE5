@@ -20,8 +20,6 @@ public:	// Functions
 	
 	ASS_InportantRoomsDoor_Base();
 
-	void OpenDoor(float Value);
-
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
@@ -35,4 +33,12 @@ protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UStaticMeshComponent> Lock;
+
+protected: // Functions
+
+	virtual void BeginPlay() override;
+
+private: // Functions
+
+	void OpenDoor(float Value);
 };

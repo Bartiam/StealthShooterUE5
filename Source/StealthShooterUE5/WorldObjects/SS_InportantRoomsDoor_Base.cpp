@@ -25,6 +25,11 @@ ASS_InportantRoomsDoor_Base::ASS_InportantRoomsDoor_Base()
 	Lock->SetupAttachment(Door);
 }
 
+void ASS_InportantRoomsDoor_Base::BeginPlay()
+{
+	Super::BeginPlay();
+}
+
 void ASS_InportantRoomsDoor_Base::OpenDoor(float Value)
 {
 
