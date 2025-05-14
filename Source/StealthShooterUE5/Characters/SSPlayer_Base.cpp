@@ -76,16 +76,18 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	UKismetSystemLibrary::SphereTraceSingle(GetWorld(), CameraLocation, EndSphereTrace, SphereTraceRadius,
 		ETraceTypeQuery::TraceTypeQuery1, true, IgnoreActors, EDrawDebugTrace::None, HitResult, true);
 
-	// Checking that the actor has an interface
+	// Checking that the actor and HitActorTrace != nullptr. The actor has an interface UInteractable.
+	// Checking that the actor's component has tag "Main Object".
 	if (HitResult.GetActor() && HitResult.GetActor()->Implements<UInteractable>()
-		&& !HitActorTrace)
+		&& !HitActorTrace && HitResult.GetComponent()->ComponentHasTag(FName("Circled")))
 	{
 		// Saving the link to the actor
 		HitActorTrace = HitResult.GetActor();
 		// Call funñtion from interface with true
 		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
 	}
-	else if (HitResult.GetActor() != HitActorTrace)
+	else if (HitResult.GetActor() != HitActorTrace || 
+		(HitResult.GetActor() != nullptr && !HitResult.GetComponent()->ComponentHasTag(FName("Circled"))))
 	{
 		// Verifying that the actor is valid
 		if (HitActorTrace != nullptr)

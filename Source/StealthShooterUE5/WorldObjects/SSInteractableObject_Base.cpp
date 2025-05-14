@@ -20,8 +20,9 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	SetRootComponent(DefaultRootComponent);
 
 	// Create and set base specifications for MainMeshComponent
-	ObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Main Mesh Component"));
+	ObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Circled Mesh"));
 	ObjectCircled->SetupAttachment(RootComponent);
+	ObjectCircled->ComponentTags.Add(FName("Circled"));
 
 	// Create and set base specifications for InteractionWidget
 	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
@@ -48,8 +49,6 @@ void ASSInteractableObject_Base::BeginPlay()
 
 void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInteract)
 {
-	if (false) return;
-
 	if (bIsCanInteract)
 	{
 		ObjectCircled->SetRenderCustomDepth(true);

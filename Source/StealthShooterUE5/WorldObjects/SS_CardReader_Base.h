@@ -26,7 +26,7 @@ protected: // Variables
 	ESSCardTypes NeededCard = ESSCardTypes::None_Card;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<class ASS_InportantRoomsDoor_Base> CurrentDoor;
+	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
 
 protected: // Functions
 

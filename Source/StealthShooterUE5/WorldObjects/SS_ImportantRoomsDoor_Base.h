@@ -6,33 +6,28 @@
 #include "GameFramework/Actor.h"
 
 #include "../SSData/SSTypes.h"
+#include "SS_Door_Base.h"
 
-#include "SS_InportantRoomsDoor_Base.generated.h"
+#include "SS_ImportantRoomsDoor_Base.generated.h"
 
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASS_InportantRoomsDoor_Base : public AActor
+class STEALTHSHOOTERUE5_API ASS_ImportantRoomsDoor_Base : public ASS_Door_Base
 {
 	GENERATED_BODY()
 	
 public:	// Functions
 	
-	ASS_InportantRoomsDoor_Base();
+	ASS_ImportantRoomsDoor_Base();
 
 protected: // Variables
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<UStaticMeshComponent> DoorFrame;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<UStaticMeshComponent> Door;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UStaticMeshComponent> Piston;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<UStaticMeshComponent> Lock;
+	TObjectPtr<UStaticMeshComponent> Door;
 
 protected: // Functions
 
@@ -40,5 +35,5 @@ protected: // Functions
 
 private: // Functions
 
-	void OpenDoor(float Value);
+	virtual void OpenDoor(float Value) override;
 };

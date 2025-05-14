@@ -9,10 +9,7 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Create and setup base specifications of Platband
-	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Platband"));
-	DoorFrame->SetupAttachment(RootComponent);
-
+	// Attach object circled to Door Frame
 	ObjectCircled->SetupAttachment(DoorFrame);
 }
 

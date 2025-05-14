@@ -5,14 +5,14 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 
-#include "SSInteractableObject_Base.h"
+#include "SS_Door_Base.h"
 #include "Components/TimelineComponent.h"
 
 #include "SSSimpleDoor_Base.generated.h"
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASSSimpleDoor_Base : public ASSInteractableObject_Base
+class STEALTHSHOOTERUE5_API ASSSimpleDoor_Base : public ASS_Door_Base
 {
 	GENERATED_BODY()
 	
@@ -21,15 +21,6 @@ public:	// Functions
 	ASSSimpleDoor_Base();
 
 protected: // Variables
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<UStaticMeshComponent> DoorFrame;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	bool bIsDoorLock = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
-	TObjectPtr<UCurveFloat> OpenDoorCurve;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
 	TObjectPtr<UCurveFloat> LockDoorCurve;
@@ -47,7 +38,7 @@ protected: // Functions
 	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
 
 	UFUNCTION()
-	void OpenDoor(float Value);
+	void OpenDoor(float Value) override;
 
 	virtual void Tick(float DeltaTime) override;
 
@@ -57,8 +48,5 @@ private: // Variables
 
 	float CurrentDoorRotateAngle = 0.f;
 
-	bool bIsDoorClosed = true;
-
-	FTimeline TimelineToOpenDoor;
 	FTimeline TimelineToOpenDoor_Lock;
 };
