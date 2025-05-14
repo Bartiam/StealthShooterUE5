@@ -30,6 +30,12 @@ enum class ESSRoomTypes : uint8
 	Hallway_Room UMETA(DisplayName = "Hallway Room")
 };
 
+UENUM(BlueprintType)
+enum class ESSCardTypes : uint8
+{
+	
+};
+
 USTRUCT(BlueprintType)
 struct FCharacterMovementSpeed
 {
