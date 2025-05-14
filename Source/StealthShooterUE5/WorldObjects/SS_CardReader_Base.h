@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "SSInteractableObject_Base.h"
+
+#include "../SSData/SSTypes.h"
+
 #include "SS_CardReader_Base.generated.h"
 
 
@@ -14,6 +17,9 @@ class STEALTHSHOOTERUE5_API ASS_CardReader_Base : public ASSInteractableObject_B
 	GENERATED_BODY()
 
 public: // Functions
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	ESSRoomTypes testint = ESSRoomTypes::Security_Room;
 
 	ASS_CardReader_Base();
 

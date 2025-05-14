@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+
+#include "../SSData/SSTypes.h"
+
 #include "SS_InportantRoomsDoor_Base.generated.h"
 
 
@@ -16,9 +19,6 @@ class STEALTHSHOOTERUE5_API ASS_InportantRoomsDoor_Base : public AActor
 public:	// Functions
 	
 	ASS_InportantRoomsDoor_Base();
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
-	int32 testint = 0;
 
 protected: // Variables
 
