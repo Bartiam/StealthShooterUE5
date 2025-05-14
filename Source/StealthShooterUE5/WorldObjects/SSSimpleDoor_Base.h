@@ -22,15 +22,15 @@ public:	// Functions
 
 protected: // Variables
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> LockDoorCurve;
 
 	// How many need to rotation door
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	float OpenDoorRotateAngle = 0.f;
 
 	// How many need to rotation door
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	float LockDoorRotateAngle = 0.f;
 
 protected: // Functions

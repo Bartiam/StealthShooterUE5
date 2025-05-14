@@ -25,10 +25,10 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> DoorFrame;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	bool bIsDoorLock = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Door Specifications")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> OpenDoorCurve;
 
 	bool bIsDoorClosed = true;

@@ -23,10 +23,10 @@ public:	// Functions
 
 protected: // Variables
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> Piston;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> Door;
 
 protected: // Functions
