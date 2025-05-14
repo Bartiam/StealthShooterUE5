@@ -10,4 +10,32 @@ ASS_Door_Base::ASS_Door_Base()
 	DoorFrame->SetupAttachment(RootComponent);
 }
 
-void ASS_Door_Base::OpenDoor(float Value) {};
+void ASS_Door_Base::BeginPlay()
+{
+	Super::BeginPlay();
+
+	BindCurveToTimeline(OpenDoorCurve, TimelineToOpenDoor);
+}
+
+void ASS_Door_Base::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	// Promotes the timeline
+	TimelineToOpenDoor.TickTimeline(DeltaTime);
+}
+
+void ASS_Door_Base::OpenDoor(float Value) {}
+
+void ASS_Door_Base::BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline)
+{
+	// Checking that curve != nullptr
+	if (CurrentCurve)
+	{
+		// Binds timeline to function
+		FOnTimelineFloat TimelineProgress;
+		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
+		// Add curve to timeline
+		CurrentTimeline.AddInterpFloat(CurrentCurve, TimelineProgress);
+	}
+}

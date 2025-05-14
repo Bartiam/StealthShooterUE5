@@ -56,30 +56,12 @@ void ASSSimpleDoor_Base::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// Promotes the timeline
-	TimelineToOpenDoor.TickTimeline(DeltaTime);
 	TimelineToOpenDoor_Lock.TickTimeline(DeltaTime);
 }
 
 void ASSSimpleDoor_Base::BeginPlay()
 {
 	Super::BeginPlay();
-
-	// Checking that curve != nullptr
-	if (OpenDoorCurve)
-	{
-		// Binds timeline to function
-		FOnTimelineFloat TimelineProgress;
-		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
-		// Add curve to timeline
-		TimelineToOpenDoor.AddInterpFloat(OpenDoorCurve, TimelineProgress);
-	}
-	// Checking that curve != nullptr
-	if (LockDoorCurve)
-	{
-		// Binds timeline to function
-		FOnTimelineFloat TimelineProgress;
-		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
-		// Add curve to timeline
-		TimelineToOpenDoor_Lock.AddInterpFloat(LockDoorCurve, TimelineProgress);
-	}
+	
+	BindCurveToTimeline(LockDoorCurve, TimelineToOpenDoor_Lock);
 }

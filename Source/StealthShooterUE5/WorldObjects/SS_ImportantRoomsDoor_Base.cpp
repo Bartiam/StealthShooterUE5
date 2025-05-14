@@ -30,6 +30,6 @@ void ASS_ImportantRoomsDoor_Base::BeginPlay()
 
 void ASS_ImportantRoomsDoor_Base::OpenDoor(float Value)
 {
-
+	
 }
 

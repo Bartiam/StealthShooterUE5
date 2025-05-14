@@ -37,5 +37,11 @@ protected: // Variables
 
 protected: // Functions
 
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
+
 	virtual void OpenDoor(float Value);
+
+	void BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline);
 };
