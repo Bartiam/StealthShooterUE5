@@ -33,7 +33,10 @@ enum class ESSRoomTypes : uint8
 UENUM(BlueprintType)
 enum class ESSCardTypes : uint8
 {
-	
+	None_Card UMETA(DisplayName = "None Card"),
+	Red_Security_Card UMETA(DisplayName = "Red Security Card"),
+	Blue_Surveillance_Card UMETA(DisplayName = "Blue Surveillance Card"),
+	White_Master_Card UMETA(DisplayName = "White Master Card")
 };
 
 USTRUCT(BlueprintType)

@@ -10,6 +10,7 @@
 
 #include "SSSimpleDoor_Base.generated.h"
 
+
 UCLASS()
 class STEALTHSHOOTERUE5_API ASSSimpleDoor_Base : public ASSInteractableObject_Base
 {

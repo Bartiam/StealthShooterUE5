@@ -71,18 +71,18 @@ void ASSSimpleDoor_Base::BeginPlay()
 	if (OpenDoorCurve)
 	{
 		// Binds timeline to function
-		FOnTimelineFloat TimelineProgressOpen;
-		TimelineProgressOpen.BindDynamic(this, &ThisClass::OpenDoor);
+		FOnTimelineFloat TimelineProgress;
+		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
 		// Add curve to timeline
-		TimelineToOpenDoor.AddInterpFloat(OpenDoorCurve, TimelineProgressOpen);
+		TimelineToOpenDoor.AddInterpFloat(OpenDoorCurve, TimelineProgress);
 	}
-
+	// Checking that curve != nullptr
 	if (LockDoorCurve)
 	{
 		// Binds timeline to function
-		FOnTimelineFloat TimelineProgressLock;
-		TimelineProgressLock.BindDynamic(this, &ThisClass::OpenDoor);
+		FOnTimelineFloat TimelineProgress;
+		TimelineProgress.BindDynamic(this, &ThisClass::OpenDoor);
 		// Add curve to timeline
-		TimelineToOpenDoor_Lock.AddInterpFloat(LockDoorCurve, TimelineProgressLock);
+		TimelineToOpenDoor_Lock.AddInterpFloat(LockDoorCurve, TimelineProgress);
 	}
 }

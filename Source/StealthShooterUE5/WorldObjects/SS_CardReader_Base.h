@@ -18,9 +18,8 @@ class STEALTHSHOOTERUE5_API ASS_CardReader_Base : public ASSInteractableObject_B
 
 public: // Functions
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
-	ESSRoomTypes testint = ESSRoomTypes::Security_Room;
-
+	void SetNeededCard(const ESSCardTypes& NewCardType);
+	
 	ASS_CardReader_Base();
 
 protected: // Functions
@@ -30,6 +29,10 @@ protected: // Functions
 	virtual void BeginPlay() override;
 
 private: // Variables
+
+	bool bIsDoorLock = false;
+
+	ESSCardTypes NeededCard = ESSCardTypes::None_Card;
 
 	TObjectPtr<class ASS_InportantRoomsDoor_Base> CurrentDoor;
 };
