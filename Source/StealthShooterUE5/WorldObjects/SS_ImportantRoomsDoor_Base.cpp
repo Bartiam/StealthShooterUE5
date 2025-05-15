@@ -11,17 +11,26 @@ ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	// Create piston and attch it to door frame
+	// Create Piston and attch it to door frame
 	Piston = CreateDefaultSubobject<UStaticMeshComponent>(FName("Piston"));
 	Piston->SetupAttachment(DoorFrame);
+
+	// Create Door Light and attach it to Door Frame
+	DoorLight = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door Light"));
+	DoorLight->SetupAttachment(DoorFrame);
 
 	// Attach Object Circled to Door
 	ObjectCircled->SetupAttachment(Piston);
 
-	// Create door and attach it to Piston
+	// Create Door and attach it to Piston
 	Lock = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
 	Lock->SetupAttachment(ObjectCircled);
 	Lock->SetCollisionProfileName(FName("NoCollision"));
+}
+
+void ASS_ImportantRoomsDoor_Base::SetMaterialToLightDoor(UMaterial* NewColor)
+{
+	DoorLight->SetMaterial(1, NewColor);
 }
 
 void ASS_ImportantRoomsDoor_Base::BeginPlay()
@@ -51,7 +60,7 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(const AActo
 
 	if (bIsDoorLock)
 	{
-		
+		return;
 	}
 	else
 	{

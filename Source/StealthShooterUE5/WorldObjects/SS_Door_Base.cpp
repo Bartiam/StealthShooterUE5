@@ -10,6 +10,12 @@ ASS_Door_Base::ASS_Door_Base()
 	DoorFrame->SetupAttachment(RootComponent);
 }
 
+bool ASS_Door_Base::GetIsDoorLock() const
+{ return bIsDoorLock; }
+
+void ASS_Door_Base::SetIsDoorLock(const bool& NewValue)
+{ bIsDoorLock = NewValue; }
+
 void ASS_Door_Base::BeginPlay()
 {
 	Super::BeginPlay();

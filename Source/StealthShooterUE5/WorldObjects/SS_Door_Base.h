@@ -21,6 +21,10 @@ public: // Functions
 
 	ASS_Door_Base();
 
+	bool GetIsDoorLock() const;
+
+	void SetIsDoorLock(const bool& NewValue);
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

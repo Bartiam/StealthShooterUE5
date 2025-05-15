@@ -20,6 +20,8 @@ public:	// Functions
 	
 	ASS_ImportantRoomsDoor_Base();
 
+	void SetMaterialToLightDoor(UMaterial* NewColor);
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -27,6 +29,9 @@ protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> Lock;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<UStaticMeshComponent> DoorLight;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> CurveRotateLock;

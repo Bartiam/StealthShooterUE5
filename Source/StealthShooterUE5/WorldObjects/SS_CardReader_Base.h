@@ -28,14 +28,17 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
 
+	// Materials for Door Light
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	TObjectPtr<UMaterial> LockDoorMaterial;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	TObjectPtr<UMaterial> OpenDoorMaterial;
+
 protected: // Functions
 
 	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
 
 	virtual void BeginPlay() override;
-
-private: // Variables
-
-	bool bIsDoorLock = false;
 
 };
