@@ -6,7 +6,6 @@
 #include "GameFramework/Actor.h"
 
 #include "SS_Door_Base.h"
-#include "Components/TimelineComponent.h"
 
 #include "SSSimpleDoor_Base.generated.h"
 
