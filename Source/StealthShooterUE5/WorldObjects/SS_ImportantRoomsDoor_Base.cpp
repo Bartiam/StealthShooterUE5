@@ -15,12 +15,13 @@ ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 	Piston = CreateDefaultSubobject<UStaticMeshComponent>(FName("Piston"));
 	Piston->SetupAttachment(DoorFrame);
 
-	// Create door and attach it to Piston
-	Door = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
-	Door->SetupAttachment(Piston);
-
 	// Attach Object Circled to Door
 	ObjectCircled->SetupAttachment(Piston);
+
+	// Create door and attach it to Piston
+	Lock = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
+	Lock->SetupAttachment(ObjectCircled);
+	Lock->SetCollisionProfileName(FName("NoCollision"));
 }
 
 void ASS_ImportantRoomsDoor_Base::BeginPlay()
@@ -57,7 +58,7 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(const AActo
 		if (bIsDoorClosed)
 		{
 			// Play timeline 
-			TimelineToOpenDoor.Play();
+			TimelineToRotateLock.Play();
 		}
 		else
 		{
@@ -71,14 +72,21 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(const AActo
 
 void ASS_ImportantRoomsDoor_Base::OpenDoor(float Value)
 {
+	// Set new location for door
 	FVector NewLocation = FMath::Lerp(LocationToLockDoor, LocationToOpenDoor, Value);
 	Piston->SetRelativeLocation(NewLocation);
+
+	if (TimelineToOpenDoor.GetPlaybackPosition() <= 0.f)
+		TimelineToRotateLock.Reverse();
 }
 
 void ASS_ImportantRoomsDoor_Base::OpenLock(float Value)
 {
 	// Set new rotation for lock
-	FRotator NewDoorRotation = FMath::Lerp(StartRotationLock, EndRotationLock, Value);
-	ObjectCircled->SetRelativeRotation(NewDoorRotation);
+	FRotator NewLockRotation = FMath::Lerp(StartRotationLock, EndRotationLock, Value);
+	Lock->SetRelativeRotation(NewLockRotation);
+
+	if (TimelineToRotateLock.GetPlaybackPosition() >= 2.f)
+		TimelineToOpenDoor.Play();	
 }
 

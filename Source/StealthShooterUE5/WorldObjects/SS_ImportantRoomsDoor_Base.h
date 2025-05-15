@@ -26,7 +26,7 @@ protected: // Variables
 	TObjectPtr<UStaticMeshComponent> Piston;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<UStaticMeshComponent> Door;
+	TObjectPtr<UStaticMeshComponent> Lock;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> CurveRotateLock;
