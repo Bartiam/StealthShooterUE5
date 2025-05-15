@@ -25,13 +25,7 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	ESSCardTypes NeededCard = ESSCardTypes::None_Card;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
-
 	// Materials for Door Light
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<UMaterial> LockDoorMaterial;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UMaterial> OpenDoorMaterial;
 
@@ -41,4 +35,7 @@ protected: // Functions
 
 	virtual void BeginPlay() override;
 
+private: // Variables
+
+	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
 };

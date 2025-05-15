@@ -51,8 +51,6 @@ void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInter
 {
 	if (bIsCanInteract)
 	{
-		
-
 		ObjectCircled->SetRenderCustomDepth(true);
 		InteractionWidget->SetVisibility(true);
 		InteractionWidget_Poiner->PlayAnimation(InteractionWidget_Poiner->AppearMarkObject);

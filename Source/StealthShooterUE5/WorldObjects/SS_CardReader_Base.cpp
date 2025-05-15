@@ -6,16 +6,14 @@
 
 
 
-ASS_CardReader_Base::ASS_CardReader_Base()
-{
-	
-}
+ASS_CardReader_Base::ASS_CardReader_Base() {}
 
 void ASS_CardReader_Base::InteractableRelease_Implementation(const AActor* Interactor)
 {
 	if (CurrentDoor->GetIsDoorLock())
 	{
-
+		CurrentDoor->SetIsDoorLock(false);
+		CurrentDoor->SetMaterialToLightDoor(OpenDoorMaterial);
 	}
 	else
 	{
@@ -30,13 +28,7 @@ void ASS_CardReader_Base::BeginPlay()
 	if (IsValid(GetParentActor()))
 		CurrentDoor = Cast<ASS_ImportantRoomsDoor_Base>(GetParentActor());
 
-	if (CurrentDoor->GetIsDoorLock())
-	{
-		CurrentDoor->SetMaterialToLightDoor(LockDoorMaterial);
-	}
-	else
-	{
+	if (!CurrentDoor->GetIsDoorLock())
 		CurrentDoor->SetMaterialToLightDoor(OpenDoorMaterial);
-	}
 }
 
