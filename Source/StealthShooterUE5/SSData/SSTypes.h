@@ -39,6 +39,8 @@ enum class ESSCardTypes : uint8
 	White_Master_Card UMETA(DisplayName = "White Master Card")
 };
 
+
+
 USTRUCT(BlueprintType)
 struct FCharacterMovementSpeed
 {

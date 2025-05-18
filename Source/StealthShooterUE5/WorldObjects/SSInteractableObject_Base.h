@@ -35,6 +35,9 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class USceneComponent> DefaultRootComponent;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	bool bIsCircledObject = true;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;

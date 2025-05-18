@@ -22,6 +22,8 @@ public:	// Functions
 
 	void SetMaterialToLightDoor(UMaterial* NewColor);
 
+	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -53,8 +55,6 @@ protected: // Functions
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
-
-	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
 
 private: // Variables
 

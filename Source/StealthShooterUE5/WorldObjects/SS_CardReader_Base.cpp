@@ -7,9 +7,7 @@
 
 
 ASS_CardReader_Base::ASS_CardReader_Base() 
-{
-	ObjectCircled->SetRenderCustomDepth(false);
-}
+{}
 
 void ASS_CardReader_Base::InteractableRelease_Implementation(const AActor* Interactor)
 {
@@ -20,7 +18,7 @@ void ASS_CardReader_Base::InteractableRelease_Implementation(const AActor* Inter
 	}
 	else
 	{
-
+		CurrentDoor->InteractableRelease_Implementation(Interactor);
 	}
 }
 
