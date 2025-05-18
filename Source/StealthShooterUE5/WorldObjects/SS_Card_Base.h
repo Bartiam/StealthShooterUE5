@@ -3,22 +3,19 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SSInteractableObject_Base.h"
-
-#include "../SSData/SSTypes.h"
-
+#include "SS_PickUpItem_Base.h"
 #include "SS_Card_Base.generated.h"
 
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASS_Card_Base : public ASSInteractableObject_Base
+class STEALTHSHOOTERUE5_API ASS_Card_Base : public ASS_PickUpItem_Base
 {
 	GENERATED_BODY()
 	
 protected: // Variables
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Card Specifications")
 	ESSCardTypes ThisCardType;
 
 public: // Functions

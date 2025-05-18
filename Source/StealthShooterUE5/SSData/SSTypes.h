@@ -39,7 +39,26 @@ enum class ESSCardTypes : uint8
 	White_Master_Card UMETA(DisplayName = "White Master Card")
 };
 
+USTRUCT(BlueprintType)
+struct FPickUpItemInfo
+{
+	GENERATED_BODY()
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool bIsImportantItem = false;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	int64 ItemID = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText ItemName = FText();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FText ItemDescription = FText();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<class ASS_PickUpItem_Base> ItemClass;
+};
 
 USTRUCT(BlueprintType)
 struct FCharacterMovementSpeed
