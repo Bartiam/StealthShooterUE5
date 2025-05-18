@@ -8,6 +8,9 @@ ASS_Door_Base::ASS_Door_Base()
 	// Create door frame and attach it to root component
 	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door Frame"));
 	DoorFrame->SetupAttachment(RootComponent);
+
+	// Disable render depth
+	ObjectCircled->SetRenderCustomDepth(false);
 }
 
 bool ASS_Door_Base::GetIsDoorLock() const

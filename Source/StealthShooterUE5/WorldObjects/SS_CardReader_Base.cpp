@@ -6,7 +6,10 @@
 
 
 
-ASS_CardReader_Base::ASS_CardReader_Base() {}
+ASS_CardReader_Base::ASS_CardReader_Base() 
+{
+	ObjectCircled->SetRenderCustomDepth(false);
+}
 
 void ASS_CardReader_Base::InteractableRelease_Implementation(const AActor* Interactor)
 {

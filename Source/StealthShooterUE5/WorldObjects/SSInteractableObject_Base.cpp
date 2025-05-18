@@ -23,6 +23,7 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	ObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Circled Mesh"));
 	ObjectCircled->SetupAttachment(RootComponent);
 	ObjectCircled->ComponentTags.Add(FName("Circled"));
+	ObjectCircled->SetRenderCustomDepth(true);
 
 	// Create and set base specifications for InteractionWidget
 	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
@@ -51,13 +52,11 @@ void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInter
 {
 	if (bIsCanInteract)
 	{
-		ObjectCircled->SetRenderCustomDepth(true);
 		InteractionWidget->SetVisibility(true);
 		InteractionWidget_Poiner->PlayAnimation(InteractionWidget_Poiner->AppearMarkObject);
 	}
 	else
 	{
-		ObjectCircled->SetRenderCustomDepth(false);
 		InteractionWidget->SetVisibility(false);
 		InteractionWidget_Poiner->ReverseAnimation(InteractionWidget_Poiner->AppearMarkObject);
 	}
