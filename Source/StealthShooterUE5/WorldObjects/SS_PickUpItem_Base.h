@@ -16,13 +16,15 @@ UCLASS()
 class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_Base
 {
 	GENERATED_BODY()
-	
+
 protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Spicifications")
 	FPickUpItemInfo ItemInfo;
 
 protected: // Functions
+
+	virtual void BeginPlay() override;
 
 	virtual void InteractableHeld_Implementation(const AActor* Interactor) override;
 

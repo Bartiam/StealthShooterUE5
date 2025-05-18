@@ -5,6 +5,13 @@
 
 
 
+void ASS_PickUpItem_Base::BeginPlay()
+{
+	Super::BeginPlay();
+
+
+}
+
 void ASS_PickUpItem_Base::InteractableHeld_Implementation(const AActor* Interactor)
 {
 	
@@ -12,5 +19,5 @@ void ASS_PickUpItem_Base::InteractableHeld_Implementation(const AActor* Interact
 
 void ASS_PickUpItem_Base::InteractableRelease_Implementation(const AActor* Interactor)
 {
-	
+	// Общее
 }
