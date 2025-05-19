@@ -31,5 +31,5 @@ protected: // Functions
 
 	virtual void BeginPlay() override;
 
-	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
+	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 };

@@ -40,7 +40,7 @@ enum class ESSCardTypes : uint8
 };
 
 USTRUCT(BlueprintType)
-struct FPickUpItemInfo
+struct FPickUpItemInfo : public FTableRowBase
 {
 	GENERATED_BODY()
 	// If the truth cannot be thrown out and haven't physics
@@ -55,6 +55,9 @@ struct FPickUpItemInfo
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FText ItemDescription = FText();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UTexture2D> ITemIcon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class ASS_PickUpItem_Base> ItemClass;

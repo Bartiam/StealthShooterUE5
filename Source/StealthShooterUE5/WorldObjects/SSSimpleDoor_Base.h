@@ -34,7 +34,7 @@ protected: // Variables
 
 protected: // Functions
 
-	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
+	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
 	UFUNCTION()
 	void OpenDoor(float Value) override;

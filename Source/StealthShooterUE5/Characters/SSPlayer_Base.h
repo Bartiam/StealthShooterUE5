@@ -15,8 +15,11 @@ class STEALTHSHOOTERUE5_API ASSPlayer_Base : public ASSCharacter_Base
 {
 	GENERATED_BODY()
 	
-public:
+public: // Functions
+
 	ASSPlayer_Base();
+
+	virtual USS_InventoryComponent* GetPlayerInventory_Implementation() override;
 
 protected: // Variables
 

@@ -2,6 +2,7 @@
 
 
 #include "SS_PickUpItem_Base.h"
+#include "../Characters/Inventory/SS_InventoryComponent.h"
 
 
 
@@ -11,11 +12,17 @@ FPickUpItemInfo ASS_PickUpItem_Base::GetItemInfo() const
 void ASS_PickUpItem_Base::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 
 }
 
-void ASS_PickUpItem_Base::InteractableRelease_Implementation(const AActor* Interactor)
+void ASS_PickUpItem_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
-	// Общее
+	if (Interactor->Implements<UCharacterInterface>())
+	{
+		auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
+
+		if (PlayerInventory->AddItemToInventory(this))
+			Destroy();
+	}
 }

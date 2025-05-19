@@ -15,14 +15,17 @@ class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-private: // Variables
-
-	TArray<FPickUpItemInfo> InventorySlots;
-
 protected: // Variables
+
+	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
+	TArray<FPickUpItemInfo> InventorySlots;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 Capacity = 0;
+
+protected: // Functions
+
+	virtual void BeginPlay() override;
 
 public:	// Functions
 	
@@ -32,7 +35,7 @@ public:	// Functions
 	bool AddItemToInventory(class ASS_PickUpItem_Base* NewItem);
 
 	UFUNCTION(BlueprintCallable)
-	void RemoveItemFromInventory(const int64 ItemID);
+	void RemoveItemFromInventory(const int32 ItemIndex);
 
 
 

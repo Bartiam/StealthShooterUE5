@@ -8,24 +8,26 @@
 USS_InventoryComponent::USS_InventoryComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
+}
 
-	InventorySlots.SetNum(Capacity);
+void USS_InventoryComponent::BeginPlay()
+{
+	Super::BeginPlay();
 }
 
 bool USS_InventoryComponent::AddItemToInventory(ASS_PickUpItem_Base* NewItem)
 {
 	if (Capacity > InventorySlots.Num())
 	{
-		FPickUpItemInfo NewPickUpItemInfo;
-		NewPickUpItemInfo = NewItem->GetItemInfo();
-		
-
+		InventorySlots.Add(NewItem->GetItemInfo());
 		return true;
 	}
+
 	return false;
 }
 
-void USS_InventoryComponent::RemoveItemFromInventory(const int64 ItemID)
+void USS_InventoryComponent::RemoveItemFromInventory(const int32 ItemIndex)
 {
+	
 }
 

@@ -47,6 +47,9 @@ ASSPlayer_Base::ASSPlayer_Base()
 
 }
 
+USS_InventoryComponent* ASSPlayer_Base::GetPlayerInventory_Implementation()
+{ return InventoryComponent; }
+
 void ASSPlayer_Base::BeginPlay()
 {
 	Super::BeginPlay();

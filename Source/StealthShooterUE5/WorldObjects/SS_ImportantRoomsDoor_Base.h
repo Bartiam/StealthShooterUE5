@@ -22,7 +22,7 @@ public:	// Functions
 
 	void SetMaterialToLightDoor(UMaterial* NewColor);
 
-	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
+	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
 protected: // Variables
 

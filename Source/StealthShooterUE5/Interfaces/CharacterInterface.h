@@ -28,4 +28,7 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	class ASSPlayerController_Base* GetOwnerCharacterController();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	class USS_InventoryComponent* GetPlayerInventory();
 };

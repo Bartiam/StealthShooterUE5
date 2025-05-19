@@ -13,7 +13,7 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	ObjectCircled->SetupAttachment(DoorFrame);
 }
 
-void ASSSimpleDoor_Base::InteractableRelease_Implementation(const AActor* Interactor)
+void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
 	// Checking that the object is currently running 
 	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing() ||

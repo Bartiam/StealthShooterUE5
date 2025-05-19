@@ -52,7 +52,7 @@ void ASS_ImportantRoomsDoor_Base::Tick(float DeltaTime)
 	TimelineToRotateLock.TickTimeline(DeltaTime);
 }
 
-void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(const AActor* Interactor)
+void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
 	// Checking that the object is currently running 
 	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing() ||
