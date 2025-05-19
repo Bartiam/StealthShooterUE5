@@ -17,6 +17,11 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 {
 	GENERATED_BODY()
 
+public: // Functions
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FPickUpItemInfo GetItemInfo() const;
+
 protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Spicifications")
@@ -25,8 +30,6 @@ protected: // Variables
 protected: // Functions
 
 	virtual void BeginPlay() override;
-
-	virtual void InteractableHeld_Implementation(const AActor* Interactor) override;
 
 	virtual void InteractableRelease_Implementation(const AActor* Interactor) override;
 };

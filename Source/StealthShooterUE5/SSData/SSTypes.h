@@ -43,7 +43,7 @@ USTRUCT(BlueprintType)
 struct FPickUpItemInfo
 {
 	GENERATED_BODY()
-	// If the truth cannot be thrown out
+	// If the truth cannot be thrown out and haven't physics
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bIsImportantItem = false;
 

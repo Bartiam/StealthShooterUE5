@@ -31,6 +31,9 @@ protected: // Variables
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USkeletalMeshComponent> Jacket;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	TObjectPtr<class USS_InventoryComponent> InventoryComponent;
 	
 protected: // Functions
 

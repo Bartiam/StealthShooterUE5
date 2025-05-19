@@ -7,7 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
-
+#include "Inventory/SS_InventoryComponent.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
 
 ASSPlayer_Base::ASSPlayer_Base()
@@ -42,7 +42,9 @@ ASSPlayer_Base::ASSPlayer_Base()
 	// Player character movement base specifications
 	GetCharacterMovement()->GetNavAgentPropertiesRef().bCanCrouch = true;
 
-	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
+	// Create inventory component
+	InventoryComponent = CreateDefaultSubobject<USS_InventoryComponent>(FName("Inventory Component"));
+
 }
 
 void ASSPlayer_Base::BeginPlay()
