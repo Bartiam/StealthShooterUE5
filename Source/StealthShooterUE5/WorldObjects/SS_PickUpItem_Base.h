@@ -22,10 +22,9 @@ public: // Functions
 	UFUNCTION(BlueprintCallable, BlueprintPure)
 	FPickUpItemInfo GetItemInfo() const;
 
-protected: // Variables
+private: // Variables
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Spicifications")
-	FPickUpItemInfo ItemInfo;
+	FPickUpItemInfo ItemInfo = FPickUpItemInfo();
 
 protected: // Functions
 

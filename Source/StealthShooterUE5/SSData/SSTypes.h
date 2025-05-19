@@ -51,7 +51,7 @@ struct FPickUpItemInfo : public FTableRowBase
 	int64 ItemID = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FText ItemName = FText();
+	FName ItemName = FName();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FText ItemDescription = FText();
