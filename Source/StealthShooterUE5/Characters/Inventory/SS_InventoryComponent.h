@@ -35,9 +35,9 @@ public:	// Functions
 	USS_InventoryComponent();
 
 	UFUNCTION(BlueprintCallable)
-	bool AddItemToInventory(const int64 ItemId);
+	bool AddItemToInventory(const int32 ItemID);
 
 	UFUNCTION(BlueprintCallable)
-	void RemoveItemFromInventory(const int8 ItemIndex);
+	void RemoveItemFromInventory(const int32 ItemIndex);
 		
 };

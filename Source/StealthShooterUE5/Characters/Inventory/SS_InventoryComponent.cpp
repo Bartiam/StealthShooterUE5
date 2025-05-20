@@ -4,6 +4,8 @@
 #include "SS_InventoryComponent.h"
 #include "../../WorldObjects/SS_PickUpItem_Base.h"
 
+
+
 // Sets default values for this component's properties
 USS_InventoryComponent::USS_InventoryComponent()
 {
@@ -15,18 +17,22 @@ void USS_InventoryComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
-bool USS_InventoryComponent::AddItemToInventory(const int64 ItemID)
+bool USS_InventoryComponent::AddItemToInventory(const int32 ItemID)
 {
 	if (Capacity > InventorySlots.Num())
 	{
-		
+		FName RowName = FName(FString::FromInt(ItemID));
+		FPickUpItemInfo NewItemToInventory = FPickUpItemInfo();
+		NewItemToInventory = *DT_ItemInfo->FindRow<FPickUpItemInfo>(RowName, TEXT(""));
+		InventorySlots.Add(NewItemToInventory);
+
 		return true;
 	}
 
 	return false;
 }
 
-void USS_InventoryComponent::RemoveItemFromInventory(const int8 ItemIndex)
+void USS_InventoryComponent::RemoveItemFromInventory(const int32 ItemIndex)
 {
 	
 }

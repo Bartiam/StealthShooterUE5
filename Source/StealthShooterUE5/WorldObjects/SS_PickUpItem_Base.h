@@ -19,12 +19,12 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 public: // Functions
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int64 GetItemID() const;
+	int32 GetItemID() const;
 
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item ID")
-	int64 ItemID = 0;
+	int32 ItemID = 0;
 
 protected: // Functions
 

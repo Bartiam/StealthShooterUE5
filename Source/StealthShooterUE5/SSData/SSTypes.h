@@ -48,7 +48,7 @@ struct FPickUpItemInfo : public FTableRowBase
 	bool bIsImportantItem = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int64 ItemID = 0;
+	int32 ItemID = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FName ItemName = FName();
@@ -58,6 +58,9 @@ struct FPickUpItemInfo : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UTexture2D> ITemIcon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FIntPoint IconSize = FIntPoint(1, 1);
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class ASS_PickUpItem_Base> ItemClass;
