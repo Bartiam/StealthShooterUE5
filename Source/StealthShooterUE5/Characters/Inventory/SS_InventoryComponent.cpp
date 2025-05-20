@@ -15,18 +15,18 @@ void USS_InventoryComponent::BeginPlay()
 	Super::BeginPlay();
 }
 
-bool USS_InventoryComponent::AddItemToInventory(ASS_PickUpItem_Base* NewItem)
+bool USS_InventoryComponent::AddItemToInventory(const int64 ItemID)
 {
 	if (Capacity > InventorySlots.Num())
 	{
-		InventorySlots.Add(NewItem->GetItemInfo());
+		
 		return true;
 	}
 
 	return false;
 }
 
-void USS_InventoryComponent::RemoveItemFromInventory(const int32 ItemIndex)
+void USS_InventoryComponent::RemoveItemFromInventory(const int8 ItemIndex)
 {
 	
 }

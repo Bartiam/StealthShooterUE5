@@ -23,6 +23,9 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 Capacity = 0;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	TObjectPtr<UDataTable> DT_ItemInfo;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;
@@ -32,15 +35,9 @@ public:	// Functions
 	USS_InventoryComponent();
 
 	UFUNCTION(BlueprintCallable)
-	bool AddItemToInventory(class ASS_PickUpItem_Base* NewItem);
+	bool AddItemToInventory(const int64 ItemId);
 
 	UFUNCTION(BlueprintCallable)
-	void RemoveItemFromInventory(const int32 ItemIndex);
-
-
-
-	
-	
-
+	void RemoveItemFromInventory(const int8 ItemIndex);
 		
 };

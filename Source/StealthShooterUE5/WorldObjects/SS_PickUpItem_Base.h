@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "SSInteractableObject_Base.h"
 
-#include "../SSData/SSTypes.h"
 #include "../Interfaces/CharacterInterface.h"
 
 #include "SS_PickUpItem_Base.generated.h"
@@ -20,11 +19,12 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 public: // Functions
 
 	UFUNCTION(BlueprintCallable, BlueprintPure)
-	FPickUpItemInfo GetItemInfo() const;
+	int64 GetItemID() const;
 
-private: // Variables
+protected: // Variables
 
-	FPickUpItemInfo ItemInfo = FPickUpItemInfo();
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item ID")
+	int64 ItemID = 0;
 
 protected: // Functions
 

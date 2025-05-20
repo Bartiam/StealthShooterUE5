@@ -6,8 +6,8 @@
 
 
 
-FPickUpItemInfo ASS_PickUpItem_Base::GetItemInfo() const
-{ return ItemInfo; }
+int64 ASS_PickUpItem_Base::GetItemID() const
+{ return ItemID; }
 
 void ASS_PickUpItem_Base::BeginPlay()
 {
@@ -22,7 +22,6 @@ void ASS_PickUpItem_Base::InteractableRelease_Implementation(AActor* Interactor)
 	{
 		auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
 
-		if (PlayerInventory->AddItemToInventory(this))
-			Destroy();
+		
 	}
 }

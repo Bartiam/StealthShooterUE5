@@ -3,7 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "SS_PickUpItem_Base.h"
+#include "../SSData/SSTypes.h"
+
 #include "SS_Card_Base.generated.h"
 
 

@@ -6,7 +6,6 @@
 
 #include "SSInteractableObject_Base.h"
 #include "Components/TimelineComponent.h"
-#include "../SSData/SSTypes.h"
 
 #include "SS_Door_Base.generated.h"
 
