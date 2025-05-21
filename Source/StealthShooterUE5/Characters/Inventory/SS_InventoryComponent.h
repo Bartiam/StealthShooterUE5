@@ -21,10 +21,7 @@ protected: // Variables
 	TArray<FPickUpItemInfo> InventorySlots;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	int32 Capacity = 0;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	TObjectPtr<UDataTable> DT_ItemInfo;
+	int32 InventorySize = 0;
 
 protected: // Functions
 

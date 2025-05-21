@@ -19,16 +19,6 @@ void USS_InventoryComponent::BeginPlay()
 
 bool USS_InventoryComponent::AddItemToInventory(const int32 ItemID)
 {
-	if (Capacity > InventorySlots.Num())
-	{
-		FName RowName = FName(FString::FromInt(ItemID));
-		FPickUpItemInfo NewItemToInventory = FPickUpItemInfo();
-		NewItemToInventory = *DT_ItemInfo->FindRow<FPickUpItemInfo>(RowName, TEXT(""));
-		InventorySlots.Add(NewItemToInventory);
-
-		return true;
-	}
-
 	return false;
 }
 

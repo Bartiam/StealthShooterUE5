@@ -16,15 +16,13 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 {
 	GENERATED_BODY()
 
-public: // Functions
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	int32 GetItemID() const;
-
 protected: // Variables
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item ID")
-	int32 ItemID = 0;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item Specifications")
+	FName RowID = FName();
+
+	UPROPERTY(BlueprintReadOnly, Category = "Item Specifications")
+	TObjectPtr<UDataTable> DT_ItemID;
 
 protected: // Functions
 

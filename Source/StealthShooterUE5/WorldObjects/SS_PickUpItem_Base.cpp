@@ -6,22 +6,14 @@
 
 
 
-int32 ASS_PickUpItem_Base::GetItemID() const
-{ return ItemID; }
-
 void ASS_PickUpItem_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	
+	DT_ItemID = LoadObject<UDataTable>(this, TEXT("/Game/StealthShooter/Blueprints/InteractionObjects/DT_PickUpItems.DT_PickUpItems"));
 }
 
 void ASS_PickUpItem_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
-	if (Interactor->Implements<UCharacterInterface>())
-	{
-		auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
-		PlayerInventory->AddItemToInventory(ItemID);
-		Destroy();
-	}
+	
 }

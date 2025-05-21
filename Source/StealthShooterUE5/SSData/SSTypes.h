@@ -15,6 +15,7 @@ enum class ESSInputID : uint8
 	Reload_Input UMETA(DisplayName = "Reload Input"),
 	Dodge_Input UMETA(DisplayName = "Dodge Input"),
 	Interact_Input UMETA(DisplayName = "Interact Input"),
+	Inventory_Input UMETA(DisplayName = "Inventory Input"),
 };
 
 UENUM(BlueprintType)
@@ -43,12 +44,10 @@ USTRUCT(BlueprintType)
 struct FPickUpItemInfo : public FTableRowBase
 {
 	GENERATED_BODY()
+
 	// If the truth cannot be thrown out and haven't physics
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bIsImportantItem = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	int32 ItemID = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FName ItemName = FName();
