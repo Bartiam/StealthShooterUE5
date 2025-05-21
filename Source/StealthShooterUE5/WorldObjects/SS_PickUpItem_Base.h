@@ -18,12 +18,7 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 
 protected: // Variables
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item Specifications")
-	FName RowID = FName();
-
-	UPROPERTY(BlueprintReadOnly, Category = "Item Specifications")
-	TObjectPtr<UDataTable> DT_ItemID;
-
+	
 protected: // Functions
 
 	virtual void BeginPlay() override;

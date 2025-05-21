@@ -45,24 +45,21 @@ struct FPickUpItemInfo : public FTableRowBase
 {
 	GENERATED_BODY()
 
-	// If the truth cannot be thrown out and haven't physics
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool bIsImportantItem = false;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FName ItemName = FName();
+	FName Name_ID = FName();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FText ItemDescription = FText();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<class ASS_PickUpItem_Base> ItemClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UTexture2D> ITemIcon;
 
+	// If the truth cannot be thrown out and haven't physics
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FIntPoint IconSize = FIntPoint(1, 1);
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TSubclassOf<class ASS_PickUpItem_Base> ItemClass;
+	bool bIsImportantItem = false;
 };
 
 USTRUCT(BlueprintType)

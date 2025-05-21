@@ -10,7 +10,7 @@ void ASS_PickUpItem_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	DT_ItemID = LoadObject<UDataTable>(this, TEXT("/Game/StealthShooter/Blueprints/InteractionObjects/DT_PickUpItems.DT_PickUpItems"));
+	
 }
 
 void ASS_PickUpItem_Base::InteractableRelease_Implementation(AActor* Interactor)
