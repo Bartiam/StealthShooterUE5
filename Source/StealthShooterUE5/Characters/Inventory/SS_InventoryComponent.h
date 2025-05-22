@@ -21,16 +21,15 @@ protected: // Variables
 	float InventoryTileSize = 0.f;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
-	TArray<FPickUpItemInfo> InventorySlots;
+	TArray<FPickUpItemInfo> InventoryItems;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	int32 InventorySize = 0;
+	FIntPoint GridSize = FIntPoint();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	TObjectPtr<UDataTable> DT_ItemInfo;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
-	TMap<FName, FPickUpItemInfo> CacheItemInfo;
+	TMap<FName, FPickUpItemInfo> Cache_ItemInfo;
 
 protected: // Functions
 

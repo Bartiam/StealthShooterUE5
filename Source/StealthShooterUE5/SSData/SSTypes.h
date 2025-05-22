@@ -58,7 +58,7 @@ struct FPickUpItemInfo : public FTableRowBase
 	TObjectPtr<UTexture2D> ITemIcon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FIntPoint IconSize = FIntPoint();
+	FIntPoint IconSize = FIntPoint(1, 1);
 
 	// If the truth cannot be thrown out and haven't physics
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
