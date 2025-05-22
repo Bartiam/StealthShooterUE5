@@ -57,9 +57,15 @@ struct FPickUpItemInfo : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UTexture2D> ITemIcon;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FIntPoint IconSize = FIntPoint();
+
 	// If the truth cannot be thrown out and haven't physics
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bIsImportantItem = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	bool bIsCanRotate = false;
 };
 
 USTRUCT(BlueprintType)

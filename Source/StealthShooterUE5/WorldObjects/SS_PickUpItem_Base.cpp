@@ -15,5 +15,11 @@ void ASS_PickUpItem_Base::BeginPlay()
 
 void ASS_PickUpItem_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
-	
+	if (Interactor->Implements<UCharacterInterface>())
+	{
+		auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
+
+		if (PlayerInventory->TryAddItemToInventory(ItemID))
+			Destroy();
+	}
 }

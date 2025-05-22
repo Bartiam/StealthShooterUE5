@@ -17,11 +17,20 @@ class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
 
 protected: // Variables
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	float InventoryTileSize = 0.f;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	TArray<FPickUpItemInfo> InventorySlots;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 InventorySize = 0;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	TObjectPtr<UDataTable> DT_ItemInfo;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
+	TMap<FName, FPickUpItemInfo> CacheItemInfo;
 
 protected: // Functions
 
@@ -32,7 +41,7 @@ public:	// Functions
 	USS_InventoryComponent();
 
 	UFUNCTION(BlueprintCallable)
-	bool AddItemToInventory(const int32 ItemID);
+	bool TryAddItemToInventory(const FName ItemID);
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItemFromInventory(const int32 ItemIndex);

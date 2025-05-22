@@ -18,6 +18,8 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 
 protected: // Variables
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item Specifications")
+	FName ItemID = FName();
 	
 protected: // Functions
 
