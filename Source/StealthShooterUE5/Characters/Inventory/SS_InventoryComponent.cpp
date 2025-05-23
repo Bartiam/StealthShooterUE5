@@ -27,8 +27,40 @@ UUserWidget* USS_InventoryComponent::GetInventoryWidget() const
 
 bool USS_InventoryComponent::TryAddItemToInventory(const FName ItemID)
 {
+	// Searching item info from TMap Cache
+	if (auto NewItemInfo = Cache_ItemInfo.Find(ItemID))
+	{
+		for (int i = 0; i < InventoryItems.Num(); ++i)
+		{
+
+		}
+
+		return true;
+	}
+
+
+	// Searching item info from DataTable
+	if (auto NewItemInfo = DT_ItemInfo->FindRow<FPickUpItemInfo>(ItemID, FString("")))
+	{
+		for (int i = 0; i < InventoryItems.Num(); ++i)
+		{
+
+		}
+
+		return true;
+	}
+
 	return false;
 }
+
+
+bool USS_InventoryComponent::IsRoomAvailable(const FPickUpItemInfo& ItemInfo, const int& TopLeftIndex)
+{
+	return true;
+}
+
+
+
 
 void USS_InventoryComponent::RemoveItemFromInventory(const int32 ItemIndex)
 {

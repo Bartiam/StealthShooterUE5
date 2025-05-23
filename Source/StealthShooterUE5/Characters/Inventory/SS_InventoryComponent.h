@@ -42,7 +42,12 @@ protected: // Functions
 private: // Variables
 
 	TObjectPtr<class UUserWidget> Inventory_Widget;
-		
+	
+private: // Functions
+
+	bool IsRoomAvailable(const FPickUpItemInfo& ItemInfo, const int& TopLeftIndex);
+
+
 
 public:	// Functions
 
