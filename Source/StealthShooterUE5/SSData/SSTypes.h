@@ -41,6 +41,18 @@ enum class ESSCardTypes : uint8
 };
 
 USTRUCT(BlueprintType)
+struct FLineSize
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D Start = FVector2D();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector2D End = FVector2D();
+};
+
+USTRUCT(BlueprintType)
 struct FPickUpItemInfo : public FTableRowBase
 {
 	GENERATED_BODY()

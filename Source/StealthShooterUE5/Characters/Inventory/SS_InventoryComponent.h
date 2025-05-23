@@ -5,7 +5,8 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 
-#include "../SSPlayer_Base.h"
+#include "../../Interfaces/CharacterInterface.h"
+#include "../../SSData/SSTypes.h"
 
 #include "SS_InventoryComponent.generated.h"
 
@@ -18,7 +19,10 @@ class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	float InventoryTileSize = 0.f;
+	float TileSize = 0.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	TSubclassOf<class UUserWidget> Inventory_Class;
 
 	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
 	TArray<FPickUpItemInfo> InventoryItems;
@@ -35,14 +39,21 @@ protected: // Functions
 
 	virtual void BeginPlay() override;
 
+private: // Variables
+
+	TObjectPtr<class UUserWidget> Inventory_Widget;
+		
+
 public:	// Functions
-	
+
 	USS_InventoryComponent();
+
+	UFUNCTION(BlueprintCallable)
+	class UUserWidget* GetInventoryWidget() const;
 
 	UFUNCTION(BlueprintCallable)
 	bool TryAddItemToInventory(const FName ItemID);
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItemFromInventory(const int32 ItemIndex);
-		
 };

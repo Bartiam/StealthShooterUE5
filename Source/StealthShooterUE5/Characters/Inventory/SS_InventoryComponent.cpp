@@ -2,7 +2,10 @@
 
 
 #include "SS_InventoryComponent.h"
+
 #include "../../WorldObjects/SS_PickUpItem_Base.h"
+#include "../SSPlayer_Base.h"
+#include "Blueprint/UserWidget.h"
 
 
 
@@ -16,8 +19,11 @@ void USS_InventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	
+	Inventory_Widget = CreateWidget<UUserWidget>(GetWorld(), Inventory_Class);
 }
+
+UUserWidget* USS_InventoryComponent::GetInventoryWidget() const
+{ return Inventory_Widget; }
 
 bool USS_InventoryComponent::TryAddItemToInventory(const FName ItemID)
 {
