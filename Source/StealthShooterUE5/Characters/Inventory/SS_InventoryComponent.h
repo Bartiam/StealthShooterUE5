@@ -4,11 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-
 #include "../../Interfaces/CharacterInterface.h"
 #include "../../SSData/SSTypes.h"
+#include "Containers/Map.h"
+#include "../../WorldObjects/SS_ItemObject.h"
 
 #include "SS_InventoryComponent.generated.h"
+
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -19,21 +21,16 @@ class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	TArray<TObjectPtr<USS_ItemObject>> InventoryItems;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	float TileSize = 0.f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	TSubclassOf<class UUserWidget> Inventory_Class;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Inventory")
-	TArray<FPickUpItemInfo> InventoryItems;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	FIntPoint GridSize = FIntPoint();
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	TObjectPtr<UDataTable> DT_ItemInfo;
-
-	TMap<FName, FPickUpItemInfo> Cache_ItemInfo;
 
 protected: // Functions
 
@@ -41,13 +38,25 @@ protected: // Functions
 
 private: // Variables
 
+	
+
 	TObjectPtr<class UUserWidget> Inventory_Widget;
+
+	bool bIsDirty = false;
 	
 private: // Functions
 
-	bool IsRoomAvailable(const FPickUpItemInfo& ItemInfo, const int& TopLeftIndex);
+	bool IsRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex);
 
+	TArray<FIntPoint> ForEachIndex(const USS_ItemObject* ItemObject, const int& TopLeftIndex);
 
+	FIntPoint IndexToTile(const int& Index);
+
+	int TileToIndex(const FIntPoint& Tile) const;
+
+	bool GetItemAtIndex(const int& CurrentIndex, const USS_ItemObject* ItemObject);
+
+	void AddItemToInventory(USS_ItemObject* ItemObject, const int& TopLeftIndex);
 
 public:	// Functions
 
@@ -57,7 +66,7 @@ public:	// Functions
 	class UUserWidget* GetInventoryWidget() const;
 
 	UFUNCTION(BlueprintCallable)
-	bool TryAddItemToInventory(const FName ItemID);
+	bool TryAddItemToInventory(USS_ItemObject* ItemObject);
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItemFromInventory(const int32 ItemIndex);

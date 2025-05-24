@@ -58,16 +58,16 @@ struct FPickUpItemInfo : public FTableRowBase
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	FName Name_ID = FName();
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FText ItemDescription = FText();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class ASS_PickUpItem_Base> ItemClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	TObjectPtr<UTexture2D> ITemIcon;
+	TObjectPtr<UMaterialInstance> ItemIcon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMaterialInstance> ItemIcon_Rotated;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FIntPoint IconSize = FIntPoint(1, 1);
@@ -77,7 +77,7 @@ struct FPickUpItemInfo : public FTableRowBase
 	bool bIsImportantItem = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	bool bIsCanRotate = false;
+	bool bIsRotated = false;
 };
 
 USTRUCT(BlueprintType)

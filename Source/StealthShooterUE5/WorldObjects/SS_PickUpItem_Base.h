@@ -6,6 +6,7 @@
 #include "SSInteractableObject_Base.h"
 
 #include "../Interfaces/CharacterInterface.h"
+#include "SS_ItemObject.h"
 
 #include "SS_PickUpItem_Base.generated.h"
 
@@ -18,8 +19,15 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 
 protected: // Variables
 
+	// Object name must be the same as the string name in data table
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item Specifications")
-	FName ItemID = FName();
+	FName Name_ID = FName();
+
+private: // Variables
+
+	TObjectPtr<USS_ItemObject> ItemObject;
+
+	TObjectPtr<UDataTable> DT_ItemInfo;
 	
 protected: // Functions
 
