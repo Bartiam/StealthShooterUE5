@@ -42,7 +42,7 @@ protected: // Functions
 
 private: // Variables
 
-	TArray<TArray<TObjectPtr<USS_ItemObject>>> InventoryItemsGrid;
+	TArray<TArray<TObjectPtr<USS_ItemObject>>> InventoryItems;
 
 	TObjectPtr<class UUserWidget> Inventory_Widget;
 
@@ -52,7 +52,7 @@ public:	// Functions
 
 	bool TryAddItemToInventory(USS_ItemObject* ItemObject);
 
-	bool isRoomAvailable();
+	bool isRoomAvailable(const FIntPoint IconSize, TArray<FIntPoint>& OutTilesToPost);
 
 	UFUNCTION(BlueprintCallable)
 	class UUserWidget* GetInventoryWidget() const;
