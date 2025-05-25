@@ -39,6 +39,7 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 	{
 		if (isRoomAvailable(ItemObject, Index))
 		{
+			// if the room is available add item to inventory
 			AddItemAtInventory(ItemObject, Index);
 			return true;
 		}
@@ -49,15 +50,18 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 
 bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex)
 {
+	// Get tiles for adding object to inventory
 	TArray<FIntPoint> Tiles = ForEachIndex(ItemObject, TopLeftIndex);
 
 	for (int Index = 0; Index < Tiles.Num(); ++Index)
 	{
 		if (IsTileValid(Tiles[Index]))
 		{
+			// Get current index from current tile
 			int CurrentIndex = TileToIndex(Tiles[Index]);
+			// Get object from inventory by CurrentIndex
 			USS_ItemObject* CurrentItemObject = GetItemAtIndex(CurrentIndex);
-
+			// Checking that object != nullptr
 			if (CurrentItemObject)
 			{
 				return false;
@@ -75,9 +79,9 @@ bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, c
 TArray<FIntPoint> USS_InventoryComponent::ForEachIndex(const USS_ItemObject* ItemObject, const int& TopLeftIndex)
 {
 	TArray<FIntPoint> Tiles;
-
+	// Get a tile from the received index
 	FIntPoint CurrentTile = IndexToTile(TopLeftIndex);
-
+	// Get the latest indexes for object in the inventory
 	int LastIndex_X = CurrentTile.X + (ItemObject->ItemInfo.IconSize.X - 1);
 	int LastIndex_Y = CurrentTile.Y + (ItemObject->ItemInfo.IconSize.Y - 1);
 
@@ -85,6 +89,7 @@ TArray<FIntPoint> USS_InventoryComponent::ForEachIndex(const USS_ItemObject* Ite
 	{
 		for (int j = CurrentTile.Y; j <= LastIndex_Y; ++j)
 		{
+			// Add tiles for adding object to the inventory
 			Tiles.Add(FIntPoint(i, j));
 		}
 	}
@@ -94,12 +99,12 @@ TArray<FIntPoint> USS_InventoryComponent::ForEachIndex(const USS_ItemObject* Ite
 
 FIntPoint USS_InventoryComponent::IndexToTile(const int& Index) const
 { 
-	return FIntPoint(Index % Columns, Index / Columns);
+	return FIntPoint(Index % Columns, Index / Columns); // Transformation index to tile
 }
 
 int USS_InventoryComponent::TileToIndex(const FIntPoint& Tile) const
 {
-	return Tile.X + (Tile.Y * Columns);
+	return Tile.X + (Tile.Y * Columns); // Transformation tile to index
 }
 
 bool USS_InventoryComponent::IsTileValid(const FIntPoint& Tile) const
@@ -119,10 +124,12 @@ USS_ItemObject* USS_InventoryComponent::GetItemAtIndex(const int& Index)
 
 void USS_InventoryComponent::AddItemAtInventory(USS_ItemObject* ItemObject, const int& Index)
 {
+	// Get tiles for adding object to inventory
 	TArray<FIntPoint> Tiles = ForEachIndex(ItemObject, Index);
 
 	for (int i = 0; i < Tiles.Num(); ++i)
 	{
+		// Adding object in the inventory
 		int ObjectIndex = TileToIndex(Tiles[i]);
 		InventoryItems[ObjectIndex] = ItemObject;
 	}
