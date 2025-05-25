@@ -12,6 +12,8 @@
 #include "SS_InventoryComponent.generated.h"
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
+
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
@@ -23,6 +25,9 @@ public:
 	USS_InventoryComponent();
 
 protected: // Variables
+
+	UPROPERTY(BlueprintAssignable)
+	FOnInventoryChanged OnInventoryChanged;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	float TileSize = 0.f;
@@ -46,7 +51,7 @@ private: // Variables
 
 	TObjectPtr<class UUserWidget> Inventory_Widget;
 
-	bool bIsDirty = false;
+	bool bIsInventoryChanged = false;
 
 private: // Functions
 

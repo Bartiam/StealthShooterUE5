@@ -54,7 +54,7 @@ TMap<USS_ItemObject*, FIntPoint> USS_InventoryComponent::GetAllInventoryItems()
 
 	for (int Index = 0; Index < InventoryItems.Num(); ++Index)
 	{
-		auto CurrentItem = InventoryItems[Index];
+		TObjectPtr<USS_ItemObject> CurrentItem = InventoryItems[Index];
 
 		if (CurrentItem)
 		{
@@ -159,5 +159,7 @@ void USS_InventoryComponent::AddItemAtInventory(USS_ItemObject* ItemObject, cons
 		InventoryItems[ObjectIndex] = ItemObject;
 	}
 
-	bIsDirty = true;
+	OnInventoryChanged.Broadcast();
+
+	bIsInventoryChanged = true;
 }
