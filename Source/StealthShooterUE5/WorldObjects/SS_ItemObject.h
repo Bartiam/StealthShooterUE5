@@ -11,12 +11,13 @@
 
 
 
-UCLASS()
+UCLASS(Blueprintable)
 class STEALTHSHOOTERUE5_API USS_ItemObject : public UObject
 {
 	GENERATED_BODY()
 
 public:
 
+	UPROPERTY(BlueprintReadWrite)
 	FPickUpItemInfo ItemInfo = FPickUpItemInfo();
 };

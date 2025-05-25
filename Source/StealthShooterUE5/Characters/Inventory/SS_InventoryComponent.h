@@ -68,7 +68,11 @@ public:	// Functions
 
 	bool TryAddItemToInventory(USS_ItemObject* ItemObject);
 
+	UFUNCTION(BlueprintCallable)
+	TMap<USS_ItemObject*, FIntPoint> GetAllInventoryItems();
 
+	UFUNCTION(BlueprintCallable)
+	void RemoveItemFromInventory(USS_ItemObject* ItemObject);
 
 	UFUNCTION(BlueprintCallable)
 	class UUserWidget* GetInventoryWidget() const;

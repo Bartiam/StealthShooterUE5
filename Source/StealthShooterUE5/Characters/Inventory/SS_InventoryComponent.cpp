@@ -48,6 +48,31 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 	return false;
 }
 
+TMap<USS_ItemObject*, FIntPoint> USS_InventoryComponent::GetAllInventoryItems()
+{
+	TMap<USS_ItemObject*, FIntPoint> AllInventoryItems;
+
+	for (int Index = 0; Index < InventoryItems.Num(); ++Index)
+	{
+		auto CurrentItem = InventoryItems[Index];
+
+		if (CurrentItem)
+		{
+			if (!AllInventoryItems.Find(CurrentItem))
+			{
+				AllInventoryItems.Add(CurrentItem, IndexToTile(Index));
+			}
+		}
+	}
+
+	return AllInventoryItems;
+}
+
+void USS_InventoryComponent::RemoveItemFromInventory(USS_ItemObject* ItemObject)
+{
+
+}
+
 bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex)
 {
 	// Get tiles for adding object to inventory
