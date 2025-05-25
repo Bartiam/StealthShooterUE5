@@ -45,6 +45,23 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 		}
 	}
 
+	if (ItemObject->ItemInfo.ItemIcon_Rotated)
+	{
+		ItemObject->RotateImage();
+
+		for (int Index = 0; Index < InventoryItems.Num(); ++Index)
+		{
+			if (isRoomAvailable(ItemObject, Index))
+			{
+				// if the room is available add item to inventory
+				AddItemAtInventory(ItemObject, Index);
+				return true;
+			}
+		}
+	}
+
+	ItemObject->RotateImage();
+
 	return false;
 }
 
@@ -70,7 +87,18 @@ TMap<USS_ItemObject*, FIntPoint> USS_InventoryComponent::GetAllInventoryItems()
 
 void USS_InventoryComponent::RemoveItemFromInventory(USS_ItemObject* ItemObject)
 {
+	if (ItemObject)
+	{
+		for (int i = 0; i < InventoryItems.Num(); ++i)
+		{
+			if (InventoryItems[i] == ItemObject)
+			{
+				InventoryItems[i] = nullptr;
+			}
+		}
 
+		OnInventoryChanged.Broadcast();
+	}
 }
 
 bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex)

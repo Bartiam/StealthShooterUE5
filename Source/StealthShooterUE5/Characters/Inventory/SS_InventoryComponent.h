@@ -55,23 +55,27 @@ private: // Variables
 
 private: // Functions
 
-	bool isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex);
-
 	TArray<FIntPoint> ForEachIndex(const USS_ItemObject* ItemObject, const int& TopLeftIndex);
 
 	FIntPoint IndexToTile(const int& Index) const;
-
-	int TileToIndex(const FIntPoint& Tile) const;
 
 	bool IsTileValid(const FIntPoint& Tile) const;
 
 	USS_ItemObject* GetItemAtIndex(const int& Index);
 
-	void AddItemAtInventory(USS_ItemObject* ItemObject, const int& Index);
-
 public:	// Functions
 
+	UFUNCTION(BlueprintCallable)
 	bool TryAddItemToInventory(USS_ItemObject* ItemObject);
+
+	UFUNCTION(BlueprintCallable)
+	void AddItemAtInventory(USS_ItemObject* ItemObject, const int& Index);
+
+	UFUNCTION(BlueprintCallable)
+	int TileToIndex(const FIntPoint& Tile) const;
+
+	UFUNCTION(BlueprintCallable)
+	bool isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex);
 
 	UFUNCTION(BlueprintCallable)
 	TMap<USS_ItemObject*, FIntPoint> GetAllInventoryItems();

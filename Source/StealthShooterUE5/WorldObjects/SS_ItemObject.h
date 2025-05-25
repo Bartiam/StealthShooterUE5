@@ -20,4 +20,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite)
 	FPickUpItemInfo ItemInfo = FPickUpItemInfo();
+
+	UFUNCTION(BlueprintCallable)
+	void RotateImage();
 };

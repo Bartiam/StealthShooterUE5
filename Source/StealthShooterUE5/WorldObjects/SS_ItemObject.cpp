@@ -3,3 +3,9 @@
 
 #include "SS_ItemObject.h"
 
+void USS_ItemObject::RotateImage()
+{
+	ItemInfo.bIsRotated = !ItemInfo.bIsRotated;
+
+	ItemInfo.IconSize = FIntPoint(ItemInfo.IconSize.Y, ItemInfo.IconSize.X);
+}
