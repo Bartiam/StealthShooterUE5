@@ -42,17 +42,33 @@ protected: // Functions
 
 private: // Variables
 
-	TArray<TArray<TObjectPtr<USS_ItemObject>>> InventoryItems;
+	TArray<TObjectPtr<USS_ItemObject>> InventoryItems;
 
 	TObjectPtr<class UUserWidget> Inventory_Widget;
 
 	bool bIsDirty = false;
 
+private: // Functions
+
+	bool isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex);
+
+	TArray<FIntPoint> ForEachIndex(const USS_ItemObject* ItemObject, const int& TopLeftIndex);
+
+	FIntPoint IndexToTile(const int& Index) const;
+
+	int TileToIndex(const FIntPoint& Tile) const;
+
+	bool IsTileValid(const FIntPoint& Tile) const;
+
+	USS_ItemObject* GetItemAtIndex(const int& Index);
+
+	void AddItemAtInventory(USS_ItemObject* ItemObject, const int& Index);
+
 public:	// Functions
 
 	bool TryAddItemToInventory(USS_ItemObject* ItemObject);
 
-	bool isRoomAvailable(const FIntPoint IconSize, TArray<FIntPoint>& OutTilesToPost);
+
 
 	UFUNCTION(BlueprintCallable)
 	class UUserWidget* GetInventoryWidget() const;

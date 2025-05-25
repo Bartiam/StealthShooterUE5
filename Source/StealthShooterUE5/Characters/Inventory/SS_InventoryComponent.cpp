@@ -21,11 +21,8 @@ void USS_InventoryComponent::BeginPlay()
 	
 	Inventory_Widget = CreateWidget<UUserWidget>(GetWorld(), Inventory_Class);
 
-	// Set rows for inventory
-	InventoryItems.SetNum(Rows);
-	// Set columns for inventory
-	for (int i = 0; i < InventoryItems.Num(); ++i)
-		InventoryItems[i].SetNum(Columns);
+	// Set size for inventory
+	InventoryItems.SetNum(Rows * Columns);
 }
 
 UUserWidget* USS_InventoryComponent::GetInventoryWidget() const
@@ -38,44 +35,97 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 	// return, if the object equals nullptr
 	if (!ItemObject) return false;
 
-	FIntPoint IconSize = ItemObject->ItemInfo.IconSize;
-
-	// Tiles for new object
-	TArray<FIntPoint> TilesToPost;
-	// Checking that there is a place in the inventory 
-	if (isRoomAvailable(IconSize, TilesToPost))
+	for (int Index = 0; Index < InventoryItems.Num(); ++Index)
 	{
-		for (int i = 0; i < TilesToPost.Num(); ++i)
+		if (isRoomAvailable(ItemObject, Index))
 		{
-			InventoryItems[TilesToPost[i].X][TilesToPost[i].Y] = ItemObject;
-			GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString::FromInt(TilesToPost[i].X) + ", " + FString::FromInt(TilesToPost[i].Y));
+			AddItemAtInventory(ItemObject, Index);
+			return true;
 		}
-		return true;
 	}
 
 	return false;
 }
 
-bool USS_InventoryComponent::isRoomAvailable(const FIntPoint IconSize, TArray<FIntPoint>& OutTilesToPost)
+bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex)
 {
-	for (int i = 0; i < InventoryItems.Num(); ++i)
-	{
-		for (int j = 0; j < InventoryItems[i].Num(); ++j)
-		{
-			if (InventoryItems[i][j])
-			{
-				OutTilesToPost.Empty();
-			}
-			else
-			{
-				OutTilesToPost.Add(FIntPoint(i, j));
-			}
+	TArray<FIntPoint> Tiles = ForEachIndex(ItemObject, TopLeftIndex);
 
-			
+	for (int Index = 0; Index < Tiles.Num(); ++Index)
+	{
+		if (IsTileValid(Tiles[Index]))
+		{
+			int CurrentIndex = TileToIndex(Tiles[Index]);
+			USS_ItemObject* CurrentItemObject = GetItemAtIndex(CurrentIndex);
+
+			if (CurrentItemObject)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
 		}
 	}
 
-	
+	return true;
+}
 
-	return false;
+TArray<FIntPoint> USS_InventoryComponent::ForEachIndex(const USS_ItemObject* ItemObject, const int& TopLeftIndex)
+{
+	TArray<FIntPoint> Tiles;
+
+	FIntPoint CurrentTile = IndexToTile(TopLeftIndex);
+
+	int LastIndex_X = CurrentTile.X + (ItemObject->ItemInfo.IconSize.X - 1);
+	int LastIndex_Y = CurrentTile.Y + (ItemObject->ItemInfo.IconSize.Y - 1);
+
+	for (int i = CurrentTile.X; i <= LastIndex_X; ++i)
+	{
+		for (int j = CurrentTile.Y; j <= LastIndex_Y; ++j)
+		{
+			Tiles.Add(FIntPoint(i, j));
+		}
+	}
+
+	return Tiles;
+}
+
+FIntPoint USS_InventoryComponent::IndexToTile(const int& Index) const
+{ 
+	return FIntPoint(Index % Columns, Index / Columns);
+}
+
+int USS_InventoryComponent::TileToIndex(const FIntPoint& Tile) const
+{
+	return Tile.X + (Tile.Y * Columns);
+}
+
+bool USS_InventoryComponent::IsTileValid(const FIntPoint& Tile) const
+{ 
+	return Tile.X >= 0 && Tile.Y >= 0 && Tile.X < Columns && Tile.Y < Rows;
+}
+
+USS_ItemObject* USS_InventoryComponent::GetItemAtIndex(const int& Index)
+{
+	if (InventoryItems.IsValidIndex(Index))
+	{
+		return InventoryItems[Index];
+	}
+
+	return nullptr;
+}
+
+void USS_InventoryComponent::AddItemAtInventory(USS_ItemObject* ItemObject, const int& Index)
+{
+	TArray<FIntPoint> Tiles = ForEachIndex(ItemObject, Index);
+
+	for (int i = 0; i < Tiles.Num(); ++i)
+	{
+		int ObjectIndex = TileToIndex(Tiles[i]);
+		InventoryItems[ObjectIndex] = ItemObject;
+	}
+
+	bIsDirty = true;
 }
