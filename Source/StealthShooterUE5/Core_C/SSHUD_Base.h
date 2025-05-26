@@ -6,9 +6,8 @@
 #include "GameFramework/HUD.h"
 #include "SSHUD_Base.generated.h"
 
-/**
- * 
- */
+
+
 UCLASS()
 class STEALTHSHOOTERUE5_API ASSHUD_Base : public AHUD
 {
