@@ -51,8 +51,6 @@ private: // Variables
 
 	TObjectPtr<class UUserWidget> Inventory_Widget;
 
-	bool bIsInventoryChanged = false;
-
 private: // Functions
 
 	TArray<FIntPoint> ForEachIndex(const USS_ItemObject* ItemObject, const int& TopLeftIndex);

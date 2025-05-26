@@ -188,6 +188,4 @@ void USS_InventoryComponent::AddItemAtInventory(USS_ItemObject* ItemObject, cons
 	}
 
 	OnInventoryChanged.Broadcast();
-
-	bIsInventoryChanged = true;
 }
