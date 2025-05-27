@@ -60,8 +60,6 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 		}
 	}
 
-	ItemObject->RotateImage();
-
 	return false;
 }
 
