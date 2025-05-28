@@ -61,6 +61,11 @@ private: // Functions
 
 	USS_ItemObject* GetItemAtIndex(const int& Index);
 
+public: // Variables
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bIsItemWasSpawnedFromInventory = false;
+
 public:	// Functions
 
 	UFUNCTION(BlueprintCallable)
