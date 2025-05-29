@@ -14,7 +14,10 @@ ASS_Card_Base::ASS_Card_Base()
 	CardName_InTheWorld->SetupAttachment(ObjectCircled);
 	CardName_InTheWorld->SetRelativeScale3D(FVector(0.01f, 0.01f, 0.01f));
 	CardName_InTheWorld->SetRelativeRotation(FRotator(0.f, 90.f, 0.f));
+	CardName_InTheWorld->SetRelativeLocation(FVector(0.f, 0.1f, 0.f));
 	CardName_InTheWorld->HorizontalAlignment = EHorizTextAligment::EHTA_Center;
 	CardName_InTheWorld->VerticalAlignment = EVerticalTextAligment::EVRTA_TextCenter;
+	CardName_InTheWorld->TextRenderColor = FColor::Black;
+	CardName_InTheWorld->WorldSize = 24.f;
 }
 
