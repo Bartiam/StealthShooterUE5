@@ -36,7 +36,7 @@ enum class ESSCardTypes : uint8
 {
 	None_Card UMETA(DisplayName = "None Card"),
 	Red_Security_Card UMETA(DisplayName = "Red Security Card"),
-	Blue_Surveillance_Card UMETA(DisplayName = "Blue Surveillance Card"),
+	Blue_Surveillance_Laboratory_Card UMETA(DisplayName = "Blue Surveillance And Laboratory Card"),
 	White_Master_Card UMETA(DisplayName = "White Master Card")
 };
 

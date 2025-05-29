@@ -21,6 +21,9 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Card Specifications")
 	ESSCardTypes ThisCardType;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Card Specifications")
+	TObjectPtr<class UTextRenderComponent> CardName_InTheWorld;
+
 public: // Functions
 
 	ASS_Card_Base();
