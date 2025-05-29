@@ -20,8 +20,9 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 protected: // Variables
 
 	// Object name must be the same as the string name in data table
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item Specifications")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item ID")
 	FName Name_ID = FName();
+	
 
 private: // Variables
 
@@ -34,4 +35,6 @@ protected: // Functions
 	virtual void BeginPlay() override;
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
+
+	virtual void InteractableHeld_Implementation(AActor* Interactor) override;
 };

@@ -81,6 +81,9 @@ struct FPickUpItemInfo : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool bIsRotated = false;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSubclassOf<class UGameplayEffect> GameplayEffect_Class;
 };
 
 USTRUCT(BlueprintType)

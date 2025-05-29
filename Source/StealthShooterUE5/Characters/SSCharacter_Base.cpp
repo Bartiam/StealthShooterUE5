@@ -55,7 +55,7 @@ void ASSCharacter_Base::InitializeAttributes()
 	{
 		// Create effect context for gameplay effect 
 		FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
-		// The source of the effect
+		// The source of the effect created
 		EffectContext.AddSourceObject(this);
 		// Create a specification for the effect
 		FGameplayEffectSpecHandle SpecHandle = AbilitySystemComponent->MakeOutgoingSpec(DefaultAttributeEffect, 1, EffectContext);
@@ -63,7 +63,7 @@ void ASSCharacter_Base::InitializeAttributes()
 		if (SpecHandle.IsValid())
 		{
 			// Apply gameplay effect to self
-			FActiveGameplayEffectHandle GEHandle = AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
+			AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 		}
 	}
 }
