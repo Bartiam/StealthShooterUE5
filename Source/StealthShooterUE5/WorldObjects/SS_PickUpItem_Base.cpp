@@ -7,6 +7,12 @@
 
 
 
+ASS_PickUpItem_Base::ASS_PickUpItem_Base()
+{
+	// Enable physics
+	ObjectCircled->SetSimulatePhysics(true);
+}
+
 void ASS_PickUpItem_Base::BeginPlay()
 {
 	Super::BeginPlay();

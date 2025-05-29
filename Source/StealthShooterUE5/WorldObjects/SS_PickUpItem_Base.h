@@ -17,6 +17,10 @@ class STEALTHSHOOTERUE5_API ASS_PickUpItem_Base : public ASSInteractableObject_B
 {
 	GENERATED_BODY()
 
+public: // Functions
+
+	ASS_PickUpItem_Base();
+
 protected: // Variables
 
 	// Object name must be the same as the string name in data table
