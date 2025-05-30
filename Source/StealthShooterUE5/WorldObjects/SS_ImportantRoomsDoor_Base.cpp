@@ -79,6 +79,9 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(AActor* Int
 	}
 }
 
+ESSCardTypes ASS_ImportantRoomsDoor_Base::GetNeededCard() const
+{ return NeededCard; }
+
 void ASS_ImportantRoomsDoor_Base::OpenDoor(float Value)
 {
 	// Set new location for door

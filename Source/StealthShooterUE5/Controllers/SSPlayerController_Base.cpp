@@ -45,17 +45,8 @@ void ASSPlayerController_Base::SetupInputComponent()
 			// Bind Inputs from InputConfig
 			for (const FSSInputActionBinds& ActionBind : InputConfig->InputActionBinds)
 			{
-
-				if (ActionBind.bIsTriggered)
-				{
-					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Triggered, this, &ThisClass::ActivateAbilityByInputIDPressed, ActionBind.ButtonInputID);
-					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
-				}
-				else
-				{
-					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Started, this, &ThisClass::ActivateAbilityByInputIDPressed, ActionBind.ButtonInputID);
-					EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
-				}
+				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Started, this, &ThisClass::ActivateAbilityByInputIDPressed, ActionBind.ButtonInputID);
+				EnhancedInputComponent->BindAction(ActionBind.InputAction, ETriggerEvent::Completed, this, &ThisClass::ActivateAbilityByInputIDReleased, ActionBind.ButtonInputID);
 			}
 		}
 		else

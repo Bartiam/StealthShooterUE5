@@ -48,11 +48,6 @@ void ASS_PickUpItem_Base::InteractableHeld_Implementation(AActor* Interactor)
 			ItemObject->ApplyGameplayEffectFromThisItem(Interactor);
 			Destroy();
 		}
-		else
-		{
-
-		}
-
 	}
 
 }

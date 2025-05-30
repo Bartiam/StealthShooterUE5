@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 
 #include "../Interfaces/Interactable.h"
+#include "../Interfaces/CharacterInterface.h"
+#include "../SSData/SSTypes.h"
 
 #include "SSInteractableObject_Base.generated.h"
 

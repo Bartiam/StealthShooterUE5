@@ -20,9 +20,6 @@ struct FSSInputActionBinds
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	ESSInputID ButtonInputID;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	bool bIsTriggered;
 };
 
 UCLASS(BlueprintType, Blueprintable)

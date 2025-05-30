@@ -4,9 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "SSInteractableObject_Base.h"
-
-#include "../SSData/SSTypes.h"
-
 #include "SS_CardReader_Base.generated.h"
 
 
@@ -20,10 +17,13 @@ public: // Functions
 	
 	ASS_CardReader_Base();
 
-protected: // Variables
+	UFUNCTION()
+	void OpenDoorWithCardreader(ESSCardTypes SelectedCard) const;
+
+public: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	ESSCardTypes NeededCard = ESSCardTypes::None_Card;
+	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
 
 	// Materials for Door Light
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
@@ -35,7 +35,4 @@ protected: // Functions
 
 	virtual void BeginPlay() override;
 
-private: // Variables
-
-	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
 };

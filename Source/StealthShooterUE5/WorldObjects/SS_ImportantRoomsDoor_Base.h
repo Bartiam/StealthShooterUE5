@@ -24,7 +24,12 @@ public:	// Functions
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
+	ESSCardTypes GetNeededCard() const;
+
 protected: // Variables
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	ESSCardTypes NeededCard = ESSCardTypes::None_Card;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> Piston;

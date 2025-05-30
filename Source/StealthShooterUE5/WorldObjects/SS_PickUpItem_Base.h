@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "SSInteractableObject_Base.h"
 
-#include "../Interfaces/CharacterInterface.h"
 #include "SS_ItemObject.h"
 
 #include "SS_PickUpItem_Base.generated.h"
