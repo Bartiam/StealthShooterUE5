@@ -86,16 +86,10 @@ void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
 }
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID InputID)
-{
-	ASC->PressInputID(static_cast<int32>(InputID));
-
-	
-}
+{ ASC->PressInputID(static_cast<int32>(InputID)); }
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID InputID)
-{
-	ASC->ReleaseInputID(static_cast<int32>(InputID));
-}
+{ ASC->ReleaseInputID(static_cast<int32>(InputID)); }
 
 void ASSPlayerController_Base::OnPossess(APawn* NewPawn)
 {

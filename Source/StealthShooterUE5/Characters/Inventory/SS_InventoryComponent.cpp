@@ -15,6 +15,8 @@ USS_InventoryComponent::USS_InventoryComponent()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
+
+
 void USS_InventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
@@ -24,6 +26,8 @@ void USS_InventoryComponent::BeginPlay()
 	// Set size for inventory
 	InventoryItems.SetNum(Rows * Columns);
 }
+
+
 
 UUserWidget* USS_InventoryComponent::GetInventoryWidget() const
 { return Inventory_Widget; }
@@ -63,6 +67,8 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 	return false;
 }
 
+
+
 TMap<USS_ItemObject*, FIntPoint> USS_InventoryComponent::GetAllInventoryItems()
 {
 	TMap<USS_ItemObject*, FIntPoint> AllInventoryItems;
@@ -83,6 +89,8 @@ TMap<USS_ItemObject*, FIntPoint> USS_InventoryComponent::GetAllInventoryItems()
 	return AllInventoryItems;
 }
 
+
+
 void USS_InventoryComponent::RemoveItemFromInventory(USS_ItemObject* ItemObject)
 {
 	if (ItemObject)
@@ -98,6 +106,8 @@ void USS_InventoryComponent::RemoveItemFromInventory(USS_ItemObject* ItemObject)
 		OnInventoryChanged.Broadcast();
 	}
 }
+
+
 
 bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex)
 {
@@ -127,6 +137,8 @@ bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, c
 	return true;
 }
 
+
+
 TArray<FIntPoint> USS_InventoryComponent::ForEachIndex(const USS_ItemObject* ItemObject, const int& TopLeftIndex)
 {
 	TArray<FIntPoint> Tiles;
@@ -148,20 +160,28 @@ TArray<FIntPoint> USS_InventoryComponent::ForEachIndex(const USS_ItemObject* Ite
 	return Tiles;
 }
 
+
+
 FIntPoint USS_InventoryComponent::IndexToTile(const int& Index) const
 { 
 	return FIntPoint(Index % Columns, Index / Columns); // Transformation index to tile
 }
+
+
 
 int USS_InventoryComponent::TileToIndex(const FIntPoint& Tile) const
 {
 	return Tile.X + (Tile.Y * Columns); // Transformation tile to index
 }
 
+
+
 bool USS_InventoryComponent::IsTileValid(const FIntPoint& Tile) const
 { 
 	return Tile.X >= 0 && Tile.Y >= 0 && Tile.X < Columns && Tile.Y < Rows;
 }
+
+
 
 USS_ItemObject* USS_InventoryComponent::GetItemAtIndex(const int& Index)
 {
@@ -172,6 +192,8 @@ USS_ItemObject* USS_InventoryComponent::GetItemAtIndex(const int& Index)
 
 	return nullptr;
 }
+
+
 
 void USS_InventoryComponent::AddItemAtInventory(USS_ItemObject* ItemObject, const int& Index)
 {
