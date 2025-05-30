@@ -2,20 +2,28 @@
 
 
 #include "SSHUD_Base.h"
-#include "../UserInterface/SS_UIDuringTheGame_Base.h"
+#include "Blueprint/UserWidget.h"
 
-USS_UIDuringTheGame_Base* ASSHUD_Base::GetUIDuringTheGame()
+
+
+UUserWidget* ASSHUD_Base::GetUIDuringTheGame()
 { return UI_DuringTheGameWidget; }
 
+
+
 UUserWidget* ASSHUD_Base::GetInventoryWidget()
-{
-	return nullptr;
-}
+{ return InventoryWidget; }
+
+
 
 void ASSHUD_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UI_DuringTheGameWidget = CreateWidget<USS_UIDuringTheGame_Base>(GetWorld(), UI_DuringTheGame_Class);
+	// Create UI during the game
+	UI_DuringTheGameWidget = CreateWidget<UUserWidget>(GetWorld(), UI_DuringTheGame_Class);
 	UI_DuringTheGameWidget->AddToViewport();
+
+	// Create Inventory widget
+	InventoryWidget = CreateWidget<UUserWidget>(GetWorld(), Inventory_Class);
 }

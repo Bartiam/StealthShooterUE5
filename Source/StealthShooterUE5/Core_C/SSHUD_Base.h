@@ -17,14 +17,14 @@ private: // Variables
 
 	TObjectPtr<class UUserWidget> InventoryWidget;
 
-	TObjectPtr<class USS_UIDuringTheGame_Base> UI_DuringTheGameWidget;
+	TObjectPtr<class UUserWidget> UI_DuringTheGameWidget;
 
 public: // Functions
 
-	UFUNCTION()
-	USS_UIDuringTheGame_Base* GetUIDuringTheGame();
+	UFUNCTION(BlueprintCallable)
+	UUserWidget* GetUIDuringTheGame();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	UUserWidget* GetInventoryWidget();
 
 protected: // Variables

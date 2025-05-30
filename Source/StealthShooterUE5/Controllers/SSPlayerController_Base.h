@@ -41,10 +41,10 @@ protected: // Functions
 
 private: // Variables
 
-	UPROPERTY()
+	TObjectPtr<class ASSHUD_Base> CurrentHUD;
+
 	TObjectPtr<class ASSPlayer_Base> CurrentCharacter;
 
-	UPROPERTY()
 	TObjectPtr<class USS_AbilitySystemComponent> ASC;
 
 private: // Functions
@@ -63,4 +63,8 @@ private: // Functions
 
 	virtual void OnPossess(APawn* NewPawn) override;
 
+public: // Functions
+
+	UFUNCTION(BlueprintCallable)
+	class ASSHUD_Base* GetCurrentHUD();
 };

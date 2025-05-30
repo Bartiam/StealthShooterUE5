@@ -13,6 +13,7 @@
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryNoSpace);
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -29,11 +30,11 @@ protected: // Variables
 	UPROPERTY(BlueprintAssignable)
 	FOnInventoryChanged OnInventoryChanged;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	float TileSize = 0.f;
+	UPROPERTY(BlueprintAssignable)
+	FOnInventoryNoSpace OnInventoryNoSpace;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	TSubclassOf<class UUserWidget> Inventory_Class;
+	float TileSize = 0.f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory|Grid Size")
 	int Rows = 0;
@@ -48,8 +49,6 @@ protected: // Functions
 private: // Variables
 
 	TArray<TObjectPtr<USS_ItemObject>> InventoryItems;
-
-	TObjectPtr<class UUserWidget> Inventory_Widget;
 
 private: // Functions
 
@@ -85,7 +84,4 @@ public:	// Functions
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItemFromInventory(USS_ItemObject* ItemObject);
-
-	UFUNCTION(BlueprintCallable)
-	class UUserWidget* GetInventoryWidget() const;
 };

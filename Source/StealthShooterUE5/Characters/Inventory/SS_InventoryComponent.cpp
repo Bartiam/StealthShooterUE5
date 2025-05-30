@@ -20,17 +20,10 @@ USS_InventoryComponent::USS_InventoryComponent()
 void USS_InventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	Inventory_Widget = CreateWidget<UUserWidget>(GetWorld(), Inventory_Class);
 
 	// Set size for inventory
 	InventoryItems.SetNum(Rows * Columns);
 }
-
-
-
-UUserWidget* USS_InventoryComponent::GetInventoryWidget() const
-{ return Inventory_Widget; }
 
 
 
@@ -63,6 +56,8 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 			}
 		}
 	}
+
+	OnInventoryNoSpace.Broadcast();
 
 	return false;
 }

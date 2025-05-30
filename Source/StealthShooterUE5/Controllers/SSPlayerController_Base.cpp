@@ -9,6 +9,7 @@
 #include "../Input/SSInputConfig.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
 #include "../Characters/SSPlayer_Base.h"
+#include "../Core_C/SSHUD_Base.h"
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -16,7 +17,7 @@
 void ASSPlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	CurrentCharacter = Cast<ASSPlayer_Base>(GetPawn());
 
 	if (IsValid(CurrentCharacter))
@@ -27,6 +28,9 @@ void ASSPlayerController_Base::BeginPlay()
 		if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 			SubSystem->AddMappingContext(MappingContext, 0);
 	}
+
+	if (IsValid(GetHUD()))
+		CurrentHUD = Cast<ASSHUD_Base>(GetHUD());
 }
 
 void ASSPlayerController_Base::SetupInputComponent()
@@ -100,3 +104,6 @@ void ASSPlayerController_Base::OnPossess(APawn* NewPawn)
 	if (IsValid(CurrentCharacter))
 		ASC = Cast<USS_AbilitySystemComponent>(CurrentCharacter->GetAbilitySystemComponent());
 }
+
+ASSHUD_Base* ASSPlayerController_Base::GetCurrentHUD()
+{ return CurrentHUD; }
