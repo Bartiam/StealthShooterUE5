@@ -10,6 +10,7 @@
 #include "SSPlayer_Base.generated.h"
 
 
+
 UCLASS()
 class STEALTHSHOOTERUE5_API ASSPlayer_Base : public ASSCharacter_Base
 {

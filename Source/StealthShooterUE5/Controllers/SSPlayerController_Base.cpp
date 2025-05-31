@@ -23,11 +23,8 @@ void ASSPlayerController_Base::BeginPlay()
 	if (IsValid(CurrentCharacter))
 		ASC = Cast<USS_AbilitySystemComponent>(CurrentCharacter->GetAbilitySystemComponent());
 
-	if (IsLocalController())
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
-			SubSystem->AddMappingContext(MappingContext, 0);
-	}
+	if (UEnhancedInputLocalPlayerSubsystem* SubSystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+		SubSystem->AddMappingContext(MappingContext, 0);
 
 	if (IsValid(GetHUD()))
 		CurrentHUD = Cast<ASSHUD_Base>(GetHUD());

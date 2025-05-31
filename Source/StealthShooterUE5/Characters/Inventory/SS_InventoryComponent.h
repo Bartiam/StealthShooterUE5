@@ -12,8 +12,10 @@
 #include "SS_InventoryComponent.generated.h"
 
 
+
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryNoSpace);
+
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
