@@ -19,11 +19,17 @@ ASS_Door_Base::ASS_Door_Base()
 	bIsCircledObject = false;
 }
 
+
+
 bool ASS_Door_Base::GetIsDoorLock() const
 { return bIsDoorLock; }
 
+
+
 void ASS_Door_Base::SetIsDoorLock(const bool& NewValue)
 { bIsDoorLock = NewValue; }
+
+
 
 void ASS_Door_Base::BeginPlay()
 {
@@ -31,6 +37,8 @@ void ASS_Door_Base::BeginPlay()
 
 	BindCurveToTimeline(OpenDoorCurve, TimelineToOpenDoor);
 }
+
+
 
 void ASS_Door_Base::Tick(float DeltaTime)
 {
@@ -40,7 +48,11 @@ void ASS_Door_Base::Tick(float DeltaTime)
 	TimelineToOpenDoor.TickTimeline(DeltaTime);
 }
 
+
+
 void ASS_Door_Base::OpenDoor(float Value) {}
+
+
 
 void ASS_Door_Base::BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline)
 {
@@ -55,13 +67,12 @@ void ASS_Door_Base::BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& Cu
 	}
 }
 
+
+
 void ASS_Door_Base::UpdateTextWhenDoorIsLocked(AActor* Interactor)
 {
-	if (Interactor->Implements<UCharacterInterface>())
-	{
-		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor)->GetCurrentHUD();
-		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(TextWhenDoorIsLocked);
-	}
+	auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor)->GetCurrentHUD();
+	CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(TextWhenDoorIsLocked);
 }
 
 

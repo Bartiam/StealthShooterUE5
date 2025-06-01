@@ -58,6 +58,9 @@ struct FPickUpItemInfo : public FTableRowBase
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FName Name_ID = FName();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FText ItemName = FText();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)

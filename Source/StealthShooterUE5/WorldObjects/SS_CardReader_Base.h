@@ -17,9 +17,6 @@ public: // Functions
 	
 	ASS_CardReader_Base();
 
-	UFUNCTION()
-	void OpenDoorWithCardreader(ESSCardTypes SelectedCard) const;
-
 public: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")

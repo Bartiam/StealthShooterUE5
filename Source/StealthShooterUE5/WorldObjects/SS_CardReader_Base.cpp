@@ -11,30 +11,25 @@
 ASS_CardReader_Base::ASS_CardReader_Base() 
 {}
 
-void ASS_CardReader_Base::OpenDoorWithCardreader(ESSCardTypes SelectedCard) const
-{
-	if (SelectedCard == CurrentDoor->GetNeededCard())
-	{
-		CurrentDoor->InteractableRelease_Implementation(nullptr);
-	}
-	else
-	{
 
-	}
-}
 
 void ASS_CardReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
-	if (CurrentDoor->GetIsDoorLock() && Interactor->Implements<UCharacterInterface>())
+	if (CurrentDoor->GetIsDoorLock())
 	{
-		auto PlayerCharacter = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
-		PlayerCharacter->GetAbilitySystemComponent()->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
+		if (Interactor->Implements<UCharacterInterface>())
+		{
+			auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
+
+		}
 	}
 	else
 	{
 		CurrentDoor->InteractableRelease_Implementation(Interactor);
 	}
 }
+
+
 
 void ASS_CardReader_Base::BeginPlay()
 {

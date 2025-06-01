@@ -2,6 +2,10 @@
 
 
 #include "SSSimpleDoor_Base.h"
+#include "../GAS/SS_AbilitySystemComponent.h"
+#include "../Characters/SSCharacter_Base.h"
+
+
 
 // Sets default values
 ASSSimpleDoor_Base::ASSSimpleDoor_Base()
@@ -13,6 +17,8 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 	ObjectCircled->SetupAttachment(DoorFrame);
 }
 
+
+
 void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
 	// Checking that the object is currently running 
@@ -21,7 +27,13 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 
 	if (bIsDoorLock)
 	{
-		UpdateTextWhenDoorIsLocked(Interactor);
+		if (Interactor->Implements<UCharacterInterface>())
+		{
+			UpdateTextWhenDoorIsLocked(Interactor);
+
+			
+		}
+
 		CurrentDoorRotateAngle = LockDoorRotateAngle;
 		// Play timeline 
 		TimelineToOpenDoor_Lock.PlayFromStart();
@@ -45,12 +57,16 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 	}
 }
 
+
+
 void ASSSimpleDoor_Base::OpenDoor(float Value)
 {
 	// Set new rotation for this object
 	FRotator CurrentDoorRotation = FRotator(0.f, CurrentDoorRotateAngle * Value, 0.f);
 	ObjectCircled->SetRelativeRotation(CurrentDoorRotation);
 }
+
+
 
 void ASSSimpleDoor_Base::Tick(float DeltaTime)
 {
@@ -59,6 +75,8 @@ void ASSSimpleDoor_Base::Tick(float DeltaTime)
 	// Promotes the timeline
 	TimelineToOpenDoor_Lock.TickTimeline(DeltaTime);
 }
+
+
 
 void ASSSimpleDoor_Base::BeginPlay()
 {

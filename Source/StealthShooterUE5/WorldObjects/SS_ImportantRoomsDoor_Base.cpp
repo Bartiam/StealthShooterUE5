@@ -60,8 +60,10 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(AActor* Int
 
 	if (bIsDoorLock)
 	{
-		UpdateTextWhenDoorIsLocked(Interactor);
-		return;
+		if (Interactor->Implements<UCharacterInterface>())
+		{
+			UpdateTextWhenDoorIsLocked(Interactor);
+		}
 	}
 	else
 	{

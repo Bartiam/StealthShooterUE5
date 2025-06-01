@@ -45,6 +45,8 @@ protected: // Functions
 
 private: // Variables
 
+	FTimerHandle TimerToOpenInventory;
+
 	float CurrentDoorRotateAngle = 0.f;
 
 	FTimeline TimelineToOpenDoor_Lock;
