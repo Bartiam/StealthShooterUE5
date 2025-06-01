@@ -11,10 +11,6 @@
 
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorClosed);
-
-
-
 UCLASS()
 class STEALTHSHOOTERUE5_API ASS_Door_Base : public ASSInteractableObject_Base
 {
@@ -30,9 +26,6 @@ public: // Functions
 
 protected: // Variables
 
-	UPROPERTY(BlueprintAssignable)
-	FOnDoorClosed OnDoorClosed;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> DoorFrame;
 
@@ -41,6 +34,9 @@ protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> OpenDoorCurve;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	FText TextWhenDoorIsLocked = FText();
 
 	bool bIsDoorClosed = true;
 
@@ -55,4 +51,6 @@ protected: // Functions
 	virtual void OpenDoor(float Value);
 
 	void BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline);
+
+	void UpdateTextWhenDoorIsLocked(AActor* Interactor);
 };

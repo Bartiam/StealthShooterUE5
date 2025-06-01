@@ -62,8 +62,7 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 	if (GetOwner()->Implements<UCharacterInterface>())
 	{
 		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(GetOwner())->GetCurrentHUD();
-		auto DuringTheGame_Widget = CurrentHUD->GetUIDuringTheGame();
-		DuringTheGame_Widget->SetNewTextToTextBlock(TextWhenInventoryNoRoom);
+		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(TextWhenInventoryNoRoom);
 	}
 
 	return false;

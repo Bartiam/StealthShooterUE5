@@ -60,8 +60,7 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(AActor* Int
 
 	if (bIsDoorLock)
 	{
-		OnDoorClosed.Broadcast();
-
+		UpdateTextWhenDoorIsLocked(Interactor);
 		return;
 	}
 	else

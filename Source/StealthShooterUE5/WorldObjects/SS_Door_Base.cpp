@@ -2,12 +2,19 @@
 
 
 #include "SS_Door_Base.h"
+#include "../Core_C/SSHUD_Base.h"
+#include "../Controllers/SSPlayerController_Base.h"
+#include "../UserInterface/SS_DuringTheGame_Base.h"
+
+
 
 ASS_Door_Base::ASS_Door_Base()
 {
 	// Create door frame and attach it to root component
 	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door Frame"));
 	DoorFrame->SetupAttachment(RootComponent);
+
+	
 
 	bIsCircledObject = false;
 }
@@ -47,3 +54,14 @@ void ASS_Door_Base::BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& Cu
 		CurrentTimeline.AddInterpFloat(CurrentCurve, TimelineProgress);
 	}
 }
+
+void ASS_Door_Base::UpdateTextWhenDoorIsLocked(AActor* Interactor)
+{
+	if (Interactor->Implements<UCharacterInterface>())
+	{
+		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor)->GetCurrentHUD();
+		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(TextWhenDoorIsLocked);
+	}
+}
+
+

@@ -10,5 +10,4 @@ void USS_DuringTheGame_Base::SetNewTextToTextBlock(const FText NewText)
 {
 	ScreenMessage->SetText(NewText);
 	PlayAnimation(AppearScreenMessage);
-
 }

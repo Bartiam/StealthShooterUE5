@@ -25,9 +25,6 @@ ASSCharacter_Base::ASSCharacter_Base()
 	// Create AS
 	AttributeSet = CreateDefaultSubobject<USS_CharacterAttributeSet>(FName("Attribute Set"));
 
-	// Set character TPS
-	NetUpdateFrequency = 30.f;
-
 	// Base specifications for PlayerMovement
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);

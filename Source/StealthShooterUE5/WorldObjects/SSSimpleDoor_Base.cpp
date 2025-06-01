@@ -21,6 +21,7 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 
 	if (bIsDoorLock)
 	{
+		UpdateTextWhenDoorIsLocked(Interactor);
 		CurrentDoorRotateAngle = LockDoorRotateAngle;
 		// Play timeline 
 		TimelineToOpenDoor_Lock.PlayFromStart();
