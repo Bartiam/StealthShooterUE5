@@ -14,7 +14,6 @@
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryNoSpace);
 
 
 
@@ -32,11 +31,11 @@ protected: // Variables
 	UPROPERTY(BlueprintAssignable)
 	FOnInventoryChanged OnInventoryChanged;
 
-	UPROPERTY(BlueprintAssignable)
-	FOnInventoryNoSpace OnInventoryNoSpace;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	float TileSize = 0.f;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
+	FText TextWhenInventoryNoRoom = FText();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory|Grid Size")
 	int Rows = 0;

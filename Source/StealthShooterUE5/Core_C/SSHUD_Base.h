@@ -17,12 +17,12 @@ private: // Variables
 
 	TObjectPtr<class UUserWidget> InventoryWidget;
 
-	TObjectPtr<class UUserWidget> UI_DuringTheGameWidget;
+	TObjectPtr<class USS_DuringTheGame_Base> UI_DuringTheGameWidget;
 
 public: // Functions
 
 	UFUNCTION(BlueprintCallable)
-	UUserWidget* GetUIDuringTheGame();
+	class USS_DuringTheGame_Base* GetUIDuringTheGame();
 
 	UFUNCTION(BlueprintCallable)
 	UUserWidget* GetInventoryWidget();
@@ -33,7 +33,7 @@ protected: // Variables
 	TSubclassOf<class UUserWidget> Inventory_Class;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
-	TSubclassOf<class UUserWidget> UI_DuringTheGame_Class;
+	TSubclassOf<class USS_DuringTheGame_Base> UI_DuringTheGame_Class;
 
 protected: // Functions
 

@@ -5,7 +5,9 @@
 
 #include "../../WorldObjects/SS_PickUpItem_Base.h"
 #include "../SSPlayer_Base.h"
-#include "Blueprint/UserWidget.h"
+#include "../../Controllers/SSPlayerController_Base.h"
+#include "../../Core_C/SSHUD_Base.h"
+#include "../../UserInterface/SS_DuringTheGame_Base.h"
 
 
 
@@ -50,14 +52,19 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 		{
 			if (isRoomAvailable(ItemObject, Index))
 			{
-				// if the room is available add item to inventory
+				// if the room is available add rotated item to inventory
 				AddItemAtInventory(ItemObject, Index);
 				return true;
 			}
 		}
 	}
 
-	OnInventoryNoSpace.Broadcast();
+	if (GetOwner()->Implements<UCharacterInterface>())
+	{
+		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(GetOwner())->GetCurrentHUD();
+		auto DuringTheGame_Widget = CurrentHUD->GetUIDuringTheGame();
+		DuringTheGame_Widget->SetNewTextToTextBlock(TextWhenInventoryNoRoom);
+	}
 
 	return false;
 }

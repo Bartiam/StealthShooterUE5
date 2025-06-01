@@ -11,6 +11,10 @@
 
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorClosed);
+
+
+
 UCLASS()
 class STEALTHSHOOTERUE5_API ASS_Door_Base : public ASSInteractableObject_Base
 {
@@ -25,6 +29,9 @@ public: // Functions
 	void SetIsDoorLock(const bool& NewValue);
 
 protected: // Variables
+
+	UPROPERTY(BlueprintAssignable)
+	FOnDoorClosed OnDoorClosed;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> DoorFrame;
