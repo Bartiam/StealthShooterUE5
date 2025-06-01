@@ -14,10 +14,10 @@
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSearchItem, FPickUpItemInfo, ItemInfo, USS_InventoryComponent*, PlayerInventory);
 
 
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable )
 class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
@@ -66,6 +66,9 @@ public: // Variables
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsItemWasSpawnedFromInventory = false;
 
+	UPROPERTY(BlueprintAssignable)
+	FOnSearchItem OnSearchItem;
+
 public:	// Functions
 
 	UFUNCTION(BlueprintCallable)
@@ -85,4 +88,7 @@ public:	// Functions
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItemFromInventory(USS_ItemObject* ItemObject);
+
+	UFUNCTION(BlueprintCallable)
+	void CallOnSearchItem(FPickUpItemInfo ItemInfo);
 };

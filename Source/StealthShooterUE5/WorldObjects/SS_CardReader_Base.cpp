@@ -5,6 +5,7 @@
 #include "SS_ImportantRoomsDoor_Base.h"
 #include "../Characters/SSCharacter_Base.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
+#include "../Characters/Inventory/SS_InventoryComponent.h"
 
 
 
@@ -19,8 +20,12 @@ void ASS_CardReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 	{
 		if (Interactor->Implements<UCharacterInterface>())
 		{
-			auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
+			auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
+			auto PlayerASC = CurrentPlayer->GetAbilitySystemComponent();
+			PlayerASC->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
 
+			auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
+			PlayerInventory->OnSearchItem.AddDynamic(this, &ThisClass::CheckItemObjectForOpenDoor);
 		}
 	}
 	else
@@ -40,5 +45,15 @@ void ASS_CardReader_Base::BeginPlay()
 
 	if (!CurrentDoor->GetIsDoorLock())
 		CurrentDoor->SetMaterialToLightDoor(OpenDoorMaterial);
+}
+
+
+
+void ASS_CardReader_Base::CheckItemObjectForOpenDoor(FPickUpItemInfo ItemInfo, USS_InventoryComponent* PlayerInventory)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("WORKED!"));
+	PlayerInventory->OnSearchItem.RemoveAll(this);
+
+
 }
 
