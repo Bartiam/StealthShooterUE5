@@ -32,9 +32,5 @@ protected: // Functions
 
 	virtual void BeginPlay() override;
 
-private: // Functions
-
-	UFUNCTION()
-	void CheckItemObjectForOpenDoor(FPickUpItemInfo ItemInfo, USS_InventoryComponent* PlayerInventory);
 
 };

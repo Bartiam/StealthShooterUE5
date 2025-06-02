@@ -14,7 +14,7 @@
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnSearchItem, FPickUpItemInfo, ItemInfo, USS_InventoryComponent*, PlayerInventory);
+
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable )
@@ -88,7 +88,4 @@ public:	// Functions
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItemFromInventory(USS_ItemObject* ItemObject);
-
-	UFUNCTION(BlueprintCallable)
-	void CallOnSearchItem(FPickUpItemInfo ItemInfo);
 };

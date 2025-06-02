@@ -18,15 +18,7 @@ void ASS_CardReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
 	if (CurrentDoor->GetIsDoorLock())
 	{
-		if (Interactor->Implements<UCharacterInterface>())
-		{
-			auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
-			auto PlayerASC = CurrentPlayer->GetAbilitySystemComponent();
-			PlayerASC->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
-
-			auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
-			PlayerInventory->OnSearchItem.AddDynamic(this, &ThisClass::CheckItemObjectForOpenDoor);
-		}
+		
 	}
 	else
 	{
@@ -49,11 +41,5 @@ void ASS_CardReader_Base::BeginPlay()
 
 
 
-void ASS_CardReader_Base::CheckItemObjectForOpenDoor(FPickUpItemInfo ItemInfo, USS_InventoryComponent* PlayerInventory)
-{
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("WORKED!"));
-	PlayerInventory->OnSearchItem.RemoveAll(this);
 
-
-}
 

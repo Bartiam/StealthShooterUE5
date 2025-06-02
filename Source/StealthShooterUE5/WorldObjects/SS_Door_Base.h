@@ -6,8 +6,13 @@
 
 #include "SSInteractableObject_Base.h"
 #include "Components/TimelineComponent.h"
+#include "../WorldObjects/SS_ItemObject.h"
 
 #include "SS_Door_Base.generated.h"
+
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGetKeyToOpenDoor, USS_ItemObject*, ItemInfo, USS_InventoryComponent*, PlayerInventory);
 
 
 
