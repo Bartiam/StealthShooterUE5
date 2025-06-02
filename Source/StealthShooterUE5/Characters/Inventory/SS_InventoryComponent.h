@@ -66,9 +66,6 @@ public: // Variables
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsItemWasSpawnedFromInventory = false;
 
-	UPROPERTY(BlueprintAssignable)
-	FOnSearchItem OnSearchItem;
-
 public:	// Functions
 
 	UFUNCTION(BlueprintCallable)

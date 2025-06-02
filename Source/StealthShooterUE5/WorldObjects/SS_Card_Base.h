@@ -18,9 +18,6 @@ class STEALTHSHOOTERUE5_API ASS_Card_Base : public ASS_PickUpItem_Base
 	
 protected: // Variables
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Card Specifications")
-	ESSCardTypes ThisCardType;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Card Specifications")
 	TObjectPtr<class UTextRenderComponent> CardName_InTheWorld;
 

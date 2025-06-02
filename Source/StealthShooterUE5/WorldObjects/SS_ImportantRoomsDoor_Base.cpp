@@ -28,10 +28,14 @@ ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 	Lock->SetCollisionProfileName(FName("NoCollision"));
 }
 
+
+
 void ASS_ImportantRoomsDoor_Base::SetMaterialToLightDoor(UMaterial* NewColor)
 {
 	DoorLight->SetMaterial(1, NewColor);
 }
+
+
 
 void ASS_ImportantRoomsDoor_Base::BeginPlay()
 {
@@ -45,12 +49,16 @@ void ASS_ImportantRoomsDoor_Base::BeginPlay()
 	}
 }
 
+
+
 void ASS_ImportantRoomsDoor_Base::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 	TimelineToRotateLock.TickTimeline(DeltaTime);
 }
+
+
 
 void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
@@ -82,8 +90,7 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(AActor* Int
 	}
 }
 
-ESSCardTypes ASS_ImportantRoomsDoor_Base::GetNeededCard() const
-{ return NeededCard; }
+
 
 void ASS_ImportantRoomsDoor_Base::OpenDoor(float Value)
 {
@@ -94,6 +101,8 @@ void ASS_ImportantRoomsDoor_Base::OpenDoor(float Value)
 	if (TimelineToOpenDoor.GetPlaybackPosition() <= 0.f)
 		TimelineToRotateLock.Reverse();
 }
+
+
 
 void ASS_ImportantRoomsDoor_Base::OpenLock(float Value)
 {

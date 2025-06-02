@@ -16,14 +16,7 @@ ASS_CardReader_Base::ASS_CardReader_Base()
 
 void ASS_CardReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
-	if (CurrentDoor->GetIsDoorLock())
-	{
-		
-	}
-	else
-	{
-		CurrentDoor->InteractableRelease_Implementation(Interactor);
-	}
+	
 }
 
 

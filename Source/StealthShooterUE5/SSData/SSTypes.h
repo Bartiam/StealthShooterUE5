@@ -32,12 +32,47 @@ enum class ESSRoomTypes : uint8
 };
 
 UENUM(BlueprintType)
-enum class ESSCardTypes : uint8
+enum class ESSPhysKeyType : uint8
 {
-	None_Card UMETA(DisplayName = "None Card"),
-	Red_Security_Card UMETA(DisplayName = "Red Security Card"),
-	Blue_Surveillance_Laboratory_Card UMETA(DisplayName = "Blue Surveillance And Laboratory Card"),
-	White_Master_Card UMETA(DisplayName = "White Master Card")
+	None UMETA(DisplayName = "None"),
+	Door_Key UMETA(DisplayName = "Door Key"),
+	Locker_Key UMETA(DisplayName = "Locker Key"),
+};
+
+UENUM(BlueprintType)
+enum class ESSCardType : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Security_Card UMETA(DisplayName = "Security Card"),
+	Laboratory_Surveillance_Card UMETA(DisplayName = "Laboratory Surveillance Card"),
+	Master_Card UMETA(DisplayName = "Master Card"),
+};
+
+UENUM(BlueprintType)
+enum class ESSItemAccessType : uint8
+{
+	None UMETA(DisplayName = "None"),
+	Physical_Key UMETA(DisplayName = "Physical Key"),
+	Card_Key UMETA(DisplayName = "Card Key"),
+	Digital_Code UMETA(DisplayName = "Digital Code"),
+};
+
+USTRUCT(BlueprintType)
+struct FKeyPermission
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ESSItemAccessType ItemAccessType = ESSItemAccessType::None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FName DigitalCode = FName("Code to open door");
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ESSCardType CardType = ESSCardType::None;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ESSPhysKeyType PhysKeyType = ESSPhysKeyType::None;
 };
 
 USTRUCT(BlueprintType)
@@ -65,6 +100,9 @@ struct FPickUpItemInfo : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FText ItemDescription = FText();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FKeyPermission KeyPepmission = FKeyPermission();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<class ASS_PickUpItem_Base> ItemClass;

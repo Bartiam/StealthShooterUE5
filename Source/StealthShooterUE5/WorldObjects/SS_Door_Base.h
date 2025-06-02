@@ -12,7 +12,7 @@
 
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGetKeyToOpenDoor, USS_ItemObject*, ItemInfo, USS_InventoryComponent*, PlayerInventory);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGetKeyToOpenDoor, USS_ItemObject*, ItemObject);
 
 
 
@@ -36,6 +36,9 @@ protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	bool bIsDoorLock = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	FKeyPermission KeyPermission = FKeyPermission();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> OpenDoorCurve;
