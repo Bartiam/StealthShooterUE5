@@ -2,7 +2,7 @@
 
 
 #include "SS_CardReader_Base.h"
-#include "SS_ImportantRoomsDoor_Base.h"
+#include "SS_Door_Base.h"
 #include "../Characters/SSCharacter_Base.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
 #include "../Characters/Inventory/SS_InventoryComponent.h"
@@ -33,10 +33,7 @@ void ASS_CardReader_Base::BeginPlay()
 	Super::BeginPlay();
 
 	if (IsValid(GetParentActor()))
-		CurrentDoor = Cast<ASS_ImportantRoomsDoor_Base>(GetParentActor());
-
-	if (!CurrentDoor->GetIsDoorLock())
-		CurrentDoor->SetMaterialToLightDoor();
+		CurrentDoor = Cast<ASS_Door_Base>(GetParentActor());
 }
 
 

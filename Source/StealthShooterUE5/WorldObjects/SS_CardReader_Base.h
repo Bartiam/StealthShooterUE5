@@ -20,7 +20,7 @@ public: // Functions
 public: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
+	TObjectPtr<class ASS_Door_Base> CurrentDoor;
 
 protected: // Functions
 
