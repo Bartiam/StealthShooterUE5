@@ -3,13 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SSInteractableObject_Base.h"
+#include "SS_DisplayReader_Base.h"
 #include "SS_CardReader_Base.generated.h"
 
 
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASS_CardReader_Base : public ASSInteractableObject_Base
+class STEALTHSHOOTERUE5_API ASS_CardReader_Base : public ASS_DisplayReader_Base
 {
 	GENERATED_BODY()
 

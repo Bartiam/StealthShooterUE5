@@ -36,6 +36,7 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	InteractionWidget->SetWidgetClass(InteractionWidget_Class);
 	InteractionWidget->SetWidgetSpace(EWidgetSpace::Screen);
 	InteractionWidget->SetVisibility(false);
+	InteractionWidget->SetCastShadow(false);
 	
 	// Get a link on widget class
 	ConstructorHelpers::FClassFinder<USSInteractionWidget_Base> InteractionWidget_Finder
