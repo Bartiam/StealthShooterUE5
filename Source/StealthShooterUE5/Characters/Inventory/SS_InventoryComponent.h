@@ -14,6 +14,7 @@
 
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnGetKeyFromInventory, FPickUpItemInfo, ItemInfo, AActor*, Interactor);
 
 
 
@@ -25,6 +26,9 @@ class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
 public: 
 
 	USS_InventoryComponent();
+
+	UPROPERTY(BlueprintAssignable)
+	FOnGetKeyFromInventory OnGetKeyFromInventory;
 
 protected: // Variables
 
@@ -85,4 +89,7 @@ public:	// Functions
 
 	UFUNCTION(BlueprintCallable)
 	void RemoveItemFromInventory(USS_ItemObject* ItemObject);
+
+	UFUNCTION(BlueprintCallable)
+	void CallOnGetKeyFromInventory(const FPickUpItemInfo& ItemInfo, AActor* Interactor);
 };

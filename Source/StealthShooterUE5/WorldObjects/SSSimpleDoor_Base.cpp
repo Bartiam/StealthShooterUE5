@@ -27,16 +27,13 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 
 	if (bIsDoorLock)
 	{
-		if (Interactor->Implements<UCharacterInterface>())
-		{
-			UpdateTextWhenDoorIsLocked(Interactor);
-
-			
-		}
+		SetTextInTheUIDuringTheGame(Interactor, TextWhenDoorIsLocked);
 
 		CurrentDoorRotateAngle = LockDoorRotateAngle;
 		// Play timeline 
 		TimelineToOpenDoor_Lock.PlayFromStart();
+
+		OpenAndBindToPlayerInventory(Interactor);
 	}
 	else
 	{

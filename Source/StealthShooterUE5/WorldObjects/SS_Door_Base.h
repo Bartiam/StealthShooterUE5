@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -9,10 +9,6 @@
 #include "../WorldObjects/SS_ItemObject.h"
 
 #include "SS_Door_Base.generated.h"
-
-
-
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGetKeyToOpenDoor, USS_ItemObject*, ItemObject);
 
 
 
@@ -27,7 +23,9 @@ public: // Functions
 
 	bool GetIsDoorLock() const;
 
-	void SetIsDoorLock(const bool& NewValue);
+	virtual void SetIsDoorLock(const bool& NewValue);
+
+	void OpenAndBindToPlayerInventory(AActor* Interactor);
 
 protected: // Variables
 
@@ -38,17 +36,18 @@ protected: // Variables
 	bool bIsDoorLock = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	FKeyPermission KeyPermission = FKeyPermission();
+	FKeyPermission DoorKeyPermission = FKeyPermission();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> OpenDoorCurve;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	FText TextWhenDoorIsLocked = FText();
-
 	bool bIsDoorClosed = true;
 
 	FTimeline TimelineToOpenDoor;
+
+	// Texts for UI
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	FText TextWhenDoorIsLocked = FText();
 
 protected: // Functions
 
@@ -60,5 +59,13 @@ protected: // Functions
 
 	void BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline);
 
-	void UpdateTextWhenDoorIsLocked(AActor* Interactor);
+	UFUNCTION()
+	void BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor);
+
+private: // Variables
+
+	FText TextWhenSelectedIncorrectKey = INVTEXT("Это не подойдёт!");
 };
+
+
+

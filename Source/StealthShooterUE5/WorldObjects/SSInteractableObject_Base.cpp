@@ -6,7 +6,11 @@
 #include "Components/WidgetComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
+
 #include "../UserInterface/SSInteractionWidget_Base.h"
+#include "../Core_C/SSHUD_Base.h"
+#include "../Controllers/SSPlayerController_Base.h"
+#include "../UserInterface/SS_DuringTheGame_Base.h"
 
 
 
@@ -67,3 +71,13 @@ void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInter
 		InteractionWidget_Poiner->ReverseAnimation(InteractionWidget_Poiner->AppearMarkObject);
 	}
 }
+
+void ASSInteractableObject_Base::SetTextInTheUIDuringTheGame(AActor* Interactor, const FText& SendBeingTextToUI)
+{
+	if (Interactor && Interactor->Implements<UCharacterInterface>())
+	{
+		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor)->GetCurrentHUD();
+		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(SendBeingTextToUI);
+	}
+}
+

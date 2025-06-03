@@ -30,12 +30,16 @@ ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 
 
 
-void ASS_ImportantRoomsDoor_Base::SetMaterialToLightDoor(UMaterial* NewColor)
+void ASS_ImportantRoomsDoor_Base::SetMaterialToLightDoor()
 {
-	DoorLight->SetMaterial(1, NewColor);
+	DoorLight->SetMaterial(1, OpenDoorMaterial);
 }
 
-
+void ASS_ImportantRoomsDoor_Base::SetIsDoorLock(const bool& NewValue)
+{
+	Super::SetIsDoorLock(NewValue);
+	SetMaterialToLightDoor();
+}
 
 void ASS_ImportantRoomsDoor_Base::BeginPlay()
 {
@@ -68,10 +72,7 @@ void ASS_ImportantRoomsDoor_Base::InteractableRelease_Implementation(AActor* Int
 
 	if (bIsDoorLock)
 	{
-		if (Interactor->Implements<UCharacterInterface>())
-		{
-			UpdateTextWhenDoorIsLocked(Interactor);
-		}
+		SetTextInTheUIDuringTheGame(Interactor, TextWhenDoorIsLocked);
 	}
 	else
 	{

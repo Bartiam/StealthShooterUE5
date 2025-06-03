@@ -20,9 +20,11 @@ public:	// Functions
 	
 	ASS_ImportantRoomsDoor_Base();
 
-	void SetMaterialToLightDoor(UMaterial* NewColor);
+	void SetMaterialToLightDoor();
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
+
+	virtual void SetIsDoorLock(const bool& NewValue) override;
 
 protected: // Variables
 
@@ -49,6 +51,10 @@ protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	FVector LocationToLockDoor = FVector();
+
+	// Materials for Door Light
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	TObjectPtr<UMaterial> OpenDoorMaterial;
 
 protected: // Functions
 

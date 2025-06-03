@@ -8,6 +8,7 @@
 #include "../Interfaces/Interactable.h"
 #include "../Interfaces/CharacterInterface.h"
 #include "../SSData/SSTypes.h"
+#include "../GAS/SS_AbilitySystemComponent.h"
 
 #include "SSInteractableObject_Base.generated.h"
 
@@ -19,6 +20,8 @@ class STEALTHSHOOTERUE5_API ASSInteractableObject_Base : public AActor, public I
 public:	// Functions
 	
 	ASSInteractableObject_Base();
+
+	void SetTextInTheUIDuringTheGame(AActor* Interactor, const FText& SendBeingTextToUI);
 
 private: // Variables
 

@@ -108,6 +108,11 @@ void USS_InventoryComponent::RemoveItemFromInventory(USS_ItemObject* ItemObject)
 	}
 }
 
+void USS_InventoryComponent::CallOnGetKeyFromInventory(const FPickUpItemInfo& ItemInfo, AActor* Interactor)
+{
+	OnGetKeyFromInventory.Broadcast(ItemInfo, Interactor);
+}
+
 
 
 bool USS_InventoryComponent::isRoomAvailable(const USS_ItemObject* ItemObject, const int& TopLeftIndex)

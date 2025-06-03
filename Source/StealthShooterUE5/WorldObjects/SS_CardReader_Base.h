@@ -22,10 +22,6 @@ public: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<class ASS_ImportantRoomsDoor_Base> CurrentDoor;
 
-	// Materials for Door Light
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<UMaterial> OpenDoorMaterial;
-
 protected: // Functions
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
