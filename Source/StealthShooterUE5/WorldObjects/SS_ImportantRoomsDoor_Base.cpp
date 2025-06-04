@@ -35,11 +35,15 @@ void ASS_ImportantRoomsDoor_Base::SetMaterialToLightDoor()
 	DoorLight->SetMaterial(1, OpenDoorMaterial);
 }
 
+
+
 void ASS_ImportantRoomsDoor_Base::SetIsDoorLock(const bool& NewValue)
 {
 	Super::SetIsDoorLock(NewValue);
 	SetMaterialToLightDoor();
 }
+
+
 
 void ASS_ImportantRoomsDoor_Base::BeginPlay()
 {
@@ -50,6 +54,11 @@ void ASS_ImportantRoomsDoor_Base::BeginPlay()
 		FOnTimelineFloat TimelineProgress;
 		TimelineProgress.BindDynamic(this, &ThisClass::OpenLock);
 		TimelineToRotateLock.AddInterpFloat(CurveRotateLock, TimelineProgress);
+	}
+
+	if (!bIsDoorLock)
+	{
+		SetMaterialToLightDoor();
 	}
 }
 

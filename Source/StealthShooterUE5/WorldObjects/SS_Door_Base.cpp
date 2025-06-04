@@ -30,6 +30,7 @@ bool ASS_Door_Base::GetIsDoorLock() const
 void ASS_Door_Base::SetIsDoorLock(const bool& NewValue)
 { 
 	bIsDoorLock = NewValue;
+	DoorOpened.Broadcast();
 }
 
 
@@ -118,5 +119,3 @@ void ASS_Door_Base::BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Int
 		break;
 	}
 }
-
-

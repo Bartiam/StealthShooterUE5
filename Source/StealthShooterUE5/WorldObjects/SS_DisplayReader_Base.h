@@ -24,11 +24,16 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class UWidgetComponent> DisplayWidget_Component;
 
+	TObjectPtr<class ASS_Door_Base> CurrentDoor;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;
 
+	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
+
 private: // Variables
 
-	TObjectPtr<class UUserWidget> DisplayWidget_Pointer;
+	TObjectPtr<class USS_CardReaderWidget_Base> DisplayWidget_Pointer;
+
 };

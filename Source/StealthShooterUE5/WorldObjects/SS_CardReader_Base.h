@@ -17,16 +17,7 @@ public: // Functions
 	
 	ASS_CardReader_Base();
 
-public: // Variables
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	TObjectPtr<class ASS_Door_Base> CurrentDoor;
-
 protected: // Functions
 
-	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
-
-	virtual void BeginPlay() override;
-
-
+	
 };

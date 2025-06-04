@@ -12,12 +12,18 @@
 
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorWasOpen);
+
+
+
 UCLASS()
 class STEALTHSHOOTERUE5_API ASS_Door_Base : public ASSInteractableObject_Base
 {
 	GENERATED_BODY()
-	
+
 public: // Functions
+
+	FOnDoorWasOpen DoorOpened;
 
 	ASS_Door_Base();
 

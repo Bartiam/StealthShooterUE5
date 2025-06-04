@@ -3,7 +3,8 @@
 
 #include "SS_DisplayReader_Base.h"
 #include "Components/WidgetComponent.h"
-#include "Blueprint/UserWidget.h"
+#include "../UserInterface/SS_CardReaderWidget_Base.h"
+#include "../WorldObjects/SS_Door_Base.h"
 
 
 
@@ -17,6 +18,10 @@ ASS_DisplayReader_Base::ASS_DisplayReader_Base()
 	DisplayWidget_Component->SetRelativeLocation(FVector(12.f, 1.f, 35.f));
 	DisplayWidget_Component->SetCastShadow(false);
 	DisplayWidget_Component->SetBlendMode(EWidgetBlendMode::Transparent);
+	DisplayWidget_Component->SetDrawSize(FVector2D(64.f, 64.f));
+	DisplayWidget_Component->SetManuallyRedraw(true);
+	DisplayWidget_Component->SetRedrawTime(1.f);
+	DisplayWidget_Component->SetRelativeScale3D(FVector(0.34f, 0.34f, 0.34f));
 }
 
 
@@ -25,6 +30,27 @@ void ASS_DisplayReader_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	DisplayWidget_Pointer = CreateWidget<UUserWidget>(GetWorld(), DisplayWidget_Component->GetWidgetClass());
+	DisplayWidget_Pointer = CreateWidget<USS_CardReaderWidget_Base>(GetWorld(), DisplayWidget_Component->GetWidgetClass());
+
+	if (GetParentActor())
+	{
+		CurrentDoor = Cast<ASS_Door_Base>(GetParentActor());
+		DisplayWidget_Pointer->OwnerActor = CurrentDoor;
+	}
+
 	DisplayWidget_Component->SetWidget(DisplayWidget_Pointer);
+}
+
+
+
+void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interactor)
+{
+	if (CurrentDoor->GetIsDoorLock())
+	{
+		CurrentDoor->OpenAndBindToPlayerInventory(Interactor);
+	}
+	else
+	{
+		CurrentDoor->InteractableRelease_Implementation(Interactor);
+	}
 }
