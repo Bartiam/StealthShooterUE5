@@ -35,7 +35,8 @@ void ASS_DisplayReader_Base::BeginPlay()
 	if (GetParentActor())
 	{
 		CurrentDoor = Cast<ASS_Door_Base>(GetParentActor());
-		DisplayWidget_Pointer->OwnerActor = CurrentDoor;
+		PlayChangesWhenDoorStateChanged();
+		CurrentDoor->OnDoorStateChanged.AddDynamic(this, &ThisClass::PlayChangesWhenDoorStateChanged);
 	}
 
 	DisplayWidget_Component->SetWidget(DisplayWidget_Pointer);
@@ -53,4 +54,10 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 	{
 		CurrentDoor->InteractableRelease_Implementation(Interactor);
 	}
+}
+
+void ASS_DisplayReader_Base::PlayChangesWhenDoorStateChanged()
+{
+	DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
+	DisplayWidget_Component->RequestRedraw();
 }

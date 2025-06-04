@@ -18,20 +18,14 @@ protected: // Variables
 	UPROPERTY(Transient, meta = (BindWidget))
 	TObjectPtr<class UBorder> BackgroundBorder;
 
-public: // Variables
-
-	virtual void NativeConstruct() override;
-
-	TObjectPtr<class ASS_Door_Base> OwnerActor;
-
 private: // Variables
-
-	FLinearColor LockDoorColor = FLinearColor(1.f, 0.f, 0.f, 0.25f);
 
 	FLinearColor OpenDoorColor = FLinearColor(0.f, 1.f, 0.f ,0.25f);
 
-private: // Functions
+	FLinearColor LockDoorColor = FLinearColor(1.f, 0.f, 0.f, 0.25f);
+
+public: // Functions
 
 	UFUNCTION()
-	void ChangeColorBackgroundBorder();
+	void SetBrushColorToOpenDoor(const bool& bIsDoorLock);
 };

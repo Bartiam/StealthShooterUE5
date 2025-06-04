@@ -12,7 +12,7 @@
 
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorWasOpen);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorStateChanged);
 
 
 
@@ -23,7 +23,8 @@ class STEALTHSHOOTERUE5_API ASS_Door_Base : public ASSInteractableObject_Base
 
 public: // Functions
 
-	FOnDoorWasOpen DoorOpened;
+	UPROPERTY()
+	FOnDoorStateChanged OnDoorStateChanged;
 
 	ASS_Door_Base();
 

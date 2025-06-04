@@ -18,13 +18,11 @@ class STEALTHSHOOTERUE5_API ASS_ImportantRoomsDoor_Base : public ASS_Door_Base
 	
 public:	// Functions
 	
+	virtual void SetIsDoorLock(const bool& NewValue) override;
+
 	ASS_ImportantRoomsDoor_Base();
 
-	void SetMaterialToLightDoor();
-
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
-
-	virtual void SetIsDoorLock(const bool& NewValue) override;
 
 protected: // Variables
 
@@ -56,6 +54,9 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UMaterial> OpenDoorMaterial;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	TObjectPtr<UMaterial> LockDoorMaterial;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;
@@ -67,6 +68,8 @@ private: // Variables
 	FTimeline TimelineToRotateLock;
 
 private: // Functions
+
+	void PlayChangesWhenDoorStateChanged();
 
 	UFUNCTION()
 	virtual void OpenDoor(float Value) override;

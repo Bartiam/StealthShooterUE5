@@ -4,28 +4,14 @@
 #include "SS_CardReaderWidget_Base.h"
 #include "Components/Border.h"
 #include "../WorldObjects/SS_Door_Base.h"
+#include "../WorldObjects/SS_DisplayReader_Base.h"
 
 
 
-void USS_CardReaderWidget_Base::NativeConstruct()
+void USS_CardReaderWidget_Base::SetBrushColorToOpenDoor(const bool& bIsDoorLock)
 {
-	Super::NativeConstruct();
-
-	ChangeColorBackgroundBorder();
-}
-
-
-
-void USS_CardReaderWidget_Base::ChangeColorBackgroundBorder()
-{
-	if (OwnerActor->GetIsDoorLock())
-	{
-		BackgroundBorder->SetBrushColor(LockDoorColor);
-		OwnerActor->DoorOpened.AddDynamic(this, &ThisClass::ChangeColorBackgroundBorder);
-	}
-	else
-	{
+	if (!bIsDoorLock)
 		BackgroundBorder->SetBrushColor(OpenDoorColor);
-		OwnerActor->DoorOpened.RemoveAll(this);
-	}
+	else
+		BackgroundBorder->SetBrushColor(LockDoorColor);
 }
