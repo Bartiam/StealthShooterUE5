@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -17,6 +17,9 @@ protected: // Variables
 
 	UPROPERTY(Transient, meta = (BindWidget))
 	TObjectPtr<class UBorder> BackgroundBorder;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+	TObjectPtr<class UTextBlock> TextBlock;
 
 private: // Variables
 

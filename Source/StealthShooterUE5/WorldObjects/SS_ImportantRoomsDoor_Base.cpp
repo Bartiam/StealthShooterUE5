@@ -33,9 +33,15 @@ ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 void ASS_ImportantRoomsDoor_Base::PlayChangesWhenDoorStateChanged()
 {
 	if (bIsDoorLock)
+	{
 		DoorLight->SetMaterial(1, LockDoorMaterial);
+
+	}
 	else
+	{
 		DoorLight->SetMaterial(1, OpenDoorMaterial);
+
+	}
 }
 
 
