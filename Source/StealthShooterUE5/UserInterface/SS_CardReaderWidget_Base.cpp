@@ -19,6 +19,6 @@ void USS_CardReaderWidget_Base::SetBrushColorToOpenDoor(const bool& bIsDoorLock)
 	else
 	{
 		BackgroundBorder->SetBrushColor(LockDoorColor);
-		TextBlock->SetText(INVTEXT("Закрыто"));
+		TextBlock->SetText(TextWhenDoorLocked);
 	}
 }
