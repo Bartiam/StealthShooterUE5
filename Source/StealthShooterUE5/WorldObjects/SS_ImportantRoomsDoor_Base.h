@@ -30,9 +30,6 @@ protected: // Variables
 	TObjectPtr<UStaticMeshComponent> Piston;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<UStaticMeshComponent> Lock;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UStaticMeshComponent> DoorLight;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")

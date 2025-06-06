@@ -29,6 +29,11 @@ ASSInteractableObject_Base::ASSInteractableObject_Base()
 	ObjectCircled->ComponentTags.Add(FName("Circled"));
 	ObjectCircled->SetRenderCustomDepth(false);
 
+	SecondObjectCircled = CreateDefaultSubobject<UStaticMeshComponent>(FName("Second Circled Mesh"));
+	SecondObjectCircled->SetupAttachment(RootComponent);
+	SecondObjectCircled->ComponentTags.Add(FName("Circled"));
+	SecondObjectCircled->SetRenderCustomDepth(false);
+
 	// Create and set base specifications for InteractionWidget
 	InteractionWidget = CreateDefaultSubobject<UWidgetComponent>(FName("Interaction Widget"));
 	InteractionWidget->SetupAttachment(ObjectCircled);
@@ -51,6 +56,8 @@ void ASSInteractableObject_Base::BeginPlay()
 
 	InteractionWidget_Poiner = CreateWidget<USSInteractionWidget_Base>(GetWorld(), InteractionWidget_Class);
 	InteractionWidget->SetWidget(InteractionWidget_Poiner);
+
+	DeleteSecondMeshWhenItsNullptr();
 }
 
 void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInteract)
@@ -80,5 +87,11 @@ void ASSInteractableObject_Base::SetTextInTheUIDuringTheGame(AActor* Interactor,
 		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor)->GetCurrentHUD();
 		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(SendBeingTextToUI);
 	}
+}
+
+void ASSInteractableObject_Base::DeleteSecondMeshWhenItsNullptr()
+{
+	if (!SecondObjectCircled->GetStaticMesh())
+		SecondObjectCircled->DestroyComponent();
 }
 

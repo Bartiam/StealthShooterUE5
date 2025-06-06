@@ -8,9 +8,6 @@
 // Sets default values
 ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
 	// Create Piston and attch it to door frame
 	Piston = CreateDefaultSubobject<UStaticMeshComponent>(FName("Piston"));
 	Piston->SetupAttachment(DoorFrame);
@@ -21,11 +18,7 @@ ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 
 	// Attach Object Circled to Door
 	ObjectCircled->SetupAttachment(Piston);
-
-	// Create Door and attach it to Piston
-	Lock = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door"));
-	Lock->SetupAttachment(ObjectCircled);
-	Lock->SetCollisionProfileName(FName("NoCollision"));
+	SecondObjectCircled->SetupAttachment(Piston);
 }
 
 
@@ -40,7 +33,6 @@ void ASS_ImportantRoomsDoor_Base::PlayChangesWhenDoorStateChanged()
 	else
 	{
 		DoorLight->SetMaterial(1, OpenDoorMaterial);
-
 	}
 }
 
@@ -124,7 +116,7 @@ void ASS_ImportantRoomsDoor_Base::OpenLock(float Value)
 {
 	// Set new rotation for lock
 	FRotator NewLockRotation = FMath::Lerp(StartRotationLock, EndRotationLock, Value);
-	Lock->SetRelativeRotation(NewLockRotation);
+	SecondObjectCircled->SetRelativeRotation(NewLockRotation);
 
 	if (TimelineToRotateLock.GetPlaybackPosition() >= 2.f)
 		TimelineToOpenDoor.Play();	

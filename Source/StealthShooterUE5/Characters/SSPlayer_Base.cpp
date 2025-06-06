@@ -64,10 +64,7 @@ void ASSPlayer_Base::CheckJacketOnTheCharacter()
 {
 	// If Jacket mesh is empty, destroy Jacket
 	if (Jacket->MeshObject == nullptr)
-	{
 		Jacket->DestroyComponent();
-		return;
-	}
 }
 
 void ASSPlayer_Base::SearchingObjectsLinetrace()

@@ -29,10 +29,17 @@ private: // Variables
 
 	TObjectPtr<class USSInteractionWidget_Base> InteractionWidget_Poiner;
 	
+private: // Functions
+
+	void DeleteSecondMeshWhenItsNullptr();
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UStaticMeshComponent> ObjectCircled;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<class UStaticMeshComponent> SecondObjectCircled;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class UWidgetComponent> InteractionWidget;

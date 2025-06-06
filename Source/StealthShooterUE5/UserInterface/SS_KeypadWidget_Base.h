@@ -3,15 +3,24 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UserInterface/SS_CardReaderWidget_Base.h"
+#include "SS_CardReaderWidget_Base.h"
 #include "SS_KeypadWidget_Base.generated.h"
 
-/**
- * 
- */
+
+
 UCLASS()
 class STEALTHSHOOTERUE5_API USS_KeypadWidget_Base : public USS_CardReaderWidget_Base
 {
 	GENERATED_BODY()
 	
+protected: // Variables
+
+	UPROPERTY(Transient, meta = (BindWidget))
+	TObjectPtr<class USizeBox> SizeBoxToTextBlock;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+	TObjectPtr<class USizeBox> SizeBoxToEnterTextBox;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+	TObjectPtr<class UEditableTextBox> EnterTextBox;
 };

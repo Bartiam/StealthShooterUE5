@@ -34,4 +34,6 @@ public: // Functions
 
 	UFUNCTION()
 	void SetBrushColorToOpenDoor(const bool& bIsDoorLock);
+
+	virtual void LaunchActionsToKeypad();
 };
