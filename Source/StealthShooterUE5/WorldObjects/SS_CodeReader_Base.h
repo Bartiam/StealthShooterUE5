@@ -22,6 +22,8 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class UCameraComponent> CameraComponent;
 
+	FInputModeGameAndUI GameAndUI;
+
 protected: // Functions
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;

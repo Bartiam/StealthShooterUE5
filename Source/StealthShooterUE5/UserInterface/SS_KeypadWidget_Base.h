@@ -21,6 +21,6 @@ protected: // Variables
 	UPROPERTY(Transient, meta = (BindWidget))
 	TObjectPtr<class USizeBox> SizeBoxToEnterTextBox;
 
-	UPROPERTY(Transient, meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, Transient, meta = (BindWidget))
 	TObjectPtr<class UEditableTextBox> EnterTextBox;
 };
