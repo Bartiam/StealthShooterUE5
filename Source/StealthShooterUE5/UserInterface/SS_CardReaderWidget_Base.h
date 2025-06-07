@@ -24,6 +24,9 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FText TextWhenDoorLocked = FText();
 
+	UPROPERTY(Transient, meta = (BindWidgetAnim))
+	TObjectPtr<class UWidgetAnimation> AppearReaderMessage;
+
 private: // Variables
 
 	FLinearColor OpenDoorColor = FLinearColor(0.f, 1.f, 0.f ,0.25f);

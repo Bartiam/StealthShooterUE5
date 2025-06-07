@@ -14,12 +14,12 @@ void USS_CardReaderWidget_Base::SetBrushColorToOpenDoor(const bool& bIsDoorLock)
 {
 	if (!bIsDoorLock)
 	{
-		BackgroundBorder->SetBrushColor(OpenDoorColor);
+		TextBlock->SetColorAndOpacity(OpenDoorColor);
 		TextBlock->SetText(INVTEXT("Открыто"));
 	}
 	else
 	{
-		BackgroundBorder->SetBrushColor(LockDoorColor);
+		TextBlock->SetColorAndOpacity(LockDoorColor);
 		TextBlock->SetText(TextWhenDoorLocked);
 	}
 }
@@ -36,5 +36,5 @@ void USS_CardReaderWidget_Base::CodeEntryDeactivated()
 void USS_CardReaderWidget_Base::ErrorEntry()
 { 
 	TextBlock->SetText(ErrorMessage);
-
+	PlayAnimation(AppearReaderMessage);
 }

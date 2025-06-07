@@ -76,8 +76,7 @@ void ASS_CodeReader_Base::BindOnCodeEntred(FName EntredCode, AActor* Interactor)
 	if (!CurrentDoor->TryCodeToOpenDoor(EntredCode, Interactor))
 	{
 		// Noisy
-		
-		
+		DisplayWidget_Pointer->ErrorEntry();
 	}
 
 	CurrentPlayerController->SetControllerBaseMode();
