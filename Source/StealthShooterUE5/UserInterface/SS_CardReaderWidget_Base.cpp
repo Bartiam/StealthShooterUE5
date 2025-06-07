@@ -7,7 +7,6 @@
 #include "Components/TextBlock.h"
 
 #include "../WorldObjects/SS_Door_Base.h"
-#include "../WorldObjects/SS_DisplayReader_Base.h"
 
 
 
@@ -25,5 +24,11 @@ void USS_CardReaderWidget_Base::SetBrushColorToOpenDoor(const bool& bIsDoorLock)
 	}
 }
 
-void USS_CardReaderWidget_Base::LaunchActionsToKeypad()
+void USS_CardReaderWidget_Base::BindOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor)
+{}
+
+void USS_CardReaderWidget_Base::CodeEntryActivated()
+{}
+
+void USS_CardReaderWidget_Base::CodeEntryDeactivated() 
 {}

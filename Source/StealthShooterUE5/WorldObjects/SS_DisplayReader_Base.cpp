@@ -40,6 +40,7 @@ void ASS_DisplayReader_Base::BeginPlay()
 	}
 
 	DisplayWidget_Component->SetWidget(DisplayWidget_Pointer);
+	DisplayWidget_Pointer->OwnerCodeReader = this;
 }
 
 

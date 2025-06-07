@@ -10,12 +10,19 @@
 
 
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCodeEntred, FPickUpItemInfo, ItemInfo, AActor*, Interactor);
+
+
+
 UCLASS()
 class STEALTHSHOOTERUE5_API ASS_DisplayReader_Base : public ASSInteractableObject_Base
 {
 	GENERATED_BODY()
 	
 public: // Variables
+
+	UPROPERTY(BlueprintAssignable)
+	FOnCodeEntred OnCodeEntred;
 
 	TObjectPtr<class ASS_Door_Base> CurrentDoor;
 
@@ -28,6 +35,8 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class UWidgetComponent> DisplayWidget_Component;
 
+	TObjectPtr<class USS_CardReaderWidget_Base> DisplayWidget_Pointer;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;
@@ -38,9 +47,5 @@ private: // Functions
 
 	UFUNCTION()
 	void PlayChangesWhenDoorStateChanged();
-
-private: // Variables
-
-	TObjectPtr<class USS_CardReaderWidget_Base> DisplayWidget_Pointer;
 
 };

@@ -30,10 +30,19 @@ private: // Variables
 
 	FLinearColor LockDoorColor = FLinearColor(1.f, 0.f, 0.f, 0.25f);
 
+public: // Variables
+
+	TObjectPtr<class ASS_DisplayReader_Base> OwnerCodeReader;
+
 public: // Functions
+
+	UFUNCTION()
+	virtual void BindOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor);
 
 	UFUNCTION()
 	void SetBrushColorToOpenDoor(const bool& bIsDoorLock);
 
-	virtual void LaunchActionsToKeypad();
+	virtual void CodeEntryActivated();
+
+	virtual void CodeEntryDeactivated();
 };

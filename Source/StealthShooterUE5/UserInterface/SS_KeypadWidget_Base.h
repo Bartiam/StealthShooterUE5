@@ -12,7 +12,7 @@ UCLASS()
 class STEALTHSHOOTERUE5_API USS_KeypadWidget_Base : public USS_CardReaderWidget_Base
 {
 	GENERATED_BODY()
-	
+
 protected: // Variables
 
 	UPROPERTY(Transient, meta = (BindWidget))
@@ -23,4 +23,16 @@ protected: // Variables
 
 	UPROPERTY(BlueprintReadWrite, Transient, meta = (BindWidget))
 	TObjectPtr<class UEditableTextBox> EnterTextBox;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+	TObjectPtr<class UVerticalBox> ButtonVerticalBox;
+
+public: // Functions
+
+	UFUNCTION(BlueprintCallable)
+	void CallOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor);
+
+	virtual void CodeEntryActivated() override;
+
+	virtual void CodeEntryDeactivated() override;
 };

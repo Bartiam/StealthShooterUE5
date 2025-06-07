@@ -47,6 +47,10 @@ private: // Variables
 
 	TObjectPtr<class USS_AbilitySystemComponent> ASC;
 
+	FInputModeGameAndUI GameAndUIMode;
+
+	FInputModeGameOnly GameOnlyMode;
+
 private: // Functions
 
 	UFUNCTION()
@@ -65,6 +69,12 @@ private: // Functions
 
 public: // Functions
 
+	ASSPlayerController_Base();
+
 	UFUNCTION(BlueprintCallable)
 	class ASSHUD_Base* GetCurrentHUD();
+
+	void SetCameraTargetForWorldWidgets(AActor* CameraTarget);
+
+	void SetCameraTargetToPlayer();
 };

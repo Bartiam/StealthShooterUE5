@@ -6,8 +6,12 @@
 #include "../Controllers/SSPlayerController_Base.h"
 #include "../Core_C/SSHUD_Base.h"
 #include "../UserInterface/SS_DuringTheGame_Base.h"
+#include "../UserInterface/SS_CardReaderWidget_Base.h"
+#include "Components/WidgetComponent.h"
 
 #include "Camera/CameraComponent.h"
+
+
 
 ASS_CodeReader_Base::ASS_CodeReader_Base()
 {
@@ -15,20 +19,57 @@ ASS_CodeReader_Base::ASS_CodeReader_Base()
 	CameraComponent->SetupAttachment(RootComponent);
 }
 
+
+
 void ASS_CodeReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
 	if (CurrentDoor->GetIsDoorLock())
 	{
-		auto CurrentPlayerController = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor);
-		CurrentPlayerController->SetViewTargetWithBlend(this, 1.f);
-		CurrentPlayerController->SetShowMouseCursor(true);
-		CurrentPlayerController->SetInputMode(GameAndUI);
-
-		if (auto CurrentHUD = Cast<ASSHUD_Base>(CurrentPlayerController->GetHUD()))
-			CurrentHUD->GetUIDuringTheGame()->RemoveFromParent();
+		CurrentPlayerController = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor);
+		CurrentPlayerController->SetCameraTargetForWorldWidgets(this);
+		SetCodeReaderEnteryMode();
+		OnCodeEntred.AddDynamic(this, &ThisClass::BindOnCodeEntred);
 	}
 	else
 	{
 		CurrentDoor->InteractableRelease_Implementation(Interactor);
 	}
+}
+
+
+
+void ASS_CodeReader_Base::SetCodeReaderEnteryMode()
+{
+	ObjectCircled->SetCollisionProfileName(FName("NoCollision"));
+	DisplayWidget_Component->SetCollisionProfileName("BlockAll");
+
+	DisplayWidget_Component->SetManuallyRedraw(false);
+	DisplayWidget_Component->SetRedrawTime(0.f);
+
+	DisplayWidget_Pointer->CodeEntryActivated();
+}
+
+
+
+void ASS_CodeReader_Base::SetCodeReaderStaticMode()
+{
+	ObjectCircled->SetCollisionProfileName(FName("BlockAll"));
+	DisplayWidget_Component->SetCollisionProfileName("NoCollision");
+
+	DisplayWidget_Component->SetManuallyRedraw(true);
+	DisplayWidget_Component->SetRedrawTime(1.f);
+
+	DisplayWidget_Pointer->CodeEntryDeactivated();
+}
+
+
+
+void ASS_CodeReader_Base::BindOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor)
+{
+	CurrentDoor->BindOnGetKeyToOpenDoor(ItemInfo, Interactor);
+	CurrentPlayerController->SetCameraTargetToPlayer();
+	SetCodeReaderStaticMode();
+	
+
+	OnCodeEntred.RemoveAll(this);
 }

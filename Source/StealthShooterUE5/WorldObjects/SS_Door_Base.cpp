@@ -120,9 +120,5 @@ void ASS_Door_Base::BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Int
 			(ReceivedKeyPermission.CardType == ESSCardType::Master_Card && DoorKeyPermission.CardType != ESSCardType::None) ?
 			SetIsDoorLock(false), InteractableRelease_Implementation(Interactor) : SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
 		break;
-	case ESSItemAccessType::Digital_Code:
-		ReceivedKeyPermission.DigitalCode == DoorKeyPermission.DigitalCode ? SetIsDoorLock(false), InteractableRelease_Implementation(Interactor) :
-			SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
-		break;
 	}
 }

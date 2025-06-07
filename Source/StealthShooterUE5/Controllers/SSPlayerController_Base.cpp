@@ -14,6 +14,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 
+
+
 void ASSPlayerController_Base::BeginPlay()
 {
 	Super::BeginPlay();
@@ -29,6 +31,8 @@ void ASSPlayerController_Base::BeginPlay()
 	if (IsValid(GetHUD()))
 		CurrentHUD = Cast<ASSHUD_Base>(GetHUD());
 }
+
+
 
 void ASSPlayerController_Base::SetupInputComponent()
 {
@@ -58,6 +62,8 @@ void ASSPlayerController_Base::SetupInputComponent()
 	}
 }
 
+
+
 void ASSPlayerController_Base::LocomotionCharacter(const FInputActionValue& Value)
 {
 	FVector2D MoveVector = Value.Get<FVector2D>();
@@ -78,6 +84,8 @@ void ASSPlayerController_Base::LocomotionCharacter(const FInputActionValue& Valu
 	}
 }
 
+
+
 void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
 {
 	FVector2D LookVector = Value.Get<FVector2D>();
@@ -86,11 +94,15 @@ void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
 	AddPitchInput(LookVector.Y);
 }
 
+
+
 void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID InputID)
 { ASC->PressInputID(static_cast<int32>(InputID)); }
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID InputID)
 { ASC->ReleaseInputID(static_cast<int32>(InputID)); }
+
+
 
 void ASSPlayerController_Base::OnPossess(APawn* NewPawn)
 {
@@ -102,5 +114,33 @@ void ASSPlayerController_Base::OnPossess(APawn* NewPawn)
 		ASC = Cast<USS_AbilitySystemComponent>(CurrentCharacter->GetAbilitySystemComponent());
 }
 
+
+
 ASSHUD_Base* ASSPlayerController_Base::GetCurrentHUD()
 { return CurrentHUD; }
+
+
+
+void ASSPlayerController_Base::SetCameraTargetForWorldWidgets(AActor* CameraTarget)
+{
+	SetViewTargetWithBlend(CameraTarget, 1.f);
+	SetShowMouseCursor(true);
+	SetInputMode(GameAndUIMode);
+}
+
+
+
+void ASSPlayerController_Base::SetCameraTargetToPlayer()
+{
+	SetViewTargetWithBlend(GetPawn(), 1.f);
+	SetShowMouseCursor(false);
+	SetInputMode(GameOnlyMode);
+}
+
+
+
+ASSPlayerController_Base::ASSPlayerController_Base()
+{
+	bEnableMouseOverEvents = true;
+	bEnableClickEvents = true;
+}

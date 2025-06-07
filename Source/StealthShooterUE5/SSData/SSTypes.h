@@ -54,7 +54,6 @@ enum class ESSItemAccessType : uint8
 	None UMETA(DisplayName = "None"),
 	Physical_Key UMETA(DisplayName = "Physical Key"),
 	Card_Key UMETA(DisplayName = "Card Key"),
-	Digital_Code UMETA(DisplayName = "Digital Code"),
 };
 
 USTRUCT(BlueprintType)
@@ -64,9 +63,6 @@ struct FKeyPermission
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ESSItemAccessType ItemAccessType = ESSItemAccessType::None;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FName DigitalCode = FName("Code to open door");
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ESSCardType CardType = ESSCardType::None;

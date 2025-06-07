@@ -12,7 +12,7 @@ UCLASS()
 class STEALTHSHOOTERUE5_API ASS_CodeReader_Base : public ASS_DisplayReader_Base
 {
 	GENERATED_BODY()
-	
+
 public: // Functions
 
 	ASS_CodeReader_Base();
@@ -22,9 +22,20 @@ protected: // Variables
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class UCameraComponent> CameraComponent;
 
-	FInputModeGameAndUI GameAndUI;
-
 protected: // Functions
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
+
+private: // Variables
+
+	TObjectPtr<ASSPlayerController_Base> CurrentPlayerController;
+
+private: // Functions
+
+	void SetCodeReaderEnteryMode();
+
+	void SetCodeReaderStaticMode();
+
+	UFUNCTION()
+	void BindOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor);
 };

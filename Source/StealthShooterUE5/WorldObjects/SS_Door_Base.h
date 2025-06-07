@@ -34,6 +34,9 @@ public: // Functions
 
 	void OpenAndBindToPlayerInventory(AActor* Interactor);
 
+	UFUNCTION()
+	void BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor);
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -65,9 +68,6 @@ protected: // Functions
 	virtual void OpenDoor(float Value);
 
 	void BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline);
-
-	UFUNCTION()
-	void BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor);
 
 private: // Variables
 
