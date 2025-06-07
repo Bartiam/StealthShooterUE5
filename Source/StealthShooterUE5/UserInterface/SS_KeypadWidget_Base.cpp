@@ -20,7 +20,7 @@ void USS_KeypadWidget_Base::CallOnCodeEntred(FName EntredCode, AActor* Interacto
 
 void USS_KeypadWidget_Base::CodeEntryActivated()
 {
-	SizeBoxToTextBlock->SetVisibility(ESlateVisibility::Hidden);
+	SizeBoxToTextBlock->SetRenderOpacity(0.f);
 	SizeBoxToEnterTextBox->SetVisibility(ESlateVisibility::Visible);
 	ButtonVerticalBox->SetVisibility(ESlateVisibility::Visible);
 }
@@ -29,7 +29,7 @@ void USS_KeypadWidget_Base::CodeEntryActivated()
 
 void USS_KeypadWidget_Base::CodeEntryDeactivated()
 {
-	SizeBoxToTextBlock->SetVisibility(ESlateVisibility::Visible);
+	SizeBoxToTextBlock->SetRenderOpacity(1.f);
 	SizeBoxToEnterTextBox->SetVisibility(ESlateVisibility::Hidden);
 	ButtonVerticalBox->SetVisibility(ESlateVisibility::Hidden);
 	EnterTextBox->SetText(FText());

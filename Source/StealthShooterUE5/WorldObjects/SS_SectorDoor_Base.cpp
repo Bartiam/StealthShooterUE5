@@ -62,5 +62,6 @@ bool ASS_SectorDoor_Base::TryCodeToOpenDoor(FName EntredCode, AActor* Interactor
 		return true;
 	}
 
+	SetTextInTheUIDuringTheGame(Interactor, MessageWhenEntredIncorrectKey);
 	return false;
 }

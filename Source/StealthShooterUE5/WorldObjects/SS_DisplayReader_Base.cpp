@@ -35,7 +35,10 @@ void ASS_DisplayReader_Base::BeginPlay()
 	if (GetParentActor())
 	{
 		CurrentDoor = Cast<ASS_Door_Base>(GetParentActor());
-		PlayChangesWhenDoorStateChanged();
+
+		DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
+		DisplayWidget_Component->RequestRedraw();
+
 		CurrentDoor->OnDoorStateChanged.AddDynamic(this, &ThisClass::PlayChangesWhenDoorStateChanged);
 	}
 
@@ -50,6 +53,8 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 	if (CurrentDoor->GetIsDoorLock())
 	{
 		CurrentDoor->OpenAndBindToPlayerInventory(Interactor);
+		DisplayWidget_Component->SetManuallyRedraw(false);
+		DisplayWidget_Component->SetRedrawTime(0.f);
 	}
 	else
 	{
@@ -57,8 +62,38 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 	}
 }
 
-void ASS_DisplayReader_Base::PlayChangesWhenDoorStateChanged()
+
+
+void ASS_DisplayReader_Base::PlayActionsWhenIncorrentTypeKey()
 {
+	DisplayWidget_Component->SetManuallyRedraw(true);
+	DisplayWidget_Component->SetRedrawTime(1.f);
+
 	DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
 	DisplayWidget_Component->RequestRedraw();
+}
+
+
+
+void ASS_DisplayReader_Base::PlayChangesWhenDoorStateChanged()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString(this->GetName()));
+
+	if (CurrentDoor->GetIsDoorLock())
+	{
+		// Noisy
+		DisplayWidget_Pointer->ShowMessageEntry();
+
+		FTimerHandle TimerHandle;
+		GetWorldTimerManager().SetTimer(TimerHandle, [this]()
+			{
+				PlayActionsWhenIncorrentTypeKey();
+			},
+			1.5f,
+			false);
+	}
+	else
+	{
+		DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
+	}
 }

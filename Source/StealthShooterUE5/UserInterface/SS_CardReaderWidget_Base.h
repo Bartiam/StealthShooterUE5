@@ -51,5 +51,5 @@ public: // Functions
 
 	virtual void CodeEntryDeactivated();
 
-	void ErrorEntry();
+	void ShowMessageEntry();
 };

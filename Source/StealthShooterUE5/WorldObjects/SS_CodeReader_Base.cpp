@@ -8,7 +8,6 @@
 #include "../UserInterface/SS_DuringTheGame_Base.h"
 #include "../UserInterface/SS_CardReaderWidget_Base.h"
 #include "Components/WidgetComponent.h"
-
 #include "Camera/CameraComponent.h"
 
 
@@ -17,6 +16,15 @@ ASS_CodeReader_Base::ASS_CodeReader_Base()
 {
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(FName("Camera Component"));
 	CameraComponent->SetupAttachment(RootComponent);
+}
+
+
+
+void ASS_CodeReader_Base::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CurrentDoor->OnDoorStateChanged.RemoveAll(this);
 }
 
 
@@ -76,7 +84,15 @@ void ASS_CodeReader_Base::BindOnCodeEntred(FName EntredCode, AActor* Interactor)
 	if (!CurrentDoor->TryCodeToOpenDoor(EntredCode, Interactor))
 	{
 		// Noisy
-		DisplayWidget_Pointer->ErrorEntry();
+		DisplayWidget_Pointer->ShowMessageEntry();
+
+		FTimerHandle TimerHandle;
+		GetWorldTimerManager().SetTimer(TimerHandle, [this]()
+			{
+				PlayActionsWhenIncorrentTypeKey();
+			},
+			1.5f,
+			false);
 	}
 
 	CurrentPlayerController->SetControllerBaseMode();

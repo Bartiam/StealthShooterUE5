@@ -33,7 +33,7 @@ void USS_CardReaderWidget_Base::CodeEntryActivated()
 void USS_CardReaderWidget_Base::CodeEntryDeactivated() 
 {}
 
-void USS_CardReaderWidget_Base::ErrorEntry()
+void USS_CardReaderWidget_Base::ShowMessageEntry()
 { 
 	TextBlock->SetText(ErrorMessage);
 	PlayAnimation(AppearReaderMessage);

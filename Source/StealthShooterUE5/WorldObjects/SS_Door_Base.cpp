@@ -116,7 +116,8 @@ void ASS_Door_Base::BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Int
 	case ESSItemAccessType::Card_Key:
 		ReceivedKeyPermission.CardType == DoorKeyPermission.CardType ||
 			(ReceivedKeyPermission.CardType == ESSCardType::Master_Card && DoorKeyPermission.CardType != ESSCardType::None) ?
-			SetIsDoorLock(false), InteractableRelease_Implementation(Interactor) : SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
+			SetIsDoorLock(false), InteractableRelease_Implementation(Interactor) : SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey),
+			SetIsDoorLock(true);
 		break;
 	}
 }

@@ -46,4 +46,6 @@ protected: // Functions
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
+	void PlayActionsWhenIncorrentTypeKey();
+
 };

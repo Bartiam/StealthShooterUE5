@@ -24,6 +24,8 @@ protected: // Variables
 
 protected: // Functions
 
+	virtual void BeginPlay() override;
+
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
 private: // Variables
