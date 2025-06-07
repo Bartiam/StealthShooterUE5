@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SS_CodeReader_Base.h"
@@ -26,8 +26,10 @@ void ASS_CodeReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 	if (CurrentDoor->GetIsDoorLock())
 	{
 		CurrentPlayerController = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor);
-		CurrentPlayerController->SetCameraTargetForWorldWidgets(this);
-		SetCodeReaderEnteryMode();
+		CurrentPlayerController->SetControllerCodeReaderMode(this);
+
+		SetCodeReaderEntryMode();
+
 		OnCodeEntred.AddDynamic(this, &ThisClass::BindOnCodeEntred);
 	}
 	else
@@ -38,7 +40,7 @@ void ASS_CodeReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 
 
 
-void ASS_CodeReader_Base::SetCodeReaderEnteryMode()
+void ASS_CodeReader_Base::SetCodeReaderEntryMode()
 {
 	ObjectCircled->SetCollisionProfileName(FName("NoCollision"));
 	DisplayWidget_Component->SetCollisionProfileName("BlockAll");
@@ -46,7 +48,15 @@ void ASS_CodeReader_Base::SetCodeReaderEnteryMode()
 	DisplayWidget_Component->SetManuallyRedraw(false);
 	DisplayWidget_Component->SetRedrawTime(0.f);
 
-	DisplayWidget_Pointer->CodeEntryActivated();
+
+	FTimerHandle TimerHandle;
+	GetWorldTimerManager().SetTimer(TimerHandle, [this]()
+		{
+			DisplayWidget_Pointer->CodeEntryActivated();
+		}, 
+		1.f,
+		false);
+
 }
 
 
@@ -56,20 +66,21 @@ void ASS_CodeReader_Base::SetCodeReaderStaticMode()
 	ObjectCircled->SetCollisionProfileName(FName("BlockAll"));
 	DisplayWidget_Component->SetCollisionProfileName("NoCollision");
 
-	DisplayWidget_Component->SetManuallyRedraw(true);
-	DisplayWidget_Component->SetRedrawTime(1.f);
-
 	DisplayWidget_Pointer->CodeEntryDeactivated();
 }
 
 
 
-void ASS_CodeReader_Base::BindOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor)
+void ASS_CodeReader_Base::BindOnCodeEntred(FName EntredCode, AActor* Interactor)
 {
-	CurrentDoor->BindOnGetKeyToOpenDoor(ItemInfo, Interactor);
-	CurrentPlayerController->SetCameraTargetToPlayer();
-	SetCodeReaderStaticMode();
-	
+	if (!CurrentDoor->TryCodeToOpenDoor(EntredCode, Interactor))
+	{
+		// Noisy
+		
+		
+	}
 
+	CurrentPlayerController->SetControllerBaseMode();
+	SetCodeReaderStaticMode();
 	OnCodeEntred.RemoveAll(this);
 }

@@ -1,13 +1,17 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SS_SectorDoor_Base.h"
+
+
 
 ASS_SectorDoor_Base::ASS_SectorDoor_Base()
 {
 	ObjectCircled->SetupAttachment(DoorFrame);
 	SecondObjectCircled->SetupAttachment(DoorFrame);
 }
+
+
 
 void ASS_SectorDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
@@ -34,6 +38,8 @@ void ASS_SectorDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 	}
 }
 
+
+
 void ASS_SectorDoor_Base::OpenDoor(float Value)
 {
 	// Set new location for left door
@@ -43,4 +49,18 @@ void ASS_SectorDoor_Base::OpenDoor(float Value)
 	// Set new location for right door
 	FVector NewLocationRightDoor = FMath::Lerp(LocationToLockDoor, LocationToOpenDoor, Value * (-1));
 	ObjectCircled->SetRelativeLocation(NewLocationRightDoor);
+}
+
+
+
+bool ASS_SectorDoor_Base::TryCodeToOpenDoor(FName EntredCode, AActor* Interactor)
+{
+	if (EntredCode == CodeToOpenDoor)
+	{
+		SetIsDoorLock(false);
+		InteractableRelease_Implementation(Interactor);
+		return true;
+	}
+
+	return false;
 }

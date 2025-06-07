@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SSPlayerController_Base.h"
@@ -30,6 +30,8 @@ void ASSPlayerController_Base::BeginPlay()
 
 	if (IsValid(GetHUD()))
 		CurrentHUD = Cast<ASSHUD_Base>(GetHUD());
+
+	SetControllerBaseMode();
 }
 
 
@@ -121,7 +123,7 @@ ASSHUD_Base* ASSPlayerController_Base::GetCurrentHUD()
 
 
 
-void ASSPlayerController_Base::SetCameraTargetForWorldWidgets(AActor* CameraTarget)
+void ASSPlayerController_Base::SetControllerCodeReaderMode(AActor* CameraTarget)
 {
 	SetViewTargetWithBlend(CameraTarget, 1.f);
 	SetShowMouseCursor(true);
@@ -130,7 +132,7 @@ void ASSPlayerController_Base::SetCameraTargetForWorldWidgets(AActor* CameraTarg
 
 
 
-void ASSPlayerController_Base::SetCameraTargetToPlayer()
+void ASSPlayerController_Base::SetControllerBaseMode()
 {
 	SetViewTargetWithBlend(GetPawn(), 1.f);
 	SetShowMouseCursor(false);

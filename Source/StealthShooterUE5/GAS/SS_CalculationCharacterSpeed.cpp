@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SS_CalculationCharacterSpeed.h"
@@ -30,6 +30,8 @@ static const FSpeedStatics& SpeedStatics()
 	return SpeedStatic;
 }
 
+
+
 // Add all the capthuredef definitions to the list of relevant attributes to capture
 USS_CalculationCharacterSpeed::USS_CalculationCharacterSpeed()
 {
@@ -38,6 +40,8 @@ USS_CalculationCharacterSpeed::USS_CalculationCharacterSpeed()
 
 
 }
+
+
 
 // Do the speed calculations and modify speed accordingly
 void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams,

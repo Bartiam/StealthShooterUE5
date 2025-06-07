@@ -37,6 +37,8 @@ public: // Functions
 	UFUNCTION()
 	void BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor);
 
+	virtual bool TryCodeToOpenDoor(FName EntredCode, AActor* Interactor);
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

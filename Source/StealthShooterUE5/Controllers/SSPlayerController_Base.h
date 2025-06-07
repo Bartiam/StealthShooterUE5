@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -74,7 +74,7 @@ public: // Functions
 	UFUNCTION(BlueprintCallable)
 	class ASSHUD_Base* GetCurrentHUD();
 
-	void SetCameraTargetForWorldWidgets(AActor* CameraTarget);
+	void SetControllerCodeReaderMode(AActor* CameraTarget);
 
-	void SetCameraTargetToPlayer();
+	void SetControllerBaseMode();
 };

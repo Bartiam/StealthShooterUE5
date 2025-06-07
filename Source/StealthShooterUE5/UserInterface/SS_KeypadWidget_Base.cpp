@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SS_KeypadWidget_Base.h"
@@ -11,9 +11,9 @@
 
 
 
-void USS_KeypadWidget_Base::CallOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor)
+void USS_KeypadWidget_Base::CallOnCodeEntred(FName EntredCode, AActor* Interactor)
 {
-	OwnerCodeReader->OnCodeEntred.Broadcast(ItemInfo, Interactor);
+	OwnerCodeReader->OnCodeEntred.Broadcast(EntredCode, Interactor);
 }
 
 
@@ -32,4 +32,5 @@ void USS_KeypadWidget_Base::CodeEntryDeactivated()
 	SizeBoxToTextBlock->SetVisibility(ESlateVisibility::Visible);
 	SizeBoxToEnterTextBox->SetVisibility(ESlateVisibility::Hidden);
 	ButtonVerticalBox->SetVisibility(ESlateVisibility::Hidden);
+	EnterTextBox->SetText(FText());
 }

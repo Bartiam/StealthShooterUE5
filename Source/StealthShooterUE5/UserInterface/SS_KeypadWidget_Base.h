@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -30,7 +30,7 @@ protected: // Variables
 public: // Functions
 
 	UFUNCTION(BlueprintCallable)
-	void CallOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor);
+	void CallOnCodeEntred(FName EntredCode, AActor* Interactor);
 
 	virtual void CodeEntryActivated() override;
 

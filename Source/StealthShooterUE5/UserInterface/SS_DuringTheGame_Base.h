@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -20,6 +20,9 @@ protected: // Variables
 
 	UPROPERTY(Transient, meta = (BindWidgetAnim))
 	TObjectPtr<class UWidgetAnimation> AppearScreenMessage;
+
+	UPROPERTY(Transient, meta = (BindWidget))
+	TObjectPtr<class UImage> PointImage;
 
 public: // Functions
 

@@ -59,9 +59,7 @@ void ASS_Door_Base::Tick(float DeltaTime)
 
 
 void ASS_Door_Base::OpenDoor(float Value) 
-{
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("WORKED!"));
-}
+{}
 
 
 
@@ -122,3 +120,6 @@ void ASS_Door_Base::BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Int
 		break;
 	}
 }
+
+bool ASS_Door_Base::TryCodeToOpenDoor(FName EntredCode, AActor* Interactor)
+{ return false; }

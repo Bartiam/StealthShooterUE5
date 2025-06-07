@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -10,7 +10,7 @@
 
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCodeEntred, FPickUpItemInfo, ItemInfo, AActor*, Interactor);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCodeEntred, FName, EntredCode, AActor*, Interactor);
 
 
 
@@ -25,6 +25,9 @@ public: // Variables
 	FOnCodeEntred OnCodeEntred;
 
 	TObjectPtr<class ASS_Door_Base> CurrentDoor;
+
+	UFUNCTION()
+	void PlayChangesWhenDoorStateChanged();
 
 public: // Functions
 
@@ -42,10 +45,5 @@ protected: // Functions
 	virtual void BeginPlay() override;
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
-
-private: // Functions 
-
-	UFUNCTION()
-	void PlayChangesWhenDoorStateChanged();
 
 };

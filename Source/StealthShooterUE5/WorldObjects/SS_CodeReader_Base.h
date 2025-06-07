@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -32,10 +32,10 @@ private: // Variables
 
 private: // Functions
 
-	void SetCodeReaderEnteryMode();
+	void SetCodeReaderEntryMode();
 
 	void SetCodeReaderStaticMode();
 
 	UFUNCTION()
-	void BindOnCodeEntred(FPickUpItemInfo ItemInfo, AActor* Interactor);
+	void BindOnCodeEntred(FName EntredCode, AActor* Interactor);
 };

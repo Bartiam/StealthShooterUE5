@@ -30,6 +30,8 @@ private: // Variables
 
 	FLinearColor LockDoorColor = FLinearColor(1.f, 0.f, 0.f, 0.25f);
 
+	FText ErrorMessage = INVTEXT("ERROR!");
+
 public: // Variables
 
 	TObjectPtr<class ASS_DisplayReader_Base> OwnerCodeReader;
@@ -45,4 +47,6 @@ public: // Functions
 	virtual void CodeEntryActivated();
 
 	virtual void CodeEntryDeactivated();
+
+	void ErrorEntry();
 };

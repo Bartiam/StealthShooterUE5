@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -18,6 +18,8 @@ public: // Functions
 	ASS_SectorDoor_Base();
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
+
+	virtual bool TryCodeToOpenDoor(FName EntredCode, AActor* Interactor) override;
 	
 protected: // Variables
 
@@ -26,6 +28,12 @@ protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	FVector LocationToLockDoor = FVector();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	FName CodeToOpenDoor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	FText MessageWhenEntredIncorrectKey = INVTEXT("Не верный пароль!");
 
 private: // Functions
 

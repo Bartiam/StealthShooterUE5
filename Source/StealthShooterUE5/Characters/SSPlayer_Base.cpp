@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "SSPlayer_Base.h"
@@ -85,7 +85,7 @@ void ASSPlayer_Base::SearchingObjectsLinetrace()
 	{
 		// Saving the link to the actor
 		HitActorTrace = HitResult.GetActor();
-		// Call funñtion from interface with true
+		// Call fun tion from interface with true
 		IInteractable::Execute_CanReceiveTrace(HitActorTrace, true);
 	}
 	else if (HitResult.GetActor() != HitActorTrace || 
