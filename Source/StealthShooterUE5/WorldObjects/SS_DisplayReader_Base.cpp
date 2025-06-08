@@ -66,6 +66,7 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 
 void ASS_DisplayReader_Base::PlayActionsWhenIncorrentTypeKey()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString(this->GetName()));
 	DisplayWidget_Component->SetManuallyRedraw(true);
 	DisplayWidget_Component->SetRedrawTime(1.f);
 
@@ -77,7 +78,7 @@ void ASS_DisplayReader_Base::PlayActionsWhenIncorrentTypeKey()
 
 void ASS_DisplayReader_Base::PlayChangesWhenDoorStateChanged()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString(this->GetName()));
+	
 
 	if (CurrentDoor->GetIsDoorLock())
 	{
@@ -95,5 +96,6 @@ void ASS_DisplayReader_Base::PlayChangesWhenDoorStateChanged()
 	else
 	{
 		DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
+		CurrentDoor->OnDoorStateChanged.RemoveAll(this);
 	}
 }
