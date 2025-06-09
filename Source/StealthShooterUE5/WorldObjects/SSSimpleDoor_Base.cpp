@@ -35,6 +35,7 @@ void ASSSimpleDoor_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interac
 	}
 	else
 	{
+		SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
 		SetIsDoorLock(true);
 	}
 }

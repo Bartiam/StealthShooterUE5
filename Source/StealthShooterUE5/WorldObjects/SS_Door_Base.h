@@ -56,6 +56,8 @@ protected: // Variables
 	FTimeline TimelineToOpenDoor;
 
 	// Texts for UI
+	FText TextWhenSelectedIncorrectKey = INVTEXT("Это не подойдёт!");
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	FText TextWhenDoorIsLocked = FText();
 
@@ -68,8 +70,5 @@ protected: // Functions
 	virtual void OpenDoor(float Value);
 
 	void BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline);
-
-private: // Variables
-
-	FText TextWhenSelectedIncorrectKey = INVTEXT("Это не подойдёт!");
+	
 };

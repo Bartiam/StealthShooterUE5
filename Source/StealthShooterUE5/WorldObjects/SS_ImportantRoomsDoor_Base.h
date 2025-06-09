@@ -24,6 +24,8 @@ public:	// Functions
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
+	void TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor) override;
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)

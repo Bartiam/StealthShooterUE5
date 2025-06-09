@@ -23,6 +23,25 @@ ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 
 
 
+void ASS_ImportantRoomsDoor_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
+{
+	Super::TryToOpenDoor(ItemInfo, Interactor);
+
+	if (ItemInfo.KeyPepmission.CardType == DoorKeyPermission.CardType)
+	{
+		SetIsDoorLock(false);
+		// Opening door with a key sound
+		InteractableRelease_Implementation(Interactor);
+	}
+	else
+	{
+		SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
+		SetIsDoorLock(true);
+	}
+}
+
+
+
 void ASS_ImportantRoomsDoor_Base::PlayChangesWhenDoorStateChanged()
 {
 	if (bIsDoorLock)
@@ -118,7 +137,7 @@ void ASS_ImportantRoomsDoor_Base::OpenLock(float Value)
 	FRotator NewLockRotation = FMath::Lerp(StartRotationLock, EndRotationLock, Value);
 	SecondObjectCircled->SetRelativeRotation(NewLockRotation);
 
-	if (TimelineToRotateLock.GetPlaybackPosition() >= 2.f)
+	if (TimelineToRotateLock.GetPlaybackPosition() >= 2.5f)
 		TimelineToOpenDoor.Play();	
 }
 
