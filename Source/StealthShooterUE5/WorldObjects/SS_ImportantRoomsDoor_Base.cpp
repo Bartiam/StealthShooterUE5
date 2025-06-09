@@ -27,10 +27,11 @@ void ASS_ImportantRoomsDoor_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor
 {
 	Super::TryToOpenDoor(ItemInfo, Interactor);
 
-	if (ItemInfo.KeyPepmission.CardType == DoorKeyPermission.CardType)
+	if (ItemInfo.KeyPepmission.CardType == DoorKeyPermission.CardType || ItemInfo.KeyPepmission.CardType == ESSCardType::Master_Card)
 	{
 		SetIsDoorLock(false);
 		// Opening door with a key sound
+		PlayChangesWhenDoorStateChanged();
 		InteractableRelease_Implementation(Interactor);
 	}
 	else
@@ -47,20 +48,11 @@ void ASS_ImportantRoomsDoor_Base::PlayChangesWhenDoorStateChanged()
 	if (bIsDoorLock)
 	{
 		DoorLight->SetMaterial(1, LockDoorMaterial);
-
 	}
 	else
 	{
 		DoorLight->SetMaterial(1, OpenDoorMaterial);
 	}
-}
-
-
-
-void ASS_ImportantRoomsDoor_Base::SetIsDoorLock(const bool& NewValue)
-{
-	Super::SetIsDoorLock(NewValue);
-	PlayChangesWhenDoorStateChanged();
 }
 
 
@@ -77,6 +69,9 @@ void ASS_ImportantRoomsDoor_Base::BeginPlay()
 	}
 
 	PlayChangesWhenDoorStateChanged();
+
+	TArray<AActor*> ActorSSSSSS;
+	GetAllChildActors(ActorSSSSSS);
 }
 
 

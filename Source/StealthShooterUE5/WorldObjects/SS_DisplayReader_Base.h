@@ -27,13 +27,16 @@ public: // Variables
 	TObjectPtr<class ASS_Door_Base> CurrentDoor;
 
 	UFUNCTION()
-	void PlayActionsWhenTryedDoorOpen();
+	virtual void PlayActionsWhenTryedDoorOpen();
 
 public: // Functions
 
 	ASS_DisplayReader_Base();
 
 protected: // Variables
+
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<ASS_DisplayReader_Base> OppositeReader;
 
 	FTimerHandle TimerToIncorrectKey;
 
@@ -48,6 +51,6 @@ protected: // Functions
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
-	void SetSpecificationsToReader();
+	void SetCurrentSpecificationsToReader();
 
 };

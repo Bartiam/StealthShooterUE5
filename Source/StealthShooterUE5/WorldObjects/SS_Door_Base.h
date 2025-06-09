@@ -70,5 +70,4 @@ protected: // Functions
 	virtual void OpenDoor(float Value);
 
 	void BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline);
-	
 };

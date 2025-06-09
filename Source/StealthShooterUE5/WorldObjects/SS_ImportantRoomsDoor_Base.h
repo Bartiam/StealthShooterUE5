@@ -17,14 +17,14 @@ class STEALTHSHOOTERUE5_API ASS_ImportantRoomsDoor_Base : public ASS_Door_Base
 	GENERATED_BODY()
 	
 public:	// Functions
-	
-	virtual void SetIsDoorLock(const bool& NewValue) override;
 
 	ASS_ImportantRoomsDoor_Base();
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
 	void TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor) override;
+
+	void PlayChangesWhenDoorStateChanged();
 
 protected: // Variables
 
@@ -67,8 +67,6 @@ private: // Variables
 	FTimeline TimelineToRotateLock;
 
 private: // Functions
-
-	void PlayChangesWhenDoorStateChanged();
 
 	UFUNCTION()
 	virtual void OpenDoor(float Value) override;

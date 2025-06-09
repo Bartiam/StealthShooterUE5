@@ -17,14 +17,14 @@ public: // Functions
 
 	ASS_CodeReader_Base();
 
+	virtual void PlayActionsWhenTryedDoorOpen() override;
+
 protected: // Variables
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class UCameraComponent> CameraComponent;
 
 protected: // Functions
-
-	virtual void BeginPlay() override;
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
 
@@ -37,7 +37,4 @@ private: // Functions
 	void SetCodeReaderEntryMode();
 
 	void SetCodeReaderStaticMode();
-
-	UFUNCTION()
-	void BindOnCodeEntred(FName EntredCode, AActor* Interactor);
 };

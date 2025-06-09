@@ -4,7 +4,7 @@
 #include "SS_DisplayReader_Base.h"
 #include "Components/WidgetComponent.h"
 #include "../UserInterface/SS_CardReaderWidget_Base.h"
-#include "../WorldObjects/SS_Door_Base.h"
+#include "../WorldObjects/SS_ImportantRoomsDoor_Base.h"
 
 
 
@@ -19,8 +19,6 @@ ASS_DisplayReader_Base::ASS_DisplayReader_Base()
 	DisplayWidget_Component->SetCastShadow(false);
 	DisplayWidget_Component->SetBlendMode(EWidgetBlendMode::Transparent);
 	DisplayWidget_Component->SetDrawSize(FVector2D(64.f, 64.f));
-	DisplayWidget_Component->SetManuallyRedraw(true);
-	DisplayWidget_Component->SetRedrawTime(1.f);
 	DisplayWidget_Component->SetRelativeScale3D(FVector(0.34f, 0.34f, 0.34f));
 }
 
@@ -40,6 +38,8 @@ void ASS_DisplayReader_Base::BeginPlay()
 		DisplayWidget_Component->RequestRedraw();
 	}
 
+	SetCurrentSpecificationsToReader();
+
 	DisplayWidget_Component->SetWidget(DisplayWidget_Pointer);
 	DisplayWidget_Pointer->OwnerCodeReader = this;
 }
@@ -50,13 +50,15 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 {
 	if (TimerToIncorrectKey.IsValid()) return;
 
-	CurrentDoor->OnTryToOpenDoor.AddDynamic(this, &ThisClass::PlayActionsWhenTryedDoorOpen);
-
 	if (CurrentDoor->GetIsDoorLock())
 	{
+		// Bint to inventory
 		CurrentDoor->OpenAndBindToPlayerInventory(Interactor);
+
 		DisplayWidget_Component->SetManuallyRedraw(false);
 		DisplayWidget_Component->SetRedrawTime(0.f);
+
+		CurrentDoor->OnTryToOpenDoor.AddDynamic(this, &ThisClass::PlayActionsWhenTryedDoorOpen);
 	}
 	else
 	{
@@ -66,10 +68,10 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 
 
 
-void ASS_DisplayReader_Base::SetSpecificationsToReader()
+void ASS_DisplayReader_Base::SetCurrentSpecificationsToReader()
 {
 	DisplayWidget_Component->SetManuallyRedraw(true);
-	DisplayWidget_Component->SetRedrawTime(1.f);
+	DisplayWidget_Component->SetRedrawTime(0.f);
 
 	DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
 	DisplayWidget_Component->RequestRedraw();
@@ -86,15 +88,18 @@ void ASS_DisplayReader_Base::PlayActionsWhenTryedDoorOpen()
 		// Noisy
 		DisplayWidget_Pointer->ShowMessageEntry();
 
-		FTimerHandle TimerHandle;
-		GetWorldTimerManager().SetTimer(TimerHandle, [this]()
+		GetWorldTimerManager().SetTimer(TimerToIncorrectKey, [this]()
 			{
-				SetSpecificationsToReader();
+				SetCurrentSpecificationsToReader();
 			},
 			1.5f,
 			false);
 	}
+	else
+	{
+		SetCurrentSpecificationsToReader();
+	}
 
-	SetSpecificationsToReader();
+	OppositeReader->SetCurrentSpecificationsToReader();
 	CurrentDoor->OnTryToOpenDoor.RemoveAll(this);
 }
