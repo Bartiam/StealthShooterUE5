@@ -69,9 +69,7 @@ void ASS_ImportantRoomsDoor_Base::BeginPlay()
 	}
 
 	PlayChangesWhenDoorStateChanged();
-
-	TArray<AActor*> ActorSSSSSS;
-	GetAllChildActors(ActorSSSSSS);
+	GetReaderFromChildActors();
 }
 
 

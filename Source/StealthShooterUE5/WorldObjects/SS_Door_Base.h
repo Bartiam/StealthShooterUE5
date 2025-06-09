@@ -21,6 +21,10 @@ class STEALTHSHOOTERUE5_API ASS_Door_Base : public ASSInteractableObject_Base
 {
 	GENERATED_BODY()
 
+public: // Variables
+
+	TObjectPtr<class ASS_DisplayReader_Base> OppositeReader;
+
 public: // Functions
 
 	UPROPERTY()
@@ -68,6 +72,8 @@ protected: // Functions
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void OpenDoor(float Value);
+
+	void GetReaderFromChildActors();
 
 	void BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& CurrentTimeline);
 };

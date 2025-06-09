@@ -35,9 +35,6 @@ public: // Functions
 
 protected: // Variables
 
-	UPROPERTY(EditAnywhere)
-	TObjectPtr<ASS_DisplayReader_Base> OppositeReader;
-
 	FTimerHandle TimerToIncorrectKey;
 
 	UPROPERTY(VisibleAnywhere)

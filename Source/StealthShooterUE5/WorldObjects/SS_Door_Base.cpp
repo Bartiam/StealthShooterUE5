@@ -8,6 +8,7 @@
 #include "../UserInterface/SS_DuringTheGame_Base.h"
 #include "../Characters/SSCharacter_Base.h"
 #include "../Characters/Inventory/SS_InventoryComponent.h"
+#include "SS_DisplayReader_Base.h"
 
 
 
@@ -100,4 +101,18 @@ void ASS_Door_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
 {
 	auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
 	CurrentPlayer->GetAbilitySystemComponent()->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
+}
+
+
+
+void ASS_Door_Base::GetReaderFromChildActors()
+{
+	TArray<AActor*> ChildActors;
+	GetAllChildActors(ChildActors);
+
+	for (int i = 0; i < ChildActors.Num(); ++i)
+	{
+		if (ChildActors[i]->ActorHasTag(FName("Opposite Reader")))
+			OppositeReader = Cast<ASS_DisplayReader_Base>(ChildActors[i]);
+	}
 }

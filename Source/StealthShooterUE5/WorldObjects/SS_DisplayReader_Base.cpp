@@ -100,6 +100,6 @@ void ASS_DisplayReader_Base::PlayActionsWhenTryedDoorOpen()
 		SetCurrentSpecificationsToReader();
 	}
 
-	OppositeReader->SetCurrentSpecificationsToReader();
+	CurrentDoor->OppositeReader->SetCurrentSpecificationsToReader();
 	CurrentDoor->OnTryToOpenDoor.RemoveAll(this);
 }
