@@ -24,21 +24,21 @@ void ASS_CodeReader_Base::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CurrentDoor->OnDoorStateChanged.RemoveAll(this);
+	
 }
 
 
 
 void ASS_CodeReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
+	if (TimerToIncorrectKey.IsValid()) return;
+
 	if (CurrentDoor->GetIsDoorLock())
 	{
 		CurrentPlayerController = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor);
 		CurrentPlayerController->SetControllerCodeReaderMode(this);
 
 		SetCodeReaderEntryMode();
-
-		OnCodeEntred.AddDynamic(this, &ThisClass::BindOnCodeEntred);
 	}
 	else
 	{
@@ -55,7 +55,6 @@ void ASS_CodeReader_Base::SetCodeReaderEntryMode()
 
 	DisplayWidget_Component->SetManuallyRedraw(false);
 	DisplayWidget_Component->SetRedrawTime(0.f);
-
 
 	FTimerHandle TimerHandle;
 	GetWorldTimerManager().SetTimer(TimerHandle, [this]()
@@ -81,21 +80,24 @@ void ASS_CodeReader_Base::SetCodeReaderStaticMode()
 
 void ASS_CodeReader_Base::BindOnCodeEntred(FName EntredCode, AActor* Interactor)
 {
-	if (!CurrentDoor->TryCodeToOpenDoor(EntredCode, Interactor))
+	//if (!CurrentDoor->TryToOpenDoorWhenItsLocked(EntredCode, Interactor))
 	{
 		// Noisy
 		DisplayWidget_Pointer->ShowMessageEntry();
-
-		FTimerHandle TimerHandle;
-		GetWorldTimerManager().SetTimer(TimerHandle, [this]()
+		
+		GetWorldTimerManager().SetTimer(TimerToIncorrectKey, [this]()
 			{
-				PlayActionsWhenIncorrentTypeKey();
+				SetSpecificationsToReader();
 			},
 			1.5f,
 			false);
 	}
+	//else
+	{
+		DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
+		OnCodeEntred.RemoveAll(this);
+	}
 
 	CurrentPlayerController->SetControllerBaseMode();
 	SetCodeReaderStaticMode();
-	OnCodeEntred.RemoveAll(this);
 }

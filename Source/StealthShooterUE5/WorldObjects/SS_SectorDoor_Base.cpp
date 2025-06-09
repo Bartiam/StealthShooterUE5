@@ -50,18 +50,3 @@ void ASS_SectorDoor_Base::OpenDoor(float Value)
 	FVector NewLocationRightDoor = FMath::Lerp(LocationToLockDoor, LocationToOpenDoor, Value * (-1));
 	ObjectCircled->SetRelativeLocation(NewLocationRightDoor);
 }
-
-
-
-bool ASS_SectorDoor_Base::TryCodeToOpenDoor(FName EntredCode, AActor* Interactor)
-{
-	if (EntredCode == CodeToOpenDoor)
-	{
-		SetIsDoorLock(false);
-		InteractableRelease_Implementation(Interactor);
-		return true;
-	}
-
-	SetTextInTheUIDuringTheGame(Interactor, MessageWhenEntredIncorrectKey);
-	return false;
-}

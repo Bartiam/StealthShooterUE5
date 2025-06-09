@@ -38,8 +38,6 @@ void ASS_DisplayReader_Base::BeginPlay()
 
 		DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
 		DisplayWidget_Component->RequestRedraw();
-
-		CurrentDoor->OnDoorStateChanged.AddDynamic(this, &ThisClass::PlayChangesWhenDoorStateChanged);
 	}
 
 	DisplayWidget_Component->SetWidget(DisplayWidget_Pointer);
@@ -50,6 +48,10 @@ void ASS_DisplayReader_Base::BeginPlay()
 
 void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
+	if (TimerToIncorrectKey.IsValid()) return;
+
+	CurrentDoor->OnTryToOpenDoor.AddDynamic(this, &ThisClass::PlayActionsWhenTryedDoorOpen);
+
 	if (CurrentDoor->GetIsDoorLock())
 	{
 		CurrentDoor->OpenAndBindToPlayerInventory(Interactor);
@@ -64,22 +66,21 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 
 
 
-void ASS_DisplayReader_Base::PlayActionsWhenIncorrentTypeKey()
+void ASS_DisplayReader_Base::SetSpecificationsToReader()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Red, FString(this->GetName()));
 	DisplayWidget_Component->SetManuallyRedraw(true);
 	DisplayWidget_Component->SetRedrawTime(1.f);
 
 	DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
 	DisplayWidget_Component->RequestRedraw();
+
+	GetWorldTimerManager().ClearTimer(TimerToIncorrectKey);
 }
 
 
 
-void ASS_DisplayReader_Base::PlayChangesWhenDoorStateChanged()
+void ASS_DisplayReader_Base::PlayActionsWhenTryedDoorOpen()
 {
-	
-
 	if (CurrentDoor->GetIsDoorLock())
 	{
 		// Noisy
@@ -88,14 +89,12 @@ void ASS_DisplayReader_Base::PlayChangesWhenDoorStateChanged()
 		FTimerHandle TimerHandle;
 		GetWorldTimerManager().SetTimer(TimerHandle, [this]()
 			{
-				PlayActionsWhenIncorrentTypeKey();
+				SetSpecificationsToReader();
 			},
 			1.5f,
 			false);
 	}
-	else
-	{
-		DisplayWidget_Pointer->SetBrushColorToOpenDoor(CurrentDoor->GetIsDoorLock());
-		CurrentDoor->OnDoorStateChanged.RemoveAll(this);
-	}
+
+	SetSpecificationsToReader();
+	CurrentDoor->OnTryToOpenDoor.RemoveAll(this);
 }

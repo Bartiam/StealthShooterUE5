@@ -19,6 +19,8 @@ public:	// Functions
 	
 	ASSSimpleDoor_Base();
 
+	void TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor) override;
+
 protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")

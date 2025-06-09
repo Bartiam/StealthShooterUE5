@@ -48,24 +48,16 @@ enum class ESSCardType : uint8
 	Master_Card UMETA(DisplayName = "Master Card"),
 };
 
-UENUM(BlueprintType)
-enum class ESSItemAccessType : uint8
-{
-	None UMETA(DisplayName = "None"),
-	Physical_Key UMETA(DisplayName = "Physical Key"),
-	Card_Key UMETA(DisplayName = "Card Key"),
-};
-
 USTRUCT(BlueprintType)
 struct FKeyPermission
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	ESSItemAccessType ItemAccessType = ESSItemAccessType::None;
+	ESSCardType CardType = ESSCardType::None;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	ESSCardType CardType = ESSCardType::None;
+	FName CodeToOpenDoor = FName();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ESSPhysKeyType PhysKeyType = ESSPhysKeyType::None;

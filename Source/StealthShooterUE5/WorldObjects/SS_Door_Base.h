@@ -12,7 +12,7 @@
 
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDoorStateChanged);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTryToOpenDoor);
 
 
 
@@ -24,7 +24,7 @@ class STEALTHSHOOTERUE5_API ASS_Door_Base : public ASSInteractableObject_Base
 public: // Functions
 
 	UPROPERTY()
-	FOnDoorStateChanged OnDoorStateChanged;
+	FOnTryToOpenDoor OnTryToOpenDoor;
 
 	ASS_Door_Base();
 
@@ -35,9 +35,7 @@ public: // Functions
 	void OpenAndBindToPlayerInventory(AActor* Interactor);
 
 	UFUNCTION()
-	void BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor);
-
-	virtual bool TryCodeToOpenDoor(FName EntredCode, AActor* Interactor);
+	virtual void TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor);
 
 protected: // Variables
 
@@ -75,6 +73,3 @@ private: // Variables
 
 	FText TextWhenSelectedIncorrectKey = INVTEXT("Это не подойдёт!");
 };
-
-
-

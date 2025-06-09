@@ -16,6 +16,31 @@ ASSSimpleDoor_Base::ASSSimpleDoor_Base()
 
 
 
+void ASSSimpleDoor_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
+{
+	Super::TryToOpenDoor(ItemInfo, Interactor);
+
+	if (ItemInfo.KeyPepmission.PhysKeyType == DoorKeyPermission.PhysKeyType)
+	{
+		SetIsDoorLock(false);
+
+		FTimerHandle TimerToOpenDoor;
+		GetWorldTimerManager().SetTimer(TimerToOpenDoor, [this, Interactor] () 
+			{
+				// Opening door with a key sound
+				InteractableRelease_Implementation(Interactor);
+			}, 
+			0.4f, 
+			false);
+	}
+	else
+	{
+		SetIsDoorLock(true);
+	}
+}
+
+
+
 void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
 	// Checking that the object is currently running 

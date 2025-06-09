@@ -34,7 +34,7 @@ bool ASS_Door_Base::GetIsDoorLock() const
 void ASS_Door_Base::SetIsDoorLock(const bool& NewValue)
 { 
 	bIsDoorLock = NewValue;
-	OnDoorStateChanged.Broadcast();
+	OnTryToOpenDoor.Broadcast();
 }
 
 
@@ -82,11 +82,13 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 {
 	if (Interactor && Interactor->Implements<UCharacterInterface>())
 	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString(this->GetName()));
+
 		auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
 
 		// Binds to inventory delegate
 		auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
-		PlayerInventory->OnGetKeyFromInventory.AddDynamic(this, &ThisClass::BindOnGetKeyToOpenDoor);
+		PlayerInventory->OnGetKeyFromInventory.AddDynamic(this, &ThisClass::TryToOpenDoor);
 
 		// Open player inventory
 		auto PlayerASC = CurrentPlayer->GetAbilitySystemComponent();
@@ -94,32 +96,8 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 	}
 }
 
-
-
-void ASS_Door_Base::BindOnGetKeyToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
+void ASS_Door_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
 {
 	auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
 	CurrentPlayer->GetAbilitySystemComponent()->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
-
-	auto ReceivedItemAccessType = ItemInfo.KeyPepmission.ItemAccessType;
-	auto ReceivedKeyPermission = ItemInfo.KeyPepmission;
-
-	switch (ReceivedItemAccessType)
-	{
-	case ESSItemAccessType::None:
-		SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
-		break;
-	case ESSItemAccessType::Physical_Key:
-		ReceivedKeyPermission.PhysKeyType == DoorKeyPermission.PhysKeyType ? SetIsDoorLock(false), InteractableRelease_Implementation(Interactor) :
-			SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
-		break;
-	case ESSItemAccessType::Card_Key:
-		ReceivedKeyPermission.CardType == DoorKeyPermission.CardType ||
-			(ReceivedKeyPermission.CardType == ESSCardType::Master_Card && DoorKeyPermission.CardType != ESSCardType::None) ?
-			SetIsDoorLock(false), InteractableRelease_Implementation(Interactor) : SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
-		break;
-	}
 }
-
-bool ASS_Door_Base::TryCodeToOpenDoor(FName EntredCode, AActor* Interactor)
-{ return false; }
