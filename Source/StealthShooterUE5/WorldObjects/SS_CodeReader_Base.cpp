@@ -28,7 +28,13 @@ void ASS_CodeReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 	{
 		DisplayWidget_Component->SetManuallyRedraw(false);
 
+		if (Interactor->Implements<UCharacterInterface>())
+			CurrentPlayerController = Cast<ASSPlayerController_Base>(ICharacterInterface::Execute_GetOwnerCharacterController(Interactor));
+
 		CurrentDoor->OnTryToOpenDoor.AddDynamic(this, &ThisClass::PlayActionsWhenTryedDoorOpen);
+		OnCodeEntred.AddDynamic(this, &ThisClass::BindToReciaveCode);
+
+		SetCodeReaderEntryMode();
 	}
 	else
 	{
@@ -54,6 +60,7 @@ void ASS_CodeReader_Base::SetCodeReaderEntryMode()
 		1.f,
 		false);
 
+	CurrentPlayerController->SetControllerCodeReaderMode(this);
 }
 
 
@@ -64,28 +71,24 @@ void ASS_CodeReader_Base::SetCodeReaderStaticMode()
 	DisplayWidget_Component->SetCollisionProfileName("NoCollision");
 
 	DisplayWidget_Pointer->CodeEntryDeactivated();
+	CurrentPlayerController->SetControllerBaseMode();
+}
+
+void ASS_CodeReader_Base::BindToReciaveCode(FName ReciavedCode, AActor* Interactor)
+{
+	FPickUpItemInfo ItemInfo;
+	ItemInfo.KeyPepmission.CodeToOpenDoor = ReciavedCode;
+
+	CurrentDoor->TryToOpenDoor(ItemInfo, Interactor);
+
+	OnCodeEntred.RemoveAll(this);
 }
 
 
 
 void ASS_CodeReader_Base::PlayActionsWhenTryedDoorOpen()
 {
-	if (CurrentDoor->GetIsDoorLock())
-	{
-		// Noisy
-		DisplayWidget_Pointer->ShowMessageEntry();
-
-		GetWorldTimerManager().SetTimer(TimerToIncorrectKey, [this]()
-			{
-				SetCurrentSpecificationsToReader();
-			},
-			1.5f,
-			false);
-	}
-	else
-	{
-		SetCurrentSpecificationsToReader();
-	}
-
-	CurrentDoor->OnTryToOpenDoor.RemoveAll(this);
+	Super::PlayActionsWhenTryedDoorOpen();
+	SetCodeReaderStaticMode();
+	CurrentPlayerController = nullptr;
 }

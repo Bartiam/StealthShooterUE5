@@ -56,7 +56,6 @@ void ASS_DisplayReader_Base::InteractableRelease_Implementation(AActor* Interact
 		CurrentDoor->OpenAndBindToPlayerInventory(Interactor);
 
 		DisplayWidget_Component->SetManuallyRedraw(false);
-		DisplayWidget_Component->SetRedrawTime(0.f);
 
 		CurrentDoor->OnTryToOpenDoor.AddDynamic(this, &ThisClass::PlayActionsWhenTryedDoorOpen);
 	}

@@ -18,6 +18,8 @@ public: // Functions
 	ASS_SectorDoor_Base();
 
 	virtual void InteractableRelease_Implementation(AActor* Interactor) override;
+
+	virtual void TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor) override;
 	
 protected: // Variables
 
@@ -27,11 +29,10 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	FVector LocationToLockDoor = FVector();
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	FName CodeToOpenDoor;
-
 private: // Functions
 
 	UFUNCTION()
 	virtual void OpenDoor(float Value) override;
+
+	virtual void BeginPlay() override;
 };

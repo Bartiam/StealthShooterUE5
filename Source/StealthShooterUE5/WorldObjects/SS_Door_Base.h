@@ -60,7 +60,8 @@ protected: // Variables
 	FTimeline TimelineToOpenDoor;
 
 	// Texts for UI
-	FText TextWhenSelectedIncorrectKey = INVTEXT("Это не подойдёт!");
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	FText TextWhenSelectedIncorrectKey = FText();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	FText TextWhenDoorIsLocked = FText();

@@ -10,7 +10,7 @@
 
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCodeEntred, FPickUpItemInfo, ItemInfo, AActor*, Interactor);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnCodeEntred, FName, ReciavedCode, AActor*, Interactor);
 
 
 

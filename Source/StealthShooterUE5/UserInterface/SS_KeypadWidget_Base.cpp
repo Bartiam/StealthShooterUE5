@@ -13,7 +13,7 @@
 
 void USS_KeypadWidget_Base::CallOnCodeEntred(FName EntredCode, AActor* Interactor)
 {
-	//OwnerCodeReader->OnCodeEntred.Broadcast(EntredCode, Interactor);
+	OwnerCodeReader->OnCodeEntred.Broadcast(EntredCode, Interactor);
 }
 
 

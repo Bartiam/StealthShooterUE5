@@ -83,8 +83,6 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 {
 	if (Interactor && Interactor->Implements<UCharacterInterface>())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString(this->GetName()));
-
 		auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
 
 		// Binds to inventory delegate

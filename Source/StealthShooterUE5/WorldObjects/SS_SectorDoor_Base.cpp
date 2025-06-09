@@ -13,6 +13,15 @@ ASS_SectorDoor_Base::ASS_SectorDoor_Base()
 
 
 
+void ASS_SectorDoor_Base::BeginPlay()
+{
+	Super::BeginPlay();
+
+	GetReaderFromChildActors();
+}
+
+
+
 void ASS_SectorDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
 	if (TimelineToOpenDoor.IsPlaying() || TimelineToOpenDoor.IsReversing()) return;
@@ -49,4 +58,20 @@ void ASS_SectorDoor_Base::OpenDoor(float Value)
 	// Set new location for right door
 	FVector NewLocationRightDoor = FMath::Lerp(LocationToLockDoor, LocationToOpenDoor, Value * (-1));
 	ObjectCircled->SetRelativeLocation(NewLocationRightDoor);
+}
+
+
+
+void ASS_SectorDoor_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
+{
+	if (ItemInfo.KeyPepmission.CodeToOpenDoor == DoorKeyPermission.CodeToOpenDoor)
+	{
+		SetIsDoorLock(false);
+		InteractableRelease_Implementation(Interactor);
+	}
+	else
+	{
+		SetTextInTheUIDuringTheGame(Interactor, TextWhenSelectedIncorrectKey);
+		SetIsDoorLock(true);
+	}
 }

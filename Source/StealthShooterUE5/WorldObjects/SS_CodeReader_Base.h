@@ -37,4 +37,7 @@ private: // Functions
 	void SetCodeReaderEntryMode();
 
 	void SetCodeReaderStaticMode();
+
+	UFUNCTION()
+	void BindToReciaveCode(FName ReciavedCode, AActor* Interactor);
 };
