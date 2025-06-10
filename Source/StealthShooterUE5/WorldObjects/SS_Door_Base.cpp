@@ -95,6 +95,8 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 	}
 }
 
+
+
 void ASS_Door_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
 {
 	auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
