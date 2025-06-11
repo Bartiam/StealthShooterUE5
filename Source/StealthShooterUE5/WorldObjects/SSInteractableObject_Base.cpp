@@ -84,7 +84,7 @@ void ASSInteractableObject_Base::SetTextInTheUIDuringTheGame(AActor* Interactor,
 {
 	if (Interactor && Interactor->Implements<UCharacterInterface>())
 	{
-		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerCharacterController(Interactor)->GetCurrentHUD();
+		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerPlayerController(Interactor)->GetCurrentHUD();
 		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(SendBeingTextToUI);
 	}
 }

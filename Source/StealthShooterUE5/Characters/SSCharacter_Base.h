@@ -24,6 +24,8 @@ private: // Variables
 
 	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
 
+	TObjectPtr<class ASS_AIController_Base> CurrentAIController;
+
 protected: // Variables
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -59,7 +61,9 @@ public: // Functions
 	// - Character Interface - //
 	virtual ASSCharacter_Base* GetOwnerCharacter_Implementation() override;
 
-	virtual class ASSPlayerController_Base* GetOwnerCharacterController_Implementation() override;
+	virtual class ASSPlayerController_Base* GetOwnerPlayerController_Implementation() override;
+
+	virtual class ASS_AIController_Base* GetOwnerAIController_Implementation() override;
 	// ----------------------- //
 
 	virtual void InitializeAttributes();

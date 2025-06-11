@@ -27,7 +27,10 @@ public:
 	class ASSCharacter_Base* GetOwnerCharacter();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
-	class ASSPlayerController_Base* GetOwnerCharacterController();
+	class ASSPlayerController_Base* GetOwnerPlayerController();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	class ASS_AIController_Base* GetOwnerAIController();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	class USS_InventoryComponent* GetPlayerInventory();

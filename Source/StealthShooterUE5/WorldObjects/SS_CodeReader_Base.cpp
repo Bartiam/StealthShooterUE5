@@ -29,7 +29,7 @@ void ASS_CodeReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 		DisplayWidget_Component->SetManuallyRedraw(false);
 
 		if (Interactor->Implements<UCharacterInterface>())
-			CurrentPlayerController = Cast<ASSPlayerController_Base>(ICharacterInterface::Execute_GetOwnerCharacterController(Interactor));
+			CurrentPlayerController = Cast<ASSPlayerController_Base>(ICharacterInterface::Execute_GetOwnerPlayerController(Interactor));
 
 		CurrentDoor->OnTryToOpenDoor.AddDynamic(this, &ThisClass::PlayActionsWhenTryedDoorOpen);
 		OnCodeEntred.AddDynamic(this, &ThisClass::BindToReciaveCode);

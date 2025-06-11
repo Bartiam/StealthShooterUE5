@@ -7,6 +7,7 @@
 #include "../GAS/Abilities/SSGameplayAbility_Base.h"
 #include "../GAS/SS_CharacterAttributeSet.h"
 #include "../Controllers/SSPlayerController_Base.h"
+#include "../Controllers/SS_AIController_Base.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -30,20 +31,40 @@ ASSCharacter_Base::ASSCharacter_Base()
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
 }
 
+
+
 // Called when the game starts or when spawned
 void ASSCharacter_Base::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
+
+
 FCharacterMovementSpeed ASSCharacter_Base::GetCharacterMovementSpeed() const
 { return CharacterMovementSpeed; }
+
+
 
 ASSCharacter_Base* ASSCharacter_Base::GetOwnerCharacter_Implementation()
 { return this; }
 
-ASSPlayerController_Base* ASSCharacter_Base::GetOwnerCharacterController_Implementation()
+
+
+ASSPlayerController_Base* ASSCharacter_Base::GetOwnerPlayerController_Implementation()
 { return CurrentPlayerController; }
+
+
+
+ASS_AIController_Base* ASSCharacter_Base::GetOwnerAIController_Implementation()
+{ return CurrentAIController; }
+
+
+
+UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
+{ return AbilitySystemComponent; }
+
+
 
 void ASSCharacter_Base::InitializeAttributes()
 {
@@ -65,6 +86,8 @@ void ASSCharacter_Base::InitializeAttributes()
 	}
 }
 
+
+
 void ASSCharacter_Base::GiveAbilities()
 {
 	// Check that it is a server and ASC != nullptr
@@ -81,8 +104,7 @@ void ASSCharacter_Base::GiveAbilities()
 	}
 }
 
-UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
-{ return AbilitySystemComponent; }
+
 
 void ASSCharacter_Base::PossessedBy(AController* NewController)
 {
@@ -92,8 +114,18 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 
 	SetOwner(NewController);
 
-	if (IsValid(NewController))
+
+
+	if (IsValid(NewController) && ActorHasTag(FName("Player")))
+	{
 		CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
+	}
+	else
+	{
+		CurrentAIController = Cast<ASS_AIController_Base>(NewController);
+	}
+
+
 
 	InitializeAttributes();
 	GiveAbilities();
