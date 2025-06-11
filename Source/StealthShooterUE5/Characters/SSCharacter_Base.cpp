@@ -116,13 +116,12 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 
 
 
-	if (IsValid(NewController) && ActorHasTag(FName("Player")))
+	if (IsValid(NewController))
 	{
-		CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
-	}
-	else
-	{
-		CurrentAIController = Cast<ASS_AIController_Base>(NewController);
+		if (ActorHasTag(FName("Player")))
+			CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
+		else
+			CurrentAIController = Cast<ASS_AIController_Base>(NewController);
 	}
 
 
