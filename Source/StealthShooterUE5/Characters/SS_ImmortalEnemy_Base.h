@@ -12,5 +12,9 @@ UCLASS()
 class STEALTHSHOOTERUE5_API ASS_ImmortalEnemy_Base : public ASSCharacter_Base
 {
 	GENERATED_BODY()
+
+public: // Functions
+
+	ASS_ImmortalEnemy_Base();
 	
 };
