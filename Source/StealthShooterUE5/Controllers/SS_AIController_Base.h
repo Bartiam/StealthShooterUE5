@@ -13,10 +13,17 @@ class STEALTHSHOOTERUE5_API ASS_AIController_Base : public AAIController
 {
 	GENERATED_BODY()
 
+public: // Functions
+	
+	ASS_AIController_Base();
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<class UBehaviorTree> BehaviorTree;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
+	TObjectPtr<class UAISenseConfig_Sight> SightConfig;
 
 protected: // Functions
 

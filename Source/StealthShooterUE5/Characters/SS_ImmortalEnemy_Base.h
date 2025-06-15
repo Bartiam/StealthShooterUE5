@@ -16,5 +16,10 @@ class STEALTHSHOOTERUE5_API ASS_ImmortalEnemy_Base : public ASSCharacter_Base
 public: // Functions
 
 	ASS_ImmortalEnemy_Base();
+
+protected: // Variables
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<class UNavigationInvokerComponent> NavigationInvoker;
 	
 };
