@@ -29,6 +29,7 @@ ASSCharacter_Base::ASSCharacter_Base()
 	// Base specifications for PlayerMovement
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f);
+	GetCharacterMovement()->bCanWalkOffLedgesWhenCrouching = true;
 
 	// Set base rotation for mesh
 	GetMesh()->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
