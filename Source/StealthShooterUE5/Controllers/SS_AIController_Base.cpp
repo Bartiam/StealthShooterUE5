@@ -15,7 +15,7 @@ ASS_AIController_Base::ASS_AIController_Base()
 {
 	// Create AI perception component
 	PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("AI Perception"));
-
+	
 	
 }
 

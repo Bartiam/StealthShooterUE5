@@ -28,3 +28,11 @@ void ASS_ImmortalEnemy_Base::BeginPlay()
 {
 	Super::BeginPlay();
 }
+
+
+
+void ASS_ImmortalEnemy_Base::GetActorEyesViewPoint(FVector& OutLocation, FRotator& OutRotation) const
+{
+	OutLocation = GetMesh()->GetSocketLocation(FName("HeadSocket"));
+	OutRotation = GetMesh()->GetSocketRotation(FName("HeadSocket"));
+}
