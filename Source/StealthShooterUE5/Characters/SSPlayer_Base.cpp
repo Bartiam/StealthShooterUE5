@@ -44,7 +44,6 @@ ASSPlayer_Base::ASSPlayer_Base()
 
 	// Create inventory component
 	InventoryComponent = CreateDefaultSubobject<USS_InventoryComponent>(FName("Inventory Component"));
-
 }
 
 USS_InventoryComponent* ASSPlayer_Base::GetPlayerInventory_Implementation()

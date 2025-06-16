@@ -17,9 +17,19 @@ public: // Functions
 
 	ASS_ImmortalEnemy_Base();
 
+	class ASS_SensoryOrgans_Base* GetSensoryOrgans();
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<class UNavigationInvokerComponent> NavigationInvoker;
+
+protected: // Functions
+
+	virtual void BeginPlay() override;
+
+private: // Variables
+
+	TObjectPtr<class ASS_SensoryOrgans_Base> SensoryOrgansComponent;
 	
 };
