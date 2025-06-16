@@ -22,6 +22,8 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<class UBehaviorTree> BehaviorTree;
 
+	TObjectPtr<class USS_SenseConfigSight> AISenseConfigSight;
+
 protected: // Functions
 
 	virtual void BeginPlay() override;

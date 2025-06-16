@@ -4,8 +4,9 @@
 #include "SS_ImmortalEnemy_Base.h"
 #include "Components/CapsuleComponent.h"
 #include "../Controllers/SS_AIController_Base.h"
-#include "../Controllers/AISenses/SS_SensoryOrgans_Base.h"
 #include "NavigationInvokerComponent.h"
+
+#include "../Controllers/AISenses/SS_SenseConfigSight.h"
 
 
 
@@ -21,17 +22,9 @@ ASS_ImmortalEnemy_Base::ASS_ImmortalEnemy_Base()
 	NavigationInvoker = CreateDefaultSubobject<UNavigationInvokerComponent>(FName("Navigation Invoker"));
 }
 
-ASS_SensoryOrgans_Base* ASS_ImmortalEnemy_Base::GetSensoryOrgans()
-{ return SensoryOrgansComponent; }
+
 
 void ASS_ImmortalEnemy_Base::BeginPlay()
 {
 	Super::BeginPlay();
-
-	TArray<AActor*> ChildActors;
-	GetAllChildActors(ChildActors);
-
-	for (int i = 0; i < ChildActors.Num(); ++i)
-		if (ChildActors[i]->ActorHasTag(FName("Sensory Organs")))
-			SensoryOrgansComponent = Cast<ASS_SensoryOrgans_Base>(ChildActors[i]);
 }

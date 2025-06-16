@@ -4,7 +4,6 @@
 #include "SS_AIController_Base.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "../Characters/SS_ImmortalEnemy_Base.h"
-#include "AISenses/SS_SensoryOrgans_Base.h"
 
 #include "Perception/AIPerceptionComponent.h"
 #include "AISenses/SS_SenseConfigSight.h"
@@ -38,6 +37,5 @@ void ASS_AIController_Base::OnPossess(APawn* NewPawn)
 	if (NewPawn)
 	{
 		CurrentNPC = Cast<ASS_ImmortalEnemy_Base>(NewPawn);
-		CurrentNPC->GetSensoryOrgans()->SetPerceptionComponent(PerceptionComponent);
 	}
 }
