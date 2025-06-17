@@ -42,9 +42,4 @@ void ASS_ImmortalEnemy_Base::GetActorEyesViewPoint(FVector& OutLocation, FRotato
 	OutRotation = GetMesh()->GetSocketRotation(FName("HeadSocket"));
 }
 
-UAISense_Sight::EVisibilityResult ASS_ImmortalEnemy_Base::CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation, int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength, int32* UserData, const FOnPendingVisibilityQueryProcessedDelegate* Delegate)
-{
-	
 
-	return UAISense_Sight::EVisibilityResult();
-}

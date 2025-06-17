@@ -8,6 +8,7 @@
 #include "../GAS/SS_CharacterAttributeSet.h"
 #include "../Controllers/SSPlayerController_Base.h"
 #include "../Controllers/SS_AIController_Base.h"
+#include "Components/CapsuleComponent.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -132,4 +133,38 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 
 	InitializeAttributes();
 	GiveAbilities();
+}
+
+
+
+UAISense_Sight::EVisibilityResult ASSCharacter_Base::CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation,
+	int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength, int32* UserData,
+	const FOnPendingVisibilityQueryProcessedDelegate* Delegate)
+{
+	FVector CapsuleLocation = GetCapsuleComponent()->GetComponentLocation();
+
+	FVector UpperPartCapsule = FVector(CapsuleLocation.X, CapsuleLocation.Y, CapsuleLocation.Z + GetCapsuleComponent()->GetScaledCapsuleHalfHeight() - 20.f);
+	FHitResult HitResult;
+
+	bool HadBlockingHit = GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		Context.ObserverLocation,
+		UpperPartCapsule,
+		ECC_Visibility,
+		FCollisionQueryParams(FName("Name_AILineOfSight"), false, Context.IgnoreActor)
+	);
+
+	if (!HadBlockingHit || (IsValid(HitResult.GetActor()) && HitResult.GetActor()->IsOwnedBy(this)))
+	{
+		OutSeenLocation = UpperPartCapsule;
+		OutNumberOfLoSChecksPerformed = 1;
+		OutNumberOfAsyncLosCheckRequested = 0;
+		OutSightStrength = 1;
+		return UAISense_Sight::EVisibilityResult::Visible;
+	}
+
+	OutNumberOfLoSChecksPerformed = 1;
+	OutNumberOfAsyncLosCheckRequested = 0;
+	OutSightStrength = 0;
+	return UAISense_Sight::EVisibilityResult::NotVisible;
 }

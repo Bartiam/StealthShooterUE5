@@ -8,12 +8,13 @@
 #include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
 #include "../SSData/SSTypes.h"
+#include "Perception/AISightTargetInterface.h"
 #include "../Interfaces/CharacterInterface.h"
 
 #include "SSCharacter_Base.generated.h"
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface, public ICharacterInterface
+class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface, public ICharacterInterface, public IAISightTargetInterface
 {
 	GENERATED_BODY()
 
@@ -72,5 +73,11 @@ public: // Functions
 
 	// - Ability System Interface - //
 	virtual class UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	// ---------------------------- //
+
+	// - Sense Sight Interface - //
+	virtual UAISense_Sight::EVisibilityResult CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation,
+		int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength,
+		int32* UserData = nullptr, const FOnPendingVisibilityQueryProcessedDelegate* Delegate = nullptr) override;
 	// ---------------------------- //
 };
