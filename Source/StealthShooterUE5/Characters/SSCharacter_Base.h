@@ -5,16 +5,19 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 
-#include "AbilitySystemInterface.h"
 #include "GameplayEffectTypes.h"
 #include "../SSData/SSTypes.h"
-#include "Perception/AISightTargetInterface.h"
+
 #include "../Interfaces/CharacterInterface.h"
+#include "Perception/AISightTargetInterface.h"
+#include "AbilitySystemInterface.h"
+#include "GenericTeamAgentInterface.h"
 
 #include "SSCharacter_Base.generated.h"
 
 UCLASS()
-class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface, public ICharacterInterface, public IAISightTargetInterface
+class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface,
+	public ICharacterInterface, public IAISightTargetInterface, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 
@@ -28,6 +31,8 @@ private: // Variables
 	TObjectPtr<class ASS_AIController_Base> CurrentAIController;
 
 protected: // Variables
+
+	FGenericTeamId TeamId = FGenericTeamId();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USS_AbilitySystemComponent> AbilitySystemComponent;
@@ -48,6 +53,9 @@ protected: // Functions
 	virtual void PossessedBy(AController* NewController) override;
 
 public: // Variables
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
+	int32 ID = 0;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
 	TSubclassOf<class UGameplayEffect> DefaultAttributeEffect;
@@ -79,5 +87,9 @@ public: // Functions
 	virtual UAISense_Sight::EVisibilityResult CanBeSeenFrom(const FCanBeSeenFromContext& Context, FVector& OutSeenLocation,
 		int32& OutNumberOfLoSChecksPerformed, int32& OutNumberOfAsyncLosCheckRequested, float& OutSightStrength,
 		int32* UserData = nullptr, const FOnPendingVisibilityQueryProcessedDelegate* Delegate = nullptr) override;
+	// ---------------------------- //
+
+	// - Team Agent Interface - //
+	virtual FGenericTeamId GetGenericTeamId() const override;
 	// ---------------------------- //
 };

@@ -2,8 +2,9 @@
 
 
 #include "SS_AIController_Base.h"
+#include "../Characters/SSCharacter_Base.h"
+
 #include "BehaviorTree/BehaviorTree.h"
-#include "../Characters/SS_ImmortalEnemy_Base.h"
 
 #include "Perception/AIPerceptionComponent.h"
 #include "AISenses/SS_SenseConfigSight.h"
@@ -25,6 +26,18 @@ ASS_AIController_Base::ASS_AIController_Base()
 
 
 
+FGenericTeamId ASS_AIController_Base::GetGenericTeamId() const
+{ return TeamId; }
+
+
+
+ETeamAttitude::Type ASS_AIController_Base::GetTeamAttitudeTowards(const AActor & OtherActor) const
+{
+	return ETeamAttitude::Type();
+}
+
+
+
 void ASS_AIController_Base::BeginPlay()
 {
 	Super::BeginPlay();
@@ -32,7 +45,15 @@ void ASS_AIController_Base::BeginPlay()
 	RunBehaviorTree(BehaviorTree);
 }
 
+
+
 void ASS_AIController_Base::OnPossess(APawn* NewPawn)
 {
 	Super::OnPossess(NewPawn);
+
+	if (auto Agent = Cast<ASSCharacter_Base>(NewPawn))
+	{
+		CurrentNPC = Agent;
+		TeamId = FGenericTeamId(CurrentNPC->ID);
+	}
 }

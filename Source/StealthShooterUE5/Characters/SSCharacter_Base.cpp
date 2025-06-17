@@ -8,9 +8,9 @@
 #include "../GAS/SS_CharacterAttributeSet.h"
 #include "../Controllers/SSPlayerController_Base.h"
 #include "../Controllers/SS_AIController_Base.h"
-#include "Components/CapsuleComponent.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/CapsuleComponent.h"
 
 #include "Kismet/KismetSystemLibrary.h"
 
@@ -68,6 +68,12 @@ ASS_AIController_Base* ASSCharacter_Base::GetOwnerAIController_Implementation()
 
 UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
 { return AbilitySystemComponent; }
+
+
+
+FGenericTeamId ASSCharacter_Base::GetGenericTeamId() const
+{ return TeamId; }
+
 
 
 

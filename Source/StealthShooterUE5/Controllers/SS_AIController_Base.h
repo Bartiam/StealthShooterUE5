@@ -13,11 +13,21 @@ class STEALTHSHOOTERUE5_API ASS_AIController_Base : public AAIController
 {
 	GENERATED_BODY()
 
+private: // Variables
+
+	TObjectPtr<class ASSCharacter_Base> CurrentNPC;
+
 public: // Functions
 	
 	ASS_AIController_Base();
 
+	virtual FGenericTeamId GetGenericTeamId() const override;
+
+	virtual ETeamAttitude::Type GetTeamAttitudeTowards(const AActor& OtherActor) const override;
+
 protected: // Variables
+
+	FGenericTeamId TeamId = FGenericTeamId();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<class UBehaviorTree> BehaviorTree;
