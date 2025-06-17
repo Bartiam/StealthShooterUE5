@@ -13,6 +13,10 @@ class STEALTHSHOOTERUE5_API USS_SenseSight : public UAISense_Sight
 {
 	GENERATED_BODY()
 	
+protected: // Functions
+
+	virtual float Update() override;
+
 public: // Functions
 
 	USS_SenseSight();
