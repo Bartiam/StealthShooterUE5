@@ -16,9 +16,5 @@ class STEALTHSHOOTERUE5_API USS_SenseConfigSight : public UAISenseConfig_Sight
 public: // Functions
 
 	USS_SenseConfigSight();
-
-protected:
-
-	
 	
 };

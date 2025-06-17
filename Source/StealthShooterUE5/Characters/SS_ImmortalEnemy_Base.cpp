@@ -22,6 +22,11 @@ ASS_ImmortalEnemy_Base::ASS_ImmortalEnemy_Base()
 	NavigationInvoker = CreateDefaultSubobject<UNavigationInvokerComponent>(FName("Navigation Invoker"));
 }
 
+UNavigationInvokerComponent* ASS_ImmortalEnemy_Base::GetNavigationInvoker()
+{
+	return NavigationInvoker;
+}
+
 
 
 void ASS_ImmortalEnemy_Base::BeginPlay()

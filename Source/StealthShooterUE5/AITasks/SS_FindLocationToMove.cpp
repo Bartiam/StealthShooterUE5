@@ -3,6 +3,7 @@
 
 #include "SS_FindLocationToMove.h"
 #include "../Controllers/SS_AIController_Base.h"
+#include "../Characters/SS_ImmortalEnemy_Base.h"
 #include "NavigationSystem.h"
 #include "BehaviorTree/BlackboardComponent.h"
 
@@ -20,10 +21,10 @@ EBTNodeResult::Type USS_FindLocationToMove::ExecuteTask(UBehaviorTreeComponent& 
 	// Get owner controller from behavior tree
 	if (auto const CurrentAIController = Cast<ASS_AIController_Base>(OwnerComponent.GetOwner()))
 	{
-		if (auto OwnerPawn = CurrentAIController->GetPawn())
+		if (auto OwnerNPC = Cast<ASS_ImmortalEnemy_Base>(CurrentAIController->GetPawn()))
 		{
 			// Get NPC Location
-			auto CharacterLocation = OwnerPawn->GetActorLocation();
+			auto CharacterLocation = OwnerNPC->GetActorLocation();
 
 			// Get the navigation system and generate random location
 			if (auto const NavSystem = UNavigationSystemV1::GetCurrent(GetWorld()))

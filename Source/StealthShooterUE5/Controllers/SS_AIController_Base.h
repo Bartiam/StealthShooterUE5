@@ -29,8 +29,4 @@ protected: // Functions
 	virtual void BeginPlay() override;
 
 	virtual void OnPossess(APawn* NewPawn) override;
-	
-private: // Variables
-
-	TObjectPtr<class ASS_ImmortalEnemy_Base> CurrentNPC;
 };

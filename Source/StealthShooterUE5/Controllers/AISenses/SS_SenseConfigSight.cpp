@@ -2,6 +2,9 @@
 
 
 #include "SS_SenseConfigSight.h"
+#include "SS_SenseSight.h"
+
+
 
 USS_SenseConfigSight::USS_SenseConfigSight()
 {

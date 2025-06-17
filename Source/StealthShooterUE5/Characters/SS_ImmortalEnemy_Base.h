@@ -17,6 +17,8 @@ public: // Functions
 
 	ASS_ImmortalEnemy_Base();
 
+	class UNavigationInvokerComponent* GetNavigationInvoker();
+
 protected: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
