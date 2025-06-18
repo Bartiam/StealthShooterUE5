@@ -8,6 +8,14 @@
 #include "SSTypes.generated.h"
 
 UENUM(BlueprintType)
+enum class ESSTeamID : uint8
+{
+	Player_Team UMETA(DisplayName = "Player Team"),
+	Immortal_Team UMETA(DisplayName = "Immortal Team"),
+	Zombie_Team UMETA(DisplayName = "Zombie Team"),
+};
+
+UENUM(BlueprintType)
 enum class ESSInputID : uint8
 {
 	Walk_Input UMETA(DisplayName = "Walk Input"),

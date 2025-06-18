@@ -55,7 +55,7 @@ protected: // Functions
 public: // Variables
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
-	int32 ID = 0;
+	ESSTeamID CharacterTeamID = ESSTeamID::Player_Team;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character Specifications")
 	TSubclassOf<class UGameplayEffect> DefaultAttributeEffect;
