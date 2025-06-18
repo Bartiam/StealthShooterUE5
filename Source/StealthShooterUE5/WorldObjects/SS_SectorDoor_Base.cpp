@@ -2,6 +2,7 @@
 
 
 #include "SS_SectorDoor_Base.h"
+#include "Components/WidgetComponent.h"
 
 
 
@@ -9,6 +10,8 @@ ASS_SectorDoor_Base::ASS_SectorDoor_Base()
 {
 	ObjectCircled->SetupAttachment(DoorFrame);
 	SecondObjectCircled->SetupAttachment(DoorFrame);
+
+	InteractionWidget->SetupAttachment(DoorFrame);
 }
 
 
@@ -18,6 +21,20 @@ void ASS_SectorDoor_Base::BeginPlay()
 	Super::BeginPlay();
 
 	GetReaderFromChildActors();
+
+	// Checking when the door is locked for key and door is not closed 
+	if (bIsDoorLock)
+	{
+		bIsDoorClosed = true;
+	}
+	else
+	{
+		if (!bIsDoorClosed)
+		{
+			ObjectCircled->SetRelativeLocation(LocationToOpenDoor * (-1));
+			SecondObjectCircled->SetRelativeLocation(LocationToOpenDoor);
+		}
+	}
 }
 
 
@@ -35,12 +52,12 @@ void ASS_SectorDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 		if (bIsDoorClosed)
 		{
 			// Play timeline 
-			TimelineToOpenDoor.Play();
+			TimelineToOpenDoor.PlayFromStart();
 		}
 		else
 		{
 			// Reverse timeline
-			TimelineToOpenDoor.Reverse();
+			TimelineToOpenDoor.ReverseFromEnd();
 		}
 
 		bIsDoorClosed = !bIsDoorClosed;

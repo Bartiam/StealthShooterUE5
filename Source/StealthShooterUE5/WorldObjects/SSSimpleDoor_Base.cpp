@@ -65,12 +65,12 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 		if (bIsDoorClosed)
 		{
 			// Play timeline 
-			TimelineToOpenDoor.Play();
+			TimelineToOpenDoor.PlayFromStart();
 		}
 		else
 		{
 			// Reverse play timeline
-			TimelineToOpenDoor.Reverse();
+			TimelineToOpenDoor.ReverseFromEnd();
 		}
 
 		bIsDoorClosed = !bIsDoorClosed;
@@ -103,4 +103,20 @@ void ASSSimpleDoor_Base::BeginPlay()
 	Super::BeginPlay();
 	
 	BindCurveToTimeline(LockDoorCurve, TimelineToOpenDoor_Lock);
+
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString(GetName()));
+
+	// Checking when the door is locked for key and door is not closed
+	if (bIsDoorLock)
+	{
+		bIsDoorClosed = true;
+	}
+	else
+	{
+		if (!bIsDoorClosed)
+		{
+			CurrentDoorRotateAngle = OpenDoorRotateAngle;
+			ObjectCircled->SetRelativeRotation(FRotator(0.f, CurrentDoorRotateAngle, 0.f));
+		}
+	}
 }

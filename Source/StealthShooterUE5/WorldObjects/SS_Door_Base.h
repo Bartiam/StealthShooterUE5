@@ -55,6 +55,7 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> OpenDoorCurve;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	bool bIsDoorClosed = true;
 
 	FTimeline TimelineToOpenDoor;

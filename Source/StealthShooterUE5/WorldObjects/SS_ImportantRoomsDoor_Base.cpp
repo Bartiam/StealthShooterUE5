@@ -70,6 +70,23 @@ void ASS_ImportantRoomsDoor_Base::BeginPlay()
 
 	PlayChangesWhenDoorStateChanged();
 	GetReaderFromChildActors();
+
+	// Checking when the door is locked for key and door is not closed 
+	if (bIsDoorLock)
+	{
+		bIsDoorClosed = true;
+	}
+	else
+	{
+		if (!bIsDoorClosed)
+		{
+			Piston->SetRelativeLocation(LocationToOpenDoor);
+			SecondObjectCircled->SetRelativeRotation(EndRotationLock);
+
+			TimelineToRotateLock.SetPlaybackPosition(2.5f, false);
+			TimelineToOpenDoor.SetPlaybackPosition(3.f, false);
+		}
+	}
 }
 
 
@@ -131,6 +148,6 @@ void ASS_ImportantRoomsDoor_Base::OpenLock(float Value)
 	SecondObjectCircled->SetRelativeRotation(NewLockRotation);
 
 	if (TimelineToRotateLock.GetPlaybackPosition() >= 2.5f)
-		TimelineToOpenDoor.Play();	
+		TimelineToOpenDoor.Play();
 }
 
