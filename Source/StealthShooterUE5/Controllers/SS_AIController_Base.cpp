@@ -26,13 +26,10 @@ ASS_AIController_Base::ASS_AIController_Base()
 
 
 
-FGenericTeamId ASS_AIController_Base::GetGenericTeamId() const
-{ return TeamID; }
-
-
-
 ETeamAttitude::Type ASS_AIController_Base::GetTeamAttitudeTowards(const AActor& OtherActor) const
 {
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString("AI Controller!"));
+
 	// Checking that's pawn
 	if (auto IsThisPawn = Cast<APawn>(&OtherActor) == nullptr)
 		return ETeamAttitude::Neutral;
@@ -42,10 +39,13 @@ ETeamAttitude::Type ASS_AIController_Base::GetTeamAttitudeTowards(const AActor& 
 	if (!VisibleTarget)
 		return ETeamAttitude::Neutral;
 
-	if (VisibleTarget->GetGenericTeamId() != this->GetGenericTeamId() && 
-		VisibleTarget->GetGenericTeamId() != FGenericTeamId(static_cast<uint8>(ESSTeamID::Zombie_Team))) 
+	if (VisibleTarget->GetGenericTeamId() != CurrentNPC->GetGenericTeamId() &&
+		VisibleTarget->GetGenericTeamId() != FGenericTeamId(static_cast<uint8>(ESSTeamID::Zombie_Team)))
+	{
 		return ETeamAttitude::Hostile;
+	}
 
+	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("Enemy" + VisibleTarget->GetGenericTeamId()));
 	return ETeamAttitude::Neutral;
 }
 
@@ -67,6 +67,5 @@ void ASS_AIController_Base::OnPossess(APawn* NewPawn)
 	if (auto Agent = Cast<ASSCharacter_Base>(NewPawn))
 	{
 		CurrentNPC = Agent;
-		TeamID = FGenericTeamId(static_cast<uint8>(CurrentNPC->CharacterTeamID));
 	}
 }

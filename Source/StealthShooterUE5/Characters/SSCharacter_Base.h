@@ -26,13 +26,13 @@ public:
 
 private: // Variables
 
+	FGenericTeamId TeamID = FGenericTeamId();
+
 	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
 
 	TObjectPtr<class ASS_AIController_Base> CurrentAIController;
 
 protected: // Variables
-
-	FGenericTeamId TeamId = FGenericTeamId();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class USS_AbilitySystemComponent> AbilitySystemComponent;

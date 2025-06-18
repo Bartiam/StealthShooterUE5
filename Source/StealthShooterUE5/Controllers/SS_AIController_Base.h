@@ -15,15 +15,11 @@ class STEALTHSHOOTERUE5_API ASS_AIController_Base : public AAIController
 
 private: // Variables
 
-	FGenericTeamId TeamID = FGenericTeamId();
-
 	TObjectPtr<class ASSCharacter_Base> CurrentNPC;
 
 public: // Functions
 	
 	ASS_AIController_Base();
-
-	virtual FGenericTeamId GetGenericTeamId() const override;
 
 protected: // Variables
 

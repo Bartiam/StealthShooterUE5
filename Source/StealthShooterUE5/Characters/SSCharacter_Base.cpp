@@ -72,7 +72,7 @@ UAbilitySystemComponent* ASSCharacter_Base::GetAbilitySystemComponent() const
 
 
 FGenericTeamId ASSCharacter_Base::GetGenericTeamId() const
-{ return TeamId; }
+{ return TeamID; }
 
 
 
@@ -125,17 +125,19 @@ void ASSCharacter_Base::PossessedBy(AController* NewController)
 
 	SetOwner(NewController);
 
-
-
 	if (IsValid(NewController))
 	{
 		if (ActorHasTag(FName("Player")))
+		{
 			CurrentPlayerController = Cast<ASSPlayerController_Base>(NewController);
+		}
 		else
+		{
 			CurrentAIController = Cast<ASS_AIController_Base>(NewController);
+		}
+
+		TeamID = FGenericTeamId(static_cast<uint8>(CharacterTeamID));
 	}
-
-
 
 	InitializeAttributes();
 	GiveAbilities();
