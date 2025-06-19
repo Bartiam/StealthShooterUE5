@@ -15,11 +15,6 @@ public:
 	// Sets default values for this actor's properties
 	ASS_RoomGeneration_Base();
 
-protected: // Variables
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Room Specifications")
-	TArray<TObjectPtr<class ASS_RoomMarker_Base>> NPCMarkers;
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
