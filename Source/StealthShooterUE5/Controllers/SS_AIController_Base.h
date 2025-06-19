@@ -26,7 +26,7 @@ protected: // Variables
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<class UBehaviorTree> BehaviorTree;
 
-	TObjectPtr<class USS_SenseConfigSight> AISenseConfigSight;
+	TObjectPtr<class UAISenseConfig_Sight> AISenseConfigSight;
 
 protected: // Functions
 

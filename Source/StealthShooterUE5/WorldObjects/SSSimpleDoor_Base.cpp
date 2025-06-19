@@ -104,8 +104,6 @@ void ASSSimpleDoor_Base::BeginPlay()
 	
 	BindCurveToTimeline(LockDoorCurve, TimelineToOpenDoor_Lock);
 
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString(GetName()));
-
 	// Checking when the door is locked for key and door is not closed
 	if (bIsDoorLock)
 	{

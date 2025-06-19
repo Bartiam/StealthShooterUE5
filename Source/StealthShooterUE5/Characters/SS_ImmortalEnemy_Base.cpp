@@ -6,8 +6,6 @@
 #include "../Controllers/SS_AIController_Base.h"
 #include "NavigationInvokerComponent.h"
 
-#include "../Controllers/AISenses/SS_SenseConfigSight.h"
-
 
 
 ASS_ImmortalEnemy_Base::ASS_ImmortalEnemy_Base()

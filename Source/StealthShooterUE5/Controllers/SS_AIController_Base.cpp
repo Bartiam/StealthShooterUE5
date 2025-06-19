@@ -7,7 +7,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 
 #include "Perception/AIPerceptionComponent.h"
-#include "AISenses/SS_SenseConfigSight.h"
+#include "Perception/AISenseConfig_Sight.h"
 #include "Perception/AISenseConfig_Hearing.h"
 
 
@@ -18,7 +18,7 @@ ASS_AIController_Base::ASS_AIController_Base()
 	PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(FName("AI Perception"));
 	
 	// Create AI sense sight
-	AISenseConfigSight = CreateDefaultSubobject<USS_SenseConfigSight>(FName("Sense Config Sight"));
+	AISenseConfigSight = CreateDefaultSubobject<UAISenseConfig_Sight>(FName("Sense Config Sight"));
 
 	// Added senses
 	PerceptionComponent->ConfigureSense(*AISenseConfigSight);
@@ -28,24 +28,21 @@ ASS_AIController_Base::ASS_AIController_Base()
 
 ETeamAttitude::Type ASS_AIController_Base::GetTeamAttitudeTowards(const AActor& OtherActor) const
 {
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Blue, FString("AI Controller!"));
-
 	// Checking that's pawn
 	if (auto IsThisPawn = Cast<APawn>(&OtherActor) == nullptr)
 		return ETeamAttitude::Neutral;
-
+	// Trying cast to Generic Cnterface
 	auto VisibleTarget = Cast<IGenericTeamAgentInterface>(&OtherActor);
-
+	// Checking that's nit nullptr
 	if (!VisibleTarget)
 		return ETeamAttitude::Neutral;
-
+	// Checking is this enemy ?
 	if (VisibleTarget->GetGenericTeamId() != CurrentNPC->GetGenericTeamId() &&
 		VisibleTarget->GetGenericTeamId() != FGenericTeamId(static_cast<uint8>(ESSTeamID::Zombie_Team)))
 	{
 		return ETeamAttitude::Hostile;
 	}
 
-	GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("Enemy" + VisibleTarget->GetGenericTeamId()));
 	return ETeamAttitude::Neutral;
 }
 
