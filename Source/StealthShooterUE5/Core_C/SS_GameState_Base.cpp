@@ -15,6 +15,4 @@ void ASS_GameState_Base::SpawnPickUpItemFromActor(const USS_ItemObject* ItemObje
 	FVector SpawnLocation = ActorLocation + (ActorForwardVector * 150.f);
 
 	GetWorld()->SpawnActor<ASS_PickUpItem_Base>(ItemObject->ItemInfo.ItemClass, FTransform(SpawnLocation));
-
-	
 }

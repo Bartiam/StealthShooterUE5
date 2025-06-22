@@ -26,7 +26,7 @@ void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectM
 	if (Data.EvaluatedData.Attribute == GetCurrentWalkSpeedAttribute())
 	{
 		// Transfer to a character CurrentWalkSpeed
-		if (ASSCharacter_Base* OwnerCharacter = ICharacterInterface::Execute_GetOwnerCharacter(GetOwningActor()))
+		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
 		{
 			OwnerCharacter->GetCharacterMovement()->MaxWalkSpeed = GetCurrentWalkSpeed();
 		}
@@ -35,7 +35,7 @@ void USS_CharacterAttributeSet::PostGameplayEffectExecute(const FGameplayEffectM
 	if (Data.EvaluatedData.Attribute == GetCurrentCrouchSpeedAttribute())
 	{
 		// Transfer to a character CurrentCrouchSpeed
-		if (ASSCharacter_Base* OwnerCharacter = ICharacterInterface::Execute_GetOwnerCharacter(GetOwningActor()))
+		if (ASSCharacter_Base* OwnerCharacter = Cast<ASSCharacter_Base>(GetOwningActor()))
 		{
 			OwnerCharacter->GetCharacterMovement()->MaxWalkSpeedCrouched = GetCurrentCrouchSpeed();
 		}

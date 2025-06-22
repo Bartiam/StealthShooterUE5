@@ -20,7 +20,7 @@ public: // Functions
 
 	ASSPlayer_Base();
 
-	virtual USS_InventoryComponent* GetPlayerInventory_Implementation() override;
+	USS_InventoryComponent* GetPlayerInventory();
 
 protected: // Variables
 

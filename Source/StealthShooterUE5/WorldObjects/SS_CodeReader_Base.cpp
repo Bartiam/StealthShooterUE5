@@ -7,6 +7,7 @@
 #include "../Core_C/SSHUD_Base.h"
 #include "../UserInterface/SS_DuringTheGame_Base.h"
 #include "../UserInterface/SS_CardReaderWidget_Base.h"
+#include "../Characters/SSCharacter_Base.h"
 #include "Components/WidgetComponent.h"
 #include "Camera/CameraComponent.h"
 
@@ -28,8 +29,8 @@ void ASS_CodeReader_Base::InteractableRelease_Implementation(AActor* Interactor)
 	{
 		DisplayWidget_Component->SetManuallyRedraw(false);
 
-		if (Interactor->Implements<UCharacterInterface>())
-			CurrentPlayerController = Cast<ASSPlayerController_Base>(ICharacterInterface::Execute_GetOwnerPlayerController(Interactor));
+		if (auto CurrentCharacter = Cast<ASSCharacter_Base>(Interactor))
+			CurrentPlayerController = CurrentCharacter->GetOwnerPlayerController();
 
 		CurrentDoor->OnTryToOpenDoor.AddDynamic(this, &ThisClass::PlayActionsWhenTryedDoorOpen);
 		OnCodeEntred.AddDynamic(this, &ThisClass::BindToReciaveCode);

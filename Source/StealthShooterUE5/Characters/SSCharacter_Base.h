@@ -8,7 +8,6 @@
 #include "GameplayEffectTypes.h"
 #include "../SSData/SSTypes.h"
 
-#include "../Interfaces/CharacterInterface.h"
 #include "Perception/AISightTargetInterface.h"
 #include "AbilitySystemInterface.h"
 #include "GenericTeamAgentInterface.h"
@@ -17,7 +16,7 @@
 
 UCLASS()
 class STEALTHSHOOTERUE5_API ASSCharacter_Base : public ACharacter, public IAbilitySystemInterface,
-	public ICharacterInterface, public IAISightTargetInterface, public IGenericTeamAgentInterface
+	public IAISightTargetInterface, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 
@@ -67,13 +66,11 @@ public: // Functions
 
 	FCharacterMovementSpeed GetCharacterMovementSpeed() const;
 
-	// - Character Interface - //
-	virtual ASSCharacter_Base* GetOwnerCharacter_Implementation() override;
+	ASSCharacter_Base* GetOwnerCharacter();
 
-	virtual class ASSPlayerController_Base* GetOwnerPlayerController_Implementation() override;
+	class ASSPlayerController_Base* GetOwnerPlayerController();
 
-	virtual class ASS_AIController_Base* GetOwnerAIController_Implementation() override;
-	// ----------------------- //
+	class ASS_AIController_Base* GetOwnerAIController();
 
 	virtual void InitializeAttributes();
 

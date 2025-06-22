@@ -47,7 +47,7 @@ ASSPlayer_Base::ASSPlayer_Base()
 	InventoryComponent = CreateDefaultSubobject<USS_InventoryComponent>(FName("Inventory Component"));
 }
 
-USS_InventoryComponent* ASSPlayer_Base::GetPlayerInventory_Implementation()
+USS_InventoryComponent* ASSPlayer_Base::GetPlayerInventory()
 { return InventoryComponent; }
 
 void ASSPlayer_Base::BeginPlay()

@@ -10,6 +10,7 @@
 #include "../UserInterface/SSInteractionWidget_Base.h"
 #include "../Core_C/SSHUD_Base.h"
 #include "../Controllers/SSPlayerController_Base.h"
+#include "../Characters/SSCharacter_Base.h"
 #include "../UserInterface/SS_DuringTheGame_Base.h"
 
 
@@ -82,9 +83,9 @@ void ASSInteractableObject_Base::CanReceiveTrace_Implementation(bool bIsCanInter
 
 void ASSInteractableObject_Base::SetTextInTheUIDuringTheGame(AActor* Interactor, const FText& SendBeingTextToUI)
 {
-	if (Interactor && Interactor->Implements<UCharacterInterface>())
+	if (auto CurrentCharacter = Cast<ASSCharacter_Base>(Interactor))
 	{
-		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerPlayerController(Interactor)->GetCurrentHUD();
+		auto CurrentHUD = CurrentCharacter->GetOwnerPlayerController()->GetCurrentHUD();
 		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(SendBeingTextToUI);
 	}
 }

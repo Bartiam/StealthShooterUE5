@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 
-#include "../../Interfaces/CharacterInterface.h"
 #include "../../SSData/SSTypes.h"
 #include "../../WorldObjects/SS_ItemObject.h"
 

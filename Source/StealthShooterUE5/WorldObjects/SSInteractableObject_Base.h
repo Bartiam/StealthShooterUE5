@@ -6,7 +6,6 @@
 #include "GameFramework/Actor.h"
 
 #include "../Interfaces/Interactable.h"
-#include "../Interfaces/CharacterInterface.h"
 #include "../SSData/SSTypes.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
 

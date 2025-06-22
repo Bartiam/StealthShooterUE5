@@ -19,7 +19,7 @@ void USS_ItemObject::RotateImage()
 void USS_ItemObject::ApplyGameplayEffectFromThisItem(AActor* Interactor)
 {
 	// Check ASC and Effect != nullptr
-	if (auto CharacterASC = ICharacterInterface::Execute_GetOwnerCharacter(Interactor)->GetAbilitySystemComponent())
+	if (auto CharacterASC = Cast<ASSCharacter_Base>(Interactor)->GetAbilitySystemComponent())
 	{
 		// Create effect context for gameplay effect 
 		FGameplayEffectContextHandle EffectContext = CharacterASC->MakeEffectContext();

@@ -72,9 +72,9 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 	if (!IsValid(SourceASC) && !IsValid(SourceActor)) return;
 
 	// Performing the actual speed calculation
-	if (SourceActor->Implements<UCharacterInterface>())
+	if (auto CurrentCharacter = Cast<ASSCharacter_Base>(SourceActor))
 	{
-		FCharacterMovementSpeed CharacterMovementSpeed = ICharacterInterface::Execute_GetOwnerCharacter(SourceActor)->GetCharacterMovementSpeed();
+		FCharacterMovementSpeed CharacterMovementSpeed = CurrentCharacter->GetCharacterMovementSpeed();
 		float NewWalkSpeed = 0.f;
 		float NewCrouchedSpeed = 0.f;
 

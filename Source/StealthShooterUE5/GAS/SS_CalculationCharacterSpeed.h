@@ -6,7 +6,6 @@
 #include "GameplayEffectExecutionCalculation.h"
 
 #include "../SSData/SSTypes.h"
-#include "../Interfaces/CharacterInterface.h"
 
 #include "SS_CalculationCharacterSpeed.generated.h"
 

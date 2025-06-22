@@ -51,17 +51,17 @@ FCharacterMovementSpeed ASSCharacter_Base::GetCharacterMovementSpeed() const
 
 
 
-ASSCharacter_Base* ASSCharacter_Base::GetOwnerCharacter_Implementation()
+ASSCharacter_Base* ASSCharacter_Base::GetOwnerCharacter()
 { return this; }
 
 
 
-ASSPlayerController_Base* ASSCharacter_Base::GetOwnerPlayerController_Implementation()
+ASSPlayerController_Base* ASSCharacter_Base::GetOwnerPlayerController()
 { return CurrentPlayerController; }
 
 
 
-ASS_AIController_Base* ASSCharacter_Base::GetOwnerAIController_Implementation()
+ASS_AIController_Base* ASSCharacter_Base::GetOwnerAIController()
 { return CurrentAIController; }
 
 

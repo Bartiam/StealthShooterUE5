@@ -59,9 +59,9 @@ bool USS_InventoryComponent::TryAddItemToInventory(USS_ItemObject* ItemObject)
 		}
 	}
 
-	if (GetOwner()->Implements<UCharacterInterface>())
+	if (auto InventoryOwner = Cast<ASSCharacter_Base>(GetOwner()))
 	{
-		auto CurrentHUD = ICharacterInterface::Execute_GetOwnerPlayerController(GetOwner())->GetCurrentHUD();
+		auto CurrentHUD = InventoryOwner->GetOwnerPlayerController()->GetCurrentHUD();
 		CurrentHUD->GetUIDuringTheGame()->SetNewTextToTextBlock(TextWhenInventoryNoRoom);
 	}
 
