@@ -28,10 +28,10 @@ void ASS_PickUpItem_Base::BeginPlay()
 
 void ASS_PickUpItem_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
-	if (auto PlayerInventory = Cast<ASSPlayer_Base>(Interactor))
+	if (auto PlayerInventory = Cast<ASSPlayer_Base>(Interactor)->GetPlayerInventory())
 	{
 		// Trying add this item to the inventory
-		if (PlayerInventory->GetPlayerInventory()->TryAddItemToInventory(ItemObject))
+		if (PlayerInventory->TryAddItemToInventory(ItemObject))
 			Destroy();
 	}
 }
