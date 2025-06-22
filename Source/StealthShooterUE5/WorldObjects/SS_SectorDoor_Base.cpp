@@ -8,6 +8,8 @@
 
 ASS_SectorDoor_Base::ASS_SectorDoor_Base()
 {
+	DoorFrame->SetRelativeScale3D(FVector(1.25f, 1.25f, 1.25f));
+
 	ObjectCircled->SetupAttachment(DoorFrame);
 	SecondObjectCircled->SetupAttachment(DoorFrame);
 

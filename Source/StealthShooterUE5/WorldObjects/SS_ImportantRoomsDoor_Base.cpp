@@ -8,6 +8,8 @@
 // Sets default values
 ASS_ImportantRoomsDoor_Base::ASS_ImportantRoomsDoor_Base()
 {
+	DoorFrame->SetRelativeScale3D(FVector(1.25f, 1.25f, 1.25f));
+
 	// Create Piston and attch it to door frame
 	Piston = CreateDefaultSubobject<UStaticMeshComponent>(FName("Piston"));
 	Piston->SetupAttachment(DoorFrame);

@@ -16,6 +16,10 @@ ASS_Door_Base::ASS_Door_Base()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Create wall around door and attach it to root component
+	WallAroundDoor = CreateDefaultSubobject<UStaticMeshComponent>(FName("Wall Around Door"));
+	WallAroundDoor->SetupAttachment(RootComponent);
+
 	// Create door frame and attach it to root component
 	DoorFrame = CreateDefaultSubobject<UStaticMeshComponent>(FName("Door Frame"));
 	DoorFrame->SetupAttachment(RootComponent);
@@ -45,6 +49,9 @@ void ASS_Door_Base::BeginPlay()
 	Super::BeginPlay();
 
 	BindCurveToTimeline(OpenDoorCurve, TimelineToOpenDoor);
+
+	if (!WallAroundDoor->GetStaticMesh())
+		WallAroundDoor->DestroyComponent();
 }
 
 

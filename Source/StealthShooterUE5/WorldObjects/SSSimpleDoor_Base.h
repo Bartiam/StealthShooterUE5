@@ -26,13 +26,18 @@ protected: // Variables
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
 	TObjectPtr<UCurveFloat> LockDoorCurve;
 
-	// How many need to rotation door
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	float OpenDoorRotateAngle = 0.f;
+	FRotator StartRotationDoor = FRotator();
 
-	// How many need to rotation door
+	FRotator EndRotationDoor = FRotator();
+
+	// How many rotate door when its locked
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
-	float LockDoorRotateAngle = 0.f;
+	FRotator OpenedDoorRotationLocked = FRotator();
+
+	// How many rotate door when its not locked
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Specifications")
+	FRotator OpenedDoorRotation = FRotator();
 
 protected: // Functions
 

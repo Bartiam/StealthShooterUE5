@@ -52,7 +52,7 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 	{
 		SetTextInTheUIDuringTheGame(Interactor, TextWhenDoorIsLocked);
 
-		CurrentDoorRotateAngle = LockDoorRotateAngle;
+		EndRotationDoor = OpenedDoorRotationLocked;
 		// Play timeline 
 		TimelineToOpenDoor_Lock.PlayFromStart();
 
@@ -60,7 +60,7 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 	}
 	else
 	{
-		CurrentDoorRotateAngle = OpenDoorRotateAngle;
+		EndRotationDoor = OpenedDoorRotation;
 
 		if (bIsDoorClosed)
 		{
@@ -82,7 +82,7 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 void ASSSimpleDoor_Base::OpenDoor(float Value)
 {
 	// Set new rotation for this object
-	FRotator CurrentDoorRotation = FRotator(0.f, CurrentDoorRotateAngle * Value, 0.f);
+	FRotator CurrentDoorRotation = FMath::Lerp(StartRotationDoor, EndRotationDoor, Value);
 	ObjectCircled->SetRelativeRotation(CurrentDoorRotation);
 }
 
@@ -113,8 +113,7 @@ void ASSSimpleDoor_Base::BeginPlay()
 	{
 		if (!bIsDoorClosed)
 		{
-			CurrentDoorRotateAngle = OpenDoorRotateAngle;
-			ObjectCircled->SetRelativeRotation(FRotator(0.f, CurrentDoorRotateAngle, 0.f));
+			ObjectCircled->SetRelativeRotation(OpenedDoorRotation);
 		}
 	}
 }

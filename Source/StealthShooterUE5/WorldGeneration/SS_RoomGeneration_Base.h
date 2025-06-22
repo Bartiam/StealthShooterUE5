@@ -12,11 +12,11 @@ class STEALTHSHOOTERUE5_API ASS_RoomGeneration_Base : public AActor
 	GENERATED_BODY()
 	
 public:	
-	// Sets default values for this actor's properties
+	
 	ASS_RoomGeneration_Base();
 
 protected:
-	// Called when the game starts or when spawned
+	
 	virtual void BeginPlay() override;
 
 };
