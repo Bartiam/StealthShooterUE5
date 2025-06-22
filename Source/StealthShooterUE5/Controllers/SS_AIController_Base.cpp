@@ -61,8 +61,8 @@ void ASS_AIController_Base::OnPossess(APawn* NewPawn)
 {
 	Super::OnPossess(NewPawn);
 
-	if (auto Agent = Cast<ASSCharacter_Base>(NewPawn))
+	if (NewPawn->Implements<UCharacterInterface>())
 	{
-		CurrentNPC = Agent;
+		CurrentNPC = ICharacterInterface::Execute_GetOwnerCharacter(NewPawn);
 	}
 }
