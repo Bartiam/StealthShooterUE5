@@ -3,6 +3,7 @@
 
 #include "SS_PickUpItem_Base.h"
 #include "../Characters/Inventory/SS_InventoryComponent.h"
+#include "../Characters/SSPlayer_Base.h"
 #include "../GAS/SS_AbilitySystemComponent.h"
 
 
@@ -27,21 +28,17 @@ void ASS_PickUpItem_Base::BeginPlay()
 
 void ASS_PickUpItem_Base::InteractableRelease_Implementation(AActor* Interactor)
 {
-	// Verifying that the actor implements the interface
-	if (Interactor->Implements<UCharacterInterface>())
+	if (auto PlayerInventory = Cast<ASSPlayer_Base>(Interactor))
 	{
-		// Get player inventory from ICharacterInterface
-		auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
 		// Trying add this item to the inventory
-		if (PlayerInventory->TryAddItemToInventory(ItemObject))
+		if (PlayerInventory->GetPlayerInventory()->TryAddItemToInventory(ItemObject))
 			Destroy();
 	}
 }
 
 void ASS_PickUpItem_Base::InteractableHeld_Implementation(AActor* Interactor)
 {
-	// Verifying that the actor implements the interface
-	if (Interactor->Implements<UCharacterInterface>())
+	if (Interactor)
 	{
 		if (ItemObject->ItemInfo.GameplayEffect_Class)
 		{
@@ -49,6 +46,5 @@ void ASS_PickUpItem_Base::InteractableHeld_Implementation(AActor* Interactor)
 			Destroy();
 		}
 	}
-
 }
 

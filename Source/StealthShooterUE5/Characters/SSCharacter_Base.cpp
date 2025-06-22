@@ -51,11 +51,6 @@ FCharacterMovementSpeed ASSCharacter_Base::GetCharacterMovementSpeed() const
 
 
 
-ASSCharacter_Base* ASSCharacter_Base::GetOwnerCharacter()
-{ return this; }
-
-
-
 ASSPlayerController_Base* ASSCharacter_Base::GetOwnerPlayerController()
 { return CurrentPlayerController; }
 

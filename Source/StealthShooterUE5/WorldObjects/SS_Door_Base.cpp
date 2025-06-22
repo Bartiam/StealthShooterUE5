@@ -6,7 +6,7 @@
 #include "../Core_C/SSHUD_Base.h"
 #include "../Controllers/SSPlayerController_Base.h"
 #include "../UserInterface/SS_DuringTheGame_Base.h"
-#include "../Characters/SSCharacter_Base.h"
+#include "../Characters/SSPlayer_Base.h"
 #include "../Characters/Inventory/SS_InventoryComponent.h"
 #include "SS_DisplayReader_Base.h"
 
@@ -88,12 +88,10 @@ void ASS_Door_Base::BindCurveToTimeline(UCurveFloat* CurrentCurve, FTimeline& Cu
 
 void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 {
-	if (Interactor && Interactor->Implements<UCharacterInterface>())
+	if (auto CurrentPlayer = Cast<ASSPlayer_Base>(Interactor))
 	{
-		auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
-
 		// Binds to inventory delegate
-		auto PlayerInventory = ICharacterInterface::Execute_GetPlayerInventory(Interactor);
+		auto PlayerInventory = CurrentPlayer->GetPlayerInventory();
 		PlayerInventory->OnGetKeyFromInventory.AddDynamic(this, &ThisClass::TryToOpenDoor);
 
 		// Open player inventory
@@ -106,7 +104,7 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 
 void ASS_Door_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
 {
-	auto CurrentPlayer = ICharacterInterface::Execute_GetOwnerCharacter(Interactor);
+	auto CurrentPlayer = Cast<ASSPlayer_Base>(Interactor);
 	CurrentPlayer->GetAbilitySystemComponent()->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
 }
 

@@ -20,7 +20,8 @@ public: // Functions
 
 	ASSPlayer_Base();
 
-	USS_InventoryComponent* GetPlayerInventory();
+	UFUNCTION(BlueprintCallable)
+	class USS_InventoryComponent* GetPlayerInventory();
 
 protected: // Variables
 

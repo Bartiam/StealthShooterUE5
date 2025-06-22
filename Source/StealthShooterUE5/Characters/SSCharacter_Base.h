@@ -66,10 +66,10 @@ public: // Functions
 
 	FCharacterMovementSpeed GetCharacterMovementSpeed() const;
 
-	ASSCharacter_Base* GetOwnerCharacter();
-
+	UFUNCTION(BlueprintCallable)
 	class ASSPlayerController_Base* GetOwnerPlayerController();
 
+	UFUNCTION(BlueprintCallable)
 	class ASS_AIController_Base* GetOwnerAIController();
 
 	virtual void InitializeAttributes();
