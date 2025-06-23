@@ -36,7 +36,7 @@ enum class ESSRoomTypes : uint8
 	Experimental_Room UMETA(DisplayName = "Experimental Room"),
 	Arena_Room UMETA(DisplayName = "Arena Room"),
 	Surveillance_Room UMETA(DisplayName = "Surveillance Room"),
-	Hallway_Room UMETA(DisplayName = "Hallway Room")
+	Hallway_Room UMETA(DisplayName = "Hallway Room"),
 };
 
 UENUM(BlueprintType)
