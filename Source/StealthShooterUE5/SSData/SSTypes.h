@@ -27,23 +27,12 @@ enum class ESSInputID : uint8
 };
 
 UENUM(BlueprintType)
-enum class ESSRoomTypes : uint8
-{
-	Begin_Play_Room UMETA(DisplayName = "Begin Play Room"),
-	Laboratory_Room UMETA(DisplayName = "Laboratory Room"),
-	Security_Room UMETA(DisplayName = "Security Room"),
-	Distribution_Room UMETA(DisplayName = "Distribution Room"),
-	Experimental_Room UMETA(DisplayName = "Experimental Room"),
-	Arena_Room UMETA(DisplayName = "Arena Room"),
-	Surveillance_Room UMETA(DisplayName = "Surveillance Room"),
-	Hallway_Room UMETA(DisplayName = "Hallway Room"),
-};
-
-UENUM(BlueprintType)
 enum class ESSPhysKeyType : uint8
 {
 	None UMETA(DisplayName = "None"),
-	Door_Key UMETA(DisplayName = "Door Key"),
+	Warehouse_Key_HeldSector UMETA(DisplayName = "Warehouse Key Sector"),
+	Warehouse_Key_Sector UMETA(DisplayName = "Warehouse Key Sector"),
+	Camera_Key UMETA(DisplayName = "Camera Key"),
 	Locker_Key UMETA(DisplayName = "Locker Key"),
 };
 
