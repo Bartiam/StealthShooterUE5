@@ -52,9 +52,12 @@ void ASSSimpleDoor_Base::InteractableRelease_Implementation(AActor* Interactor)
 	{
 		SetTextInTheUIDuringTheGame(Interactor, TextWhenDoorIsLocked);
 
-		EndRotationDoor = OpenedDoorRotationLocked;
-		// Play timeline 
-		TimelineToOpenDoor_Lock.PlayFromStart();
+		if (LockDoorCurve)
+		{
+			EndRotationDoor = OpenedDoorRotationLocked;
+			// Play timeline 
+			TimelineToOpenDoor_Lock.PlayFromStart();
+		}
 
 		OpenAndBindToPlayerInventory(Interactor);
 	}
@@ -101,7 +104,7 @@ void ASSSimpleDoor_Base::Tick(float DeltaTime)
 void ASSSimpleDoor_Base::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	BindCurveToTimeline(LockDoorCurve, TimelineToOpenDoor_Lock);
 
 	// Checking when the door is locked for key and door is not closed
