@@ -8,6 +8,30 @@
 #include "SSTypes.generated.h"
 
 UENUM(BlueprintType)
+enum class ESSSpawnMarker_Type : uint8
+{
+	Locker_Marker UMETA(DisplayName = "Locker Marker"),
+	Chest_Marker UMETA(DisplayName = "Chest Marker"),
+	LabShelf_Marker UMETA(DisplayName = "Lab Shelf Marker"),
+	Sink_Marker UMETA(DisplayName = "Sink Marker"),
+	Cart_Marker UMETA(DisplayName = "Cart Marker"),
+	Drawer_Marker UMETA(DisplayName = "Drawer Marker"),
+	Table_Marker UMETA(DisplayName = "Table Marker"),
+};
+
+UENUM(BlueprintType)
+enum class ESSRoomType : uint8
+{
+	BeginPlay_Room UMETA(DisplayName = "Begin Play Room"),
+	Security_Room UMETA(DisplayName = "Security Room"),
+	Laboratory_Room UMETA(DisplayName = "Laboratory Room"),
+	SectorHeld_Room UMETA(DisplayName = "Sector Held Room"),
+	Sector_Experiments UMETA(DisplayName = "LaSector Experimentsboratory Room"),
+	Distributions_Room UMETA(DisplayName = "Distributions Room"),
+	Arena_Room UMETA(DisplayName = "Arena Room"),
+};
+
+UENUM(BlueprintType)
 enum class ESSTeamID : uint8
 {
 	Player_Team UMETA(DisplayName = "Player Team"),
