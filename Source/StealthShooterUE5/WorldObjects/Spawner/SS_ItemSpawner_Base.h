@@ -20,10 +20,16 @@ public:
 protected: // Variables
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 ItemsCount = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> ItemsID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<TObjectPtr<class ASS_SpawnMarker_Base>> SpawnMarkers;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	ESSRoomType RoomType;
+	ESSRoomType RoomType = ESSRoomType();
 
 protected:
 

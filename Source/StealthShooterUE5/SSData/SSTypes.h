@@ -54,8 +54,7 @@ UENUM(BlueprintType)
 enum class ESSPhysKeyType : uint8
 {
 	None UMETA(DisplayName = "None"),
-	Warehouse_Key_HeldSector UMETA(DisplayName = "Warehouse Key Sector"),
-	Warehouse_Key_Sector UMETA(DisplayName = "Warehouse Key Sector"),
+	Warehouse_Key UMETA(DisplayName = "Warehouse Key"),
 	Camera_Key UMETA(DisplayName = "Camera Key"),
 	Locker_Key UMETA(DisplayName = "Locker Key"),
 };
