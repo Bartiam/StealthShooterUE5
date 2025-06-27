@@ -22,13 +22,6 @@ class STEALTHSHOOTERUE5_API USS_InventoryComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public: 
-
-	USS_InventoryComponent();
-
-	UPROPERTY(BlueprintAssignable)
-	FOnGetKeyFromInventory OnGetKeyFromInventory;
-
 protected: // Variables
 
 	UPROPERTY(BlueprintAssignable)
@@ -67,9 +60,17 @@ private: // Functions
 public: // Variables
 
 	UPROPERTY(BlueprintReadWrite)
+	bool bIsNeedToChooseItem = false;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnGetKeyFromInventory OnGetKeyFromInventory;
+
+	UPROPERTY(BlueprintReadWrite)
 	bool bIsItemWasSpawnedFromInventory = false;
 
 public:	// Functions
+
+	USS_InventoryComponent();
 
 	UFUNCTION(BlueprintCallable)
 	bool TryAddItemToInventory(USS_ItemObject* ItemObject);

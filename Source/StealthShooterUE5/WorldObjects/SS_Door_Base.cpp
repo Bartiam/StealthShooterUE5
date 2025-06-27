@@ -93,6 +93,7 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 		// Binds to inventory delegate
 		auto PlayerInventory = CurrentPlayer->GetPlayerInventory();
 		PlayerInventory->OnGetKeyFromInventory.AddDynamic(this, &ThisClass::TryToOpenDoor);
+		PlayerInventory->bIsNeedToChooseItem = true;
 
 		// Open player inventory
 		auto PlayerASC = CurrentPlayer->GetAbilitySystemComponent();
