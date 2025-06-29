@@ -83,18 +83,22 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 			SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.WalkTag))
 		{
 			NewCrouchedSpeed = CharacterMovementSpeed.CrouchedWalkSpeed;
+			NewWalkSpeed = CharacterMovementSpeed.WalkSpeed;
 		}
 		else if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.CrouchTag))
 		{
 			NewCrouchedSpeed = CharacterMovementSpeed.CrouchSpeed;
+			NewWalkSpeed = CharacterMovementSpeed.RunSpeed;
 		}
 		else if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.WalkTag))
 		{
 			NewWalkSpeed = CharacterMovementSpeed.WalkSpeed;
+			NewCrouchedSpeed = CharacterMovementSpeed.CrouchedWalkSpeed;
 		}
 		else
 		{
 			NewWalkSpeed = CharacterMovementSpeed.RunSpeed;
+			NewCrouchedSpeed = CharacterMovementSpeed.CrouchSpeed;
 		}
 
 		// Update character speed from baff/debaff
