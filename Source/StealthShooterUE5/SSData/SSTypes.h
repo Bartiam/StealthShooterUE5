@@ -48,6 +48,7 @@ enum class ESSInputID : uint8
 	Dodge_Input UMETA(DisplayName = "Dodge Input"),
 	Interact_Input UMETA(DisplayName = "Interact Input"),
 	Inventory_Input UMETA(DisplayName = "Inventory Input"),
+	Lift_Input UMETA(DisplayName = "Lift Input"),
 };
 
 UENUM(BlueprintType)
