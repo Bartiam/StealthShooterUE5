@@ -79,7 +79,12 @@ void USS_CalculationCharacterSpeed::Execute_Implementation(const FGameplayEffect
 		float NewCrouchedSpeed = 0.f;
 
 		// Setting base character speed
-		if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.CrouchTag) &&
+		if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.LiftTag))
+		{
+			NewWalkSpeed = CharacterMovementSpeed.LiftBigObjectSpeed;
+			NewCrouchedSpeed = CharacterMovementSpeed.CrouchSpeed;
+		}
+		else if (SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.CrouchTag) &&
 			SourceASC->HasMatchingGameplayTag(CharacterMovementSpeed.WalkTag))
 		{
 			NewCrouchedSpeed = CharacterMovementSpeed.CrouchedWalkSpeed;

@@ -152,6 +152,11 @@ struct FCharacterMovementSpeed
 	FGameplayTag CrouchTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float LiftBigObjectSpeed = 0.f;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayTag LiftTag;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float RunSpeed = 0.f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
