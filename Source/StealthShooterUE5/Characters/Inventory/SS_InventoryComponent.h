@@ -45,6 +45,7 @@ protected: // Functions
 
 private: // Variables
 
+	UPROPERTY()
 	TArray<TObjectPtr<USS_ItemObject>> InventoryItems;
 
 private: // Functions

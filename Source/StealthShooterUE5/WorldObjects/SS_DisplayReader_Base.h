@@ -24,6 +24,7 @@ public: // Variables
 	UPROPERTY(BlueprintAssignable)
 	FOnCodeEntred OnCodeEntred;
 
+	UPROPERTY()
 	TObjectPtr<class ASS_Door_Base> CurrentDoor;
 
 	UFUNCTION()
@@ -35,6 +36,7 @@ public: // Functions
 
 protected: // Variables
 
+	UPROPERTY()
 	FTimerHandle TimerToIncorrectKey;
 
 	UPROPERTY(VisibleAnywhere)

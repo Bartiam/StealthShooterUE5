@@ -15,8 +15,10 @@ class STEALTHSHOOTERUE5_API ASSHUD_Base : public AHUD
 	
 private: // Variables
 
+	UPROPERTY()
 	TObjectPtr<class UUserWidget> InventoryWidget;
 
+	UPROPERTY()
 	TObjectPtr<class USS_DuringTheGame_Base> UI_DuringTheGameWidget;
 
 public: // Functions

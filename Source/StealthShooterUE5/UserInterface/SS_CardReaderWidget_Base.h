@@ -37,6 +37,7 @@ private: // Variables
 
 public: // Variables
 
+	UPROPERTY()
 	TObjectPtr<class ASS_DisplayReader_Base> OwnerCodeReader;
 
 public: // Functions

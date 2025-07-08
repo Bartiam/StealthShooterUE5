@@ -97,7 +97,9 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 
 		// Open player inventory
 		auto PlayerASC = CurrentPlayer->GetAbilitySystemComponent();
-		PlayerASC->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
+		int32 InputID = static_cast<int32>(ESSInputID::Inventory_Input);
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::FromInt(InputID));
+		PlayerASC->PressInputID(InputID);
 	}
 }
 
@@ -106,7 +108,8 @@ void ASS_Door_Base::OpenAndBindToPlayerInventory(AActor* Interactor)
 void ASS_Door_Base::TryToOpenDoor(FPickUpItemInfo ItemInfo, AActor* Interactor)
 {
 	auto CurrentPlayer = Cast<ASSPlayer_Base>(Interactor);
-	CurrentPlayer->GetAbilitySystemComponent()->PressInputID(static_cast<int32>(ESSInputID::Inventory_Input));
+	int32 InputID = static_cast<int32>(ESSInputID::Inventory_Input);
+	CurrentPlayer->GetAbilitySystemComponent()->PressInputID(InputID);
 }
 
 

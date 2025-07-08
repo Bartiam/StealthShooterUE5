@@ -49,6 +49,7 @@ private: // Variables
 	FTimerHandle TimerToSearching;
 
 	// - Variables for trace - //
+	UPROPERTY()
 	TArray<AActor*> IgnoreActors;
 	float SphereTraceLength = 300.f;
 	float SphereTraceRadius = 5.f;

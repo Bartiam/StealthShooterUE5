@@ -27,8 +27,9 @@ private: // Variables
 
 	FGenericTeamId TeamID = FGenericTeamId();
 
+	UPROPERTY()
 	TObjectPtr<class ASSPlayerController_Base> CurrentPlayerController;
-
+	UPROPERTY()
 	TObjectPtr<class ASS_AIController_Base> CurrentAIController;
 
 protected: // Variables

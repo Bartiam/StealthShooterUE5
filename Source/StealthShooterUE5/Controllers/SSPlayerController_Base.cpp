@@ -99,12 +99,7 @@ void ASSPlayerController_Base::LookCharacter(const FInputActionValue& Value)
 
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDPressed(const ESSInputID InputID)
-{
-	if (ASC)
-		ASC->PressInputID(static_cast<int32>(InputID));
-	else
-		GEngine->AddOnScreenDebugMessage(-1, 10.f, FColor::Black, FString("NULL!!!!!"));
-}
+{ ASC->PressInputID(static_cast<int32>(InputID)); }
 
 void ASSPlayerController_Base::ActivateAbilityByInputIDReleased(const ESSInputID InputID)
 { ASC->ReleaseInputID(static_cast<int32>(InputID)); }
